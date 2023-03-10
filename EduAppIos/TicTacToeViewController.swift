@@ -25,7 +25,7 @@ class TicTacToeViewController: UIViewController {
     
     @objc func boardTapAction( _ sender: UIButton!){
         if(turnLabel.text == "x"){
-            
+            print("hi!")
         }
         let generator = UIImpactFeedbackGenerator(style: .light)
                 generator.impactOccurred()
