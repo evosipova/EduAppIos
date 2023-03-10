@@ -26,6 +26,16 @@ class TicTacToeViewController: UIViewController {
         return turnLabel
     }()
     
+    var label: UILabel! = {
+        var label = UILabel()
+        label.text = "крестики нолики"
+        label.font = UIFont(name: "Raleway-Bold", size: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     var buttons : [UIButton] = []
     
     var firstTurn = Turn.X
@@ -33,6 +43,9 @@ class TicTacToeViewController: UIViewController {
     
     var X = "X"
     var O = "O"
+    
+    var endGameContoller = EndGameViewController()
+    var backButton = UIButton()
     
     @objc func boardTapAction( _ sender: UIButton!){
         addToBoard(sender)
@@ -42,29 +55,117 @@ class TicTacToeViewController: UIViewController {
         
     }
     
+    
+    func win(winner : String){
+        endGameContoller.resLabel.text = "Победитель: " + winner
+        clearBoard()
+        self.navigationController?.pushViewController(endGameContoller, animated: true)
+        
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
+    
     func addToBoard(_ sender: UIButton!){
         if(sender.title(for: .normal) == nil){
             if(currentTurn == Turn.X){
                 sender.setTitle(X, for: .normal)
                 sender.setTitleColor(.black, for: .normal)
             
-                sender.titleLabel!.font = UIFont(name: "Raleway-Bold", size: 30)
-                sender.titleLabel!.font = UIFont.boldSystemFont(ofSize: 30)
+                sender.titleLabel!.font = UIFont(name: "Raleway-Bold", size: 40)
+                sender.titleLabel!.font = UIFont.boldSystemFont(ofSize: 60)
+                sender.isEnabled = false
+                checkWinner()
+                    currentTurn = Turn.O
+                    turnLabel.text = "Очередь: O"
+                    
                 
-                currentTurn = Turn.O
-                turnLabel.text = "Очередь: О"
             }
             else if(currentTurn == Turn.O){
                 sender.setTitle(O, for: .normal)
             
                 sender.setTitleColor(.black, for: .normal)
-                sender.titleLabel!.font = UIFont(name: "Raleway-Bold", size: 30)
-                sender.titleLabel!.font = UIFont.boldSystemFont(ofSize: 30)
-             
-                currentTurn = Turn.X
-                turnLabel.text = "Очередь: X"
+                sender.titleLabel!.font = UIFont(name: "Raleway-Bold", size: 40)
+                sender.titleLabel!.font = UIFont.boldSystemFont(ofSize: 60)
+        
+                sender.isEnabled = false
+                checkWinner()
+                    currentTurn = Turn.X
+                    turnLabel.text = "Очередь: X"
+                    
+                
+            }
+            
+        }
+        
+        if (isBoardFull()){
+            endGameContoller.resLabel.text = "Ничья!"
+            clearBoard()
+            self.navigationController?.pushViewController(endGameContoller, animated: true)
+     
+            
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+        }
+    }
+    
+    func clearBoard(){
+        for button in buttons {
+            button.setTitle(nil, for: .normal)
+            button.isEnabled = true
+        }
+        if(firstTurn == Turn.X){
+            firstTurn = Turn.O
+            turnLabel.text = "Очередь: O"
+        }
+        else{
+            firstTurn = Turn.X
+            turnLabel.text = "Очередь: X"
+        }
+        currentTurn = firstTurn
+    }
+    
+    func checkWinner(){
+        var cur = "O"
+        if (currentTurn == Turn.X){
+            cur = "X"
+        }
+        var i = 0
+        while(i < 7){
+            if(buttons[i].title(for: .normal) == cur && buttons[i+1].title(for: .normal) == cur && buttons[i+2].title(for: .normal) == cur){
+                win(winner : cur)
+                return;
+            }
+            i += 3
+        }
+        i=0
+        while(i < 3){
+            if(buttons[i].title(for: .normal)  == cur && buttons[i+3].title(for: .normal)  == cur && buttons[i+6].title(for: .normal)  == cur){
+                win(winner : cur)
+                return;
+            }
+            i += 1
+        }
+       
+        if(buttons[0].title(for: .normal) == cur && buttons[4].title(for: .normal)  == cur && buttons[8].title(for: .normal) == cur){
+            win(winner : cur)
+            return;
+        }
+        
+        if(buttons[2].title(for: .normal)  == cur && buttons[4].title(for: .normal)  == cur && buttons[6].title(for: .normal)  == cur){
+            win(winner : cur)
+            return;
+        }
+        return;
+    }
+    
+    func isBoardFull() -> Bool{
+        for button in buttons {
+            if(button.title(for: .normal) == nil){
+                return false
             }
         }
+        return true
+        
     }
 
     override func viewDidLoad() {
@@ -72,8 +173,35 @@ class TicTacToeViewController: UIViewController {
         setupView()
         setupStackView()
         view.addSubview(turnLabel)
-        turnLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height*0.07).isActive = true
+        turnLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height*0.2).isActive = true
         turnLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width/3).isActive = true
+        //self.navigationItem.setHidesBackButton(true, animated: true)
+        view.addSubview(label)
+        label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width/3.1).isActive = true
+        label.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height*0.06).isActive = true
+        
+        
+        
+        let config = UIImage.SymbolConfiguration(textStyle: .title1)
+        var image = UIImage(systemName: "arrow.turn.up.left",withConfiguration: config)?.withTintColor(.white
+                                                                                                             , renderingMode: .alwaysOriginal)
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+
+       
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
+        self.navigationController?.navigationBar.backIndicatorImage = image
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
+       
+        
+        
+    }
+    
+    @objc
+    func goBack(){
+        _ = navigationController?.popViewController(animated: true)
         
     }
     private func setupView() {
@@ -124,7 +252,31 @@ class TicTacToeViewController: UIViewController {
         viewRect.layer.cornerRadius = view.frame.width/9
         
         viewRect.clipsToBounds = true
-
+//
+//        let config = UIImage.SymbolConfiguration(textStyle: .title1)
+//        var image = UIImage(systemName: "arrow.turn.up.left",withConfiguration: config)?.withTintColor(.white
+//                                                                                                             , renderingMode: .alwaysOriginal)
+        
+        
+//        view.addSubview(backButton)
+//
+//        backButton.translatesAutoresizingMaskIntoConstraints = false
+//        backButton.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+//        backButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+//
+//        backButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//        backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width*0.05).isActive = true
+//        backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height*0.05).isActive = true
+//        backButton.setImage(image, for: .normal)
+//        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+//
+//        self.navigationController?.navigationBar.backIndicatorImage = image
+//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
+//        self.navigationController?.navigationBar.backItem?.title = "co"
+//        let backItem = UIBarButtonItem()
+//        backItem.image = image
+//            backItem.title = ""
+//        self.navigationController?.navigationBar.backBarButtonItem = backItem
         
     }
     

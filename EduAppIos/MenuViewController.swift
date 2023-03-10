@@ -22,9 +22,9 @@ class MenuViewController: UIViewController {
     
     @objc
        private func buttonTicTacPressed(){
-           let navigation = UINavigationController(rootViewController: ticTacController)
-           navigation.modalPresentationStyle = .fullScreen
-           present(navigation, animated: true)
+          
+           self.navigationController?.pushViewController(ticTacController, animated: true)
+
            let generator = UIImpactFeedbackGenerator(style: .medium)
            generator.impactOccurred()
            
