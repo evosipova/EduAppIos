@@ -10,27 +10,61 @@ import Foundation
 import UIKit
 
 class TicTacToeViewController: UIViewController {
+    enum Turn{
+        case X
+        case O
+    }
+    
     var viewRect = UILabel()
     var stackView = UIStackView()
     var turnLabel: UILabel! = {
         var turnLabel = UILabel()
-        turnLabel.text = "х"
-        turnLabel.font = UIFont(name: "Raleway-Bold", size: 30)
-        turnLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        turnLabel.text = "Очередь: X"
+        turnLabel.font = UIFont(name: "Raleway-Bold", size: 26)
+        turnLabel.font = UIFont.boldSystemFont(ofSize: 26)
         turnLabel.translatesAutoresizingMaskIntoConstraints = false
         return turnLabel
     }()
     
     var buttons : [UIButton] = []
     
+    var firstTurn = Turn.X
+    var currentTurn = Turn.X
+    
+    var X = "X"
+    var O = "O"
+    
     @objc func boardTapAction( _ sender: UIButton!){
-        if(turnLabel.text == "x"){
-            print("hi!")
-        }
+        addToBoard(sender)
         let generator = UIImpactFeedbackGenerator(style: .light)
                 generator.impactOccurred()
         
         
+    }
+    
+    func addToBoard(_ sender: UIButton!){
+        if(sender.title(for: .normal) == nil){
+            if(currentTurn == Turn.X){
+                sender.setTitle(X, for: .normal)
+                sender.setTitleColor(.black, for: .normal)
+            
+                sender.titleLabel!.font = UIFont(name: "Raleway-Bold", size: 30)
+                sender.titleLabel!.font = UIFont.boldSystemFont(ofSize: 30)
+                
+                currentTurn = Turn.O
+                turnLabel.text = "Очередь: О"
+            }
+            else if(currentTurn == Turn.O){
+                sender.setTitle(O, for: .normal)
+            
+                sender.setTitleColor(.black, for: .normal)
+                sender.titleLabel!.font = UIFont(name: "Raleway-Bold", size: 30)
+                sender.titleLabel!.font = UIFont.boldSystemFont(ofSize: 30)
+             
+                currentTurn = Turn.X
+                turnLabel.text = "Очередь: X"
+            }
+        }
     }
 
     override func viewDidLoad() {
@@ -38,8 +72,8 @@ class TicTacToeViewController: UIViewController {
         setupView()
         setupStackView()
         view.addSubview(turnLabel)
-        turnLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height*0.06).isActive = true
-        turnLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width/2).isActive = true
+        turnLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height*0.07).isActive = true
+        turnLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width/3).isActive = true
         
     }
     private func setupView() {
@@ -90,8 +124,7 @@ class TicTacToeViewController: UIViewController {
         viewRect.layer.cornerRadius = view.frame.width/9
         
         viewRect.clipsToBounds = true
-        
-//        viewRect.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+
         
     }
     
@@ -135,43 +168,6 @@ class TicTacToeViewController: UIViewController {
                 const2 += viewRect.frame.width*0.8/3 + 5
             }
         }
-        
-//        stackView.frame = CGRect(x: 0, y: 0, width: viewRect.frame.width*0.8, height: viewRect.frame.width*0.8)
-//
-//        viewRect.addSubview(stackView)
-//
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        stackView.widthAnchor.constraint(equalToConstant: viewRect.frame.width*0.8).isActive = true
-//
-//        stackView.heightAnchor.constraint(equalToConstant: viewRect.frame.width*0.8).isActive = true
-//
-//        stackView.leadingAnchor.constraint(equalTo: viewRect.leadingAnchor, constant: viewRect.frame.width*0.1).isActive = true
-//
-//        stackView.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: (viewRect.frame.height-viewRect.frame.width*0.8)/2).isActive = true
-//        stackView.distribution = .fillEqually
-//        stackView.axis = .horizontal
-//        stackView.spacing = 5
-//        let verticalFirstStackView = createVstack()
-//        let verticalSecondStackView = createVstack()
-//        let verticalThirdStackView = createVstack()
-//        for i in 0...8 {
-//            buttons.append(createButton())
-//            view.addSubview(buttons[i])
-//            if(i < 3){
-//                verticalFirstStackView.addArrangedSubview(buttons[i])
-//            }
-//            if(i >= 3 && i < 6){
-//                verticalSecondStackView.addArrangedSubview(buttons[i])
-//            }
-//            if(i >= 6){
-//                verticalThirdStackView.addArrangedSubview(buttons[i])
-//            }
-//        }
-        
-//        stackView.addArrangedSubview(verticalFirstStackView)
-//        stackView.addArrangedSubview(verticalSecondStackView)
-//        stackView.addArrangedSubview(verticalThirdStackView)
         for button in buttons {
             button.addTarget(self ,action: #selector(boardTapAction), for: .touchUpInside)
             
