@@ -24,10 +24,9 @@ class TicTacToeViewController: UIViewController {
     var buttons : [UIButton] = []
     
     @objc func boardTapAction( _ sender: UIButton!){
-
-        print("action")
-//            sender.layer.borderWidth = 10;
-//            sender.layer.borderColor = UIColor(red: 0.554, green: 0.599, blue: 1, alpha: 1).cgColor
+        if(turnLabel.text == "x"){
+            
+        }
         let generator = UIImpactFeedbackGenerator(style: .light)
                 generator.impactOccurred()
         
