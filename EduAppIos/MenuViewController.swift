@@ -14,6 +14,7 @@ class MenuViewController: UIViewController {
     var buttonTicTac = UIButton()
     var buttonMemory = UIButton()
     var ticTacController = TicTacToeViewController()
+    var puzzleController = PuzzleViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,13 @@ class MenuViewController: UIViewController {
            
          
        }
+    
+    @objc
+    func buttonPuzzlesPressed(){
+        self.navigationController?.pushViewController(puzzleController, animated: true)
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
     
     private func setupView() {
         self.view.backgroundColor = UIColor(red: 0.118, green: 0.118, blue: 0.118, alpha: 1)
@@ -169,6 +177,8 @@ class MenuViewController: UIViewController {
         
         buttonPuzzles.addSubview(imagePuzzleView)
         imagePuzzleView.pin(to: buttonPuzzles, [.top: buttonPuzzles.frame.height/2.8, .right: viewRect.frame.width/40])
+        
+        buttonPuzzles.addTarget(self, action: #selector(buttonPuzzlesPressed), for: .touchUpInside)
         
     }
     

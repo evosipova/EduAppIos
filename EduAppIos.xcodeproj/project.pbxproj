@@ -15,6 +15,9 @@
 		819E089429B769F200E4CFDF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E089329B769F200E4CFDF /* MenuViewController.swift */; };
 		819E089629B771A400E4CFDF /* UIView+Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E089529B771A400E4CFDF /* UIView+Pin.swift */; };
 		81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */; };
+		81E99C3529BCA41000D3B0BD /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */; };
+		81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */; };
+		81E99C3929BCCD5800D3B0BD /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		819E089329B769F200E4CFDF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		819E089529B771A400E4CFDF /* UIView+Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Pin.swift"; sourceTree = "<group>"; };
 		81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
+		81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
+		81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
+		81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,8 +75,19 @@
 				819E089529B771A400E4CFDF /* UIView+Pin.swift */,
 				8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */,
 				81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */,
+				81E99C3A29BCCF3900D3B0BD /* Puzzles */,
 			);
 			path = EduAppIos;
+			sourceTree = "<group>";
+		};
+		81E99C3A29BCCF3900D3B0BD /* Puzzles */ = {
+			isa = PBXGroup;
+			children = (
+				81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */,
+				81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */,
+				81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */,
+			);
+			path = Puzzles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,9 +161,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */,
+				81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */,
 				819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */,
+				81E99C3529BCA41000D3B0BD /* PuzzleViewController.swift in Sources */,
 				81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */,
 				8103B3B629B91D8D002AF007 /* TicTacToeViewController.swift in Sources */,
+				81E99C3929BCCD5800D3B0BD /* ImageCollectionViewCell.swift in Sources */,
 				819E089629B771A400E4CFDF /* UIView+Pin.swift in Sources */,
 				819E089429B769F200E4CFDF /* MenuViewController.swift in Sources */,
 			);

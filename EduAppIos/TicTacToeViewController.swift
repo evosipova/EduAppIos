@@ -199,11 +199,7 @@ class TicTacToeViewController: UIViewController {
         
     }
     
-    @objc
-    func goBack(){
-        _ = navigationController?.popViewController(animated: true)
-        
-    }
+    
     private func setupView() {
         self.view.backgroundColor = UIColor(red: 0.118, green: 0.118, blue: 0.118, alpha: 1)
         let layer0 = CAGradientLayer()
