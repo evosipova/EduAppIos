@@ -9,12 +9,8 @@ import Foundation
 import UIKit
 
 class MemoryViewController: UIViewController {
-    
-    
     var viewRect = UILabel()
     var stackView = UIStackView()
-    
-    
     var label: UILabel! = {
         let label = UILabel()
         label.text = "мемори"
@@ -47,9 +43,8 @@ class MemoryViewController: UIViewController {
         
         
         let config = UIImage.SymbolConfiguration(textStyle: .title1)
-        let image = UIImage(systemName: "arrow.turn.up.left",withConfiguration: config)?.withTintColor(.white
-                                                                                                       , renderingMode: .alwaysOriginal)
-        
+        let image = UIImage(systemName: "arrow.turn.up.left",withConfiguration: config)?.withTintColor(.white, renderingMode: .alwaysOriginal)
+
         let backButton = UIBarButtonItem()
         backButton.title = ""
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
@@ -81,44 +76,48 @@ class MemoryViewController: UIViewController {
            buttonImagesPairs.shuffle()
            for (index, button) in buttons.enumerated() {
                button.tag = index
-               button.setImage(buttonImagesPairs[index], for: .normal)
                button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
            }
        }
-       
 
     
     @objc private func buttonTapped(_ sender: UIButton) {
-        guard !selectedButtons.contains(sender) else { return }
+           guard !selectedButtons.contains(sender) else { return }
 
-        if selectedButtons.count < 2 {
-            // Toggle the button image between front and back
-            let image = selectedButtons.count == 0 ? buttonsImages[sender.tag] : nil
-            sender.setImage(image, for: .normal)
-            selectedButtons.append(sender)
+           if selectedButtons.count < 2 {
+               UIView.transition(with: sender, duration: 0.3, options: .transitionFlipFromLeft, animations: {
+                   let image = self.buttonsImages[sender.tag]
+                   sender.setImage(image, for: .normal)
+               }, completion: nil)
 
-            if selectedButtons.count == 2 {
-                view.isUserInteractionEnabled = false
+               selectedButtons.append(sender)
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                    guard let self = self else { return }
+               if selectedButtons.count == 2 {
+                   view.isUserInteractionEnabled = false
 
-                    if self.selectedButtons[0].currentImage == self.selectedButtons[1].currentImage {
-                        self.selectedButtons[0].isEnabled = false
-                        self.selectedButtons[1].isEnabled = false
-                    } else {
-                        // Flip the buttons back over if they don't match
-                        self.selectedButtons[0].setImage(nil, for: .normal)
-                        self.selectedButtons[1].setImage(nil, for: .normal)
-                    }
+                   DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                       guard let self = self else { return }
 
-                    self.selectedButtons.removeAll()
-                    self.view.isUserInteractionEnabled = true
-                }
-            }
-        }
-    }
+                       if self.selectedButtons[0].currentImage == self.selectedButtons[1].currentImage {
+                           self.selectedButtons[0].isEnabled = false
+                           self.selectedButtons[1].isEnabled = false
+                       } else {
+                           // Flip the buttons back over if they don't match
+                           UIView.transition(with: self.selectedButtons[0], duration: 0.3, options: .transitionFlipFromLeft, animations: {
+                               self.selectedButtons[0].setImage(nil, for: .normal)
+                           }, completion: nil)
+                           UIView.transition(with: self.selectedButtons[1], duration: 0.3, options: .transitionFlipFromLeft, animations: {
+                               self.selectedButtons[1].setImage(nil, for: .normal)
+                           }, completion: nil)
+                       }
 
+                       self.selectedButtons.removeAll()
+                       self.view.isUserInteractionEnabled = true
+                   }
+               }
+           }
+       }
+    
     private func setupRectangle() {
         viewRect.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height*0.7)
         viewRect.backgroundColor = .white
