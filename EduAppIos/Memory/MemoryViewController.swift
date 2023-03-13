@@ -11,6 +11,7 @@ import UIKit
 class MemoryViewController: UIViewController {
     var viewRect = UILabel()
     var stackView = UIStackView()
+    
     var label: UILabel! = {
         let label = UILabel()
         label.text = "мемори"
@@ -42,8 +43,6 @@ class MemoryViewController: UIViewController {
         label.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height*0.06).isActive = true
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        
-        
         let config = UIImage.SymbolConfiguration(textStyle: .title1)
         let image = UIImage(systemName: "arrow.turn.up.left",withConfiguration: config)?.withTintColor(.white, renderingMode: .alwaysOriginal)
 
@@ -74,17 +73,16 @@ class MemoryViewController: UIViewController {
     
 
     private func setupGame() {
+        buttonsImages.shuffle()
         var buttonImagesPairs = buttonsImages + buttonsImages
         buttonImagesPairs.shuffle()
 
         for (index, button) in buttons.enumerated() {
             button.tag = index
-            //button.setImage(buttonImagesPairs[index], for: .normal) // Set the default image or a blank image
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             button.isEnabled = true // Make sure the button is enabled
         }
     }
-
 
 
     @objc private func buttonTapped(_ sender: UIButton) {
