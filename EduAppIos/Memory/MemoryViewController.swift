@@ -52,6 +52,7 @@ class MemoryViewController: UIViewController {
         self.navigationController?.navigationBar.backIndicatorImage = image
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
         
+    
     }
 
     private func setupView() {
@@ -94,11 +95,33 @@ class MemoryViewController: UIViewController {
         }
         print(flippedCount);
         if flippedCount == buttons.count {
+            
             endGameContoller.resLabel.text = "Победа!"
             navigationController?.pushViewController(endGameContoller, animated: true)
+            restartGame()
         }
     }
 
+
+
+    private func restartGame() {
+        // Reset all variables and properties
+        selectedButtons.removeAll()
+        
+        // Reset all buttons to their original state
+        for button in buttons {
+            button.isEnabled = true
+            button.isSelected = false
+            button.setImage(UIImage(named: "card-back"), for: .normal) // устанавливаем рубашку вниз
+        }
+        
+        // Shuffle the buttons
+        buttons.shuffle()
+        for (index, button) in buttons.enumerated() {
+            button.tag = index
+          
+        }
+    }
 
 
 
