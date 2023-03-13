@@ -23,7 +23,9 @@ class MemoryViewController: UIViewController {
     
     var buttons : [UIButton] = []
     
-    var buttonsImages = [UIImage(named: "1"), UIImage(named: "2"), UIImage(named: "3"), UIImage(named: "4"), UIImage(named: "5"), UIImage(named: "6"), UIImage(named: "7"), UIImage(named: "8")]
+    
+    var buttonsImages = [UIImage(named: "1"), UIImage(named: "1"), UIImage(named: "2"), UIImage(named: "2"), UIImage(named: "3"), UIImage(named: "3"), UIImage(named: "4"), UIImage(named: "4"), UIImage(named: "5"), UIImage(named: "5"), UIImage(named: "6"), UIImage(named: "6"), UIImage(named: "7"), UIImage(named: "7"), UIImage(named: "8"), UIImage(named: "8")]
+    
     var selectedButtons: [UIButton] = []
     
     var endGameContoller = EndGameViewController()
@@ -70,53 +72,63 @@ class MemoryViewController: UIViewController {
         setupRectangle()
     }
     
-    
+
     private func setupGame() {
-           var buttonImagesPairs = buttonsImages + buttonsImages
-           buttonImagesPairs.shuffle()
-           for (index, button) in buttons.enumerated() {
-               button.tag = index
-               button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-           }
-       }
+        var buttonImagesPairs = buttonsImages + buttonsImages
+        buttonImagesPairs.shuffle()
 
-    
+        for (index, button) in buttons.enumerated() {
+            button.tag = index
+            //button.setImage(buttonImagesPairs[index], for: .normal) // Set the default image or a blank image
+            button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+            button.isEnabled = true // Make sure the button is enabled
+        }
+    }
+
+
+
     @objc private func buttonTapped(_ sender: UIButton) {
-           guard !selectedButtons.contains(sender) else { return }
+        guard !selectedButtons.contains(sender) else { return }
+        
+        if selectedButtons.count < 2 {
+            // Check if sender.tag is a valid index for buttonsImages
+            guard sender.tag < buttonsImages.count else { return }
+            
+            // Flip the button over to reveal the image
+            UIView.transition(with: sender, duration: 0.3, options: .transitionFlipFromLeft, animations: {
+                let image = self.buttonsImages[sender.tag]
+                sender.setImage(image, for: .normal)
+            }, completion: nil)
+            
+            selectedButtons.append(sender)
+            
+            if selectedButtons.count == 2 {
+                view.isUserInteractionEnabled = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    if self.selectedButtons[0].currentImage == self.selectedButtons[1].currentImage {
+                        // Disable the buttons if they match
+                        self.selectedButtons[0].isEnabled = false
+                        self.selectedButtons[1].isEnabled = false
+                    } else {
+                        // Flip the buttons back over if they don't match
+                        UIView.transition(with: self.selectedButtons[0], duration: 0.3, options: .transitionFlipFromLeft, animations: {
+                            self.selectedButtons[0].setImage(nil, for: .normal)
+                        }, completion: nil)
+                        UIView.transition(with: self.selectedButtons[1], duration: 0.3, options: .transitionFlipFromLeft, animations: {
+                            self.selectedButtons[1].setImage(nil, for: .normal)
+                        }, completion: nil)
+                    }
+                    
+                    self.selectedButtons.removeAll()
+                    self.view.isUserInteractionEnabled = true
+                }
+            }
+        }
+    }
 
-           if selectedButtons.count < 2 {
-               UIView.transition(with: sender, duration: 0.3, options: .transitionFlipFromLeft, animations: {
-                   let image = self.buttonsImages[sender.tag]
-                   sender.setImage(image, for: .normal)
-               }, completion: nil)
-
-               selectedButtons.append(sender)
-
-               if selectedButtons.count == 2 {
-                   view.isUserInteractionEnabled = false
-
-                   DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                       guard let self = self else { return }
-
-                       if self.selectedButtons[0].currentImage == self.selectedButtons[1].currentImage {
-                           self.selectedButtons[0].isEnabled = false
-                           self.selectedButtons[1].isEnabled = false
-                       } else {
-                           // Flip the buttons back over if they don't match
-                           UIView.transition(with: self.selectedButtons[0], duration: 0.3, options: .transitionFlipFromLeft, animations: {
-                               self.selectedButtons[0].setImage(nil, for: .normal)
-                           }, completion: nil)
-                           UIView.transition(with: self.selectedButtons[1], duration: 0.3, options: .transitionFlipFromLeft, animations: {
-                               self.selectedButtons[1].setImage(nil, for: .normal)
-                           }, completion: nil)
-                       }
-
-                       self.selectedButtons.removeAll()
-                       self.view.isUserInteractionEnabled = true
-                   }
-               }
-           }
-       }
     
     private func setupRectangle() {
         viewRect.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height*0.7)
@@ -143,9 +155,8 @@ class MemoryViewController: UIViewController {
     }
     
     
-    
     private func setupStackView() {
-        let buttonCount = 16 // Изменили количество кнопок на 16
+        let buttonCount = 16 // Changed the button count to 16
         var const1: CGFloat =  (viewRect.frame.width*0.2 - 15)/2
         var const2: CGFloat = (viewRect.frame.height-viewRect.frame.width*0.8-15)/2
         for i in 0..<buttonCount {
@@ -163,6 +174,8 @@ class MemoryViewController: UIViewController {
                 const1 = (viewRect.frame.width*0.2 - 15)/2
                 const2 += viewRect.frame.width*0.8/4 + 5
             }
+            buttons[i].isEnabled = true // Make sure the button is enabled
         }
     }
+
 }
