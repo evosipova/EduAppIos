@@ -13,9 +13,6 @@ class MenuViewController: UIViewController {
     var buttonPuzzles = UIButton()
     var buttonTicTac = UIButton()
     var buttonMemory = UIButton()
-//    var ticTacController = TicTacToeViewController()
-//    var puzzleController = PuzzleViewController()
-//    var memoryController = MemoryViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,26 +20,14 @@ class MenuViewController: UIViewController {
     }
     
     @objc
-       private func buttonTicTacPressed(){
-          
-           self.navigationController?.pushViewController(TicTacToeViewController(), animated: true)
-
-           let generator = UIImpactFeedbackGenerator(style: .medium)
-           generator.impactOccurred()
-           
-         
-       }
+    private func buttonTicTacPressed(){
+        self.navigationController?.pushViewController(TicTacToeViewController(), animated: true)
+    }
     
     @objc
-       private func buttonMemoryPressed(){
-          
-           self.navigationController?.pushViewController(MemoryViewController(), animated: true)
-
-           let generator = UIImpactFeedbackGenerator(style: .medium)
-           generator.impactOccurred()
-           
-         
-       }
+    private func buttonMemoryPressed(){
+        self.navigationController?.pushViewController(MemoryViewController(), animated: true)
+    }
     
     @objc
     func buttonPuzzlesPressed(){
@@ -75,29 +60,22 @@ class MenuViewController: UIViewController {
     }
     
     private func setupUser(){
+        
         let config2 = UIImage.SymbolConfiguration(textStyle: .largeTitle)
-        var imageUser = UIImage(systemName: "person",withConfiguration: config2)?.withTintColor(.white
-                                                                                                            , renderingMode: .alwaysOriginal)
+        let imageUser = UIImage(systemName: "person",withConfiguration: config2)?.withTintColor(.white
+                                                                                                , renderingMode: .alwaysOriginal)
         
-        var imageUserView = UIImageView(image: imageUser)
-        
+        let imageUserView = UIImageView(image: imageUser)
         view.addSubview(imageUserView)
         imageUserView.pin(to: view, [.top: view.frame.height*0.08, .right: view.frame.width/20])
-        var label = UILabel()
         
+        
+        let label = UILabel()
         label.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height*0.9)
-        
-        
-        
         label.textColor = .white
-        
         label.font = UIFont(name: "Raleway-Bold", size: 22)
         label.font = UIFont.boldSystemFont(ofSize: 22)
-        
-        
         label.text = "игры"
-        
-        
         view.addSubview(label)
         label.pin(to: view, [.top: view.frame.height*0.09, .left: view.frame.width/20])
         
@@ -105,22 +83,17 @@ class MenuViewController: UIViewController {
     }
     private func setupRectangle() {
         
-        
         viewRect.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height*0.7)
         
         viewRect.backgroundColor = .white
         
-        
         viewRect.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
         
-        
-        var parent = self.view!
+        let parent = self.view!
         
         parent.addSubview(viewRect)
         
         viewRect.translatesAutoresizingMaskIntoConstraints = false
-        
-        
         
         viewRect.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
         
@@ -144,7 +117,7 @@ class MenuViewController: UIViewController {
         buttonPuzzles.layer.cornerRadius = 20
         buttonPuzzles.layer.borderColor = UIColor(red: 0.554, green: 0.599, blue: 1, alpha: 1).cgColor
         buttonPuzzles.layer.borderWidth = 2
-        var parent = self.view!
+        let parent = self.view!
         parent.addSubview(buttonPuzzles)
         buttonPuzzles.translatesAutoresizingMaskIntoConstraints = false
         buttonPuzzles.widthAnchor.constraint(equalToConstant: viewRect.frame.width*0.9).isActive = true
@@ -152,44 +125,33 @@ class MenuViewController: UIViewController {
         buttonPuzzles.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: viewRect.frame.width*0.05).isActive = true
         buttonPuzzles.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.1).isActive = true
         
+        
         let config = UIImage.SymbolConfiguration(textStyle: .largeTitle)
-        var image = UIImage(systemName: "arrowtriangle.right.fill",withConfiguration: config)?.withTintColor(.black
+        let image = UIImage(systemName: "arrowtriangle.right.fill",withConfiguration: config)?.withTintColor(.black
                                                                                                              , renderingMode: .alwaysOriginal)
-        
-        
-        
         buttonPuzzles.setImage(image, for: .normal)
-        
         buttonPuzzles.imageEdgeInsets.left = -buttonPuzzles.frame.width*0.75
         
-        var label = UILabel()
         
+        let label = UILabel()
         label.frame = CGRect(x: 0, y: 0, width: buttonPuzzles.frame.width, height: buttonPuzzles.frame.height*0.9)
-        
         label.backgroundColor = .white
-        
-        
         label.textColor = .black
-        
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        
-        
         label.text = "пазлы"
-        
-        
         buttonPuzzles.addSubview(label)
         label.pinCenter(to: buttonPuzzles)
         
+        
         let config2 = UIImage.SymbolConfiguration(textStyle: .largeTitle)
-        var imagePuzzle = UIImage(systemName: "puzzlepiece.fill",withConfiguration: config2)?.withTintColor(UIColor(red: 0.747, green: 0.917, blue: 0.386, alpha: 1)
+        let imagePuzzle = UIImage(systemName: "puzzlepiece.fill",withConfiguration: config2)?.withTintColor(UIColor(red: 0.747, green: 0.917, blue: 0.386, alpha: 1)
                                                                                                             , renderingMode: .alwaysOriginal)
         
-        var imagePuzzleView = UIImageView(image: imagePuzzle)
+        let imagePuzzleView = UIImageView(image: imagePuzzle)
         
         buttonPuzzles.addSubview(imagePuzzleView)
         imagePuzzleView.pin(to: buttonPuzzles, [.top: buttonPuzzles.frame.height/2.8, .right: viewRect.frame.width/40])
-        
         buttonPuzzles.addTarget(self, action: #selector(buttonPuzzlesPressed), for: .touchUpInside)
         
     }
@@ -208,7 +170,7 @@ class MenuViewController: UIViewController {
         buttonTicTac.layer.cornerRadius = 20
         buttonTicTac.layer.borderColor = UIColor(red: 0.554, green: 0.599, blue: 1, alpha: 1).cgColor
         buttonTicTac.layer.borderWidth = 2
-        var parent = self.view!
+        let parent = self.view!
         parent.addSubview(buttonTicTac)
         buttonTicTac.translatesAutoresizingMaskIntoConstraints = false
         buttonTicTac.widthAnchor.constraint(equalToConstant: viewRect.frame.width*0.9).isActive = true
@@ -217,46 +179,32 @@ class MenuViewController: UIViewController {
         buttonTicTac.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.4).isActive = true
         
         let config = UIImage.SymbolConfiguration(textStyle: .largeTitle)
-        var image = UIImage(systemName: "arrowtriangle.right.fill",withConfiguration: config)?.withTintColor(.black
+        let image = UIImage(systemName: "arrowtriangle.right.fill",withConfiguration: config)?.withTintColor(.black
                                                                                                              , renderingMode: .alwaysOriginal)
-        
-        
         
         buttonTicTac.setImage(image, for: .normal)
         
         buttonTicTac.imageEdgeInsets.left = -buttonTicTac.frame.width*0.75
         
-        var label = UILabel()
         
+        let label = UILabel()
         label.frame = CGRect(x: 0, y: 0, width: buttonTicTac.frame.width, height: buttonTicTac.frame.height*0.9)
-        
         label.backgroundColor = .white
-        
-        
         label.textColor = .black
-        
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        
-        
         label.text = "крестики нолики"
-        
-        
         buttonTicTac.addSubview(label)
         label.pinCenter(to: buttonTicTac)
         
         
-        var imageTicTac = UIImage(named: "tictac.png")!
-        var newImage: UIImage = imageWithImage(image: imageTicTac, scaledToSize: CGSize(width: buttonTicTac.frame.height/3, height: buttonTicTac.frame.height/3))
+        let imageTicTac = UIImage(named: "tictac.png")!
+        let newImage: UIImage = imageWithImage(image: imageTicTac, scaledToSize: CGSize(width: buttonTicTac.frame.height/3, height: buttonTicTac.frame.height/3))
+
+        let imageTicTacView = UIImageView(image: newImage)
         
-        
-//        var imagePuzzle = UIImage(named: "tictac.png",withConfiguration: config2)?.withTintColor(UIColor(red: 0.747, green: 0.917, blue: 0.386, alpha: 1)
-//                                                                                                            , renderingMode: .alwaysOriginal)
-        
-        var imagePuzzleView = UIImageView(image: newImage)
-        
-        buttonTicTac.addSubview(imagePuzzleView)
-        imagePuzzleView.pin(to: buttonTicTac, [.top: buttonTicTac.frame.height/2.8, .right: viewRect.frame.width/20])
+        buttonTicTac.addSubview(imageTicTacView)
+        imageTicTacView.pin(to: buttonTicTac, [.top: buttonTicTac.frame.height/2.8, .right: viewRect.frame.width/20])
         
         buttonTicTac.addTarget(self, action: #selector(buttonTicTacPressed), for: .touchUpInside)
         
@@ -268,7 +216,7 @@ class MenuViewController: UIViewController {
         buttonMemory.layer.cornerRadius = 20
         buttonMemory.layer.borderColor = UIColor(red: 0.554, green: 0.599, blue: 1, alpha: 1).cgColor
         buttonMemory.layer.borderWidth = 2
-        var parent = self.view!
+        let parent = self.view!
         parent.addSubview(buttonMemory)
         buttonMemory.translatesAutoresizingMaskIntoConstraints = false
         buttonMemory.widthAnchor.constraint(equalToConstant: viewRect.frame.width*0.9).isActive = true
@@ -277,43 +225,26 @@ class MenuViewController: UIViewController {
         buttonMemory.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.7).isActive = true
         
         let config = UIImage.SymbolConfiguration(textStyle: .largeTitle)
-        var image = UIImage(systemName: "arrowtriangle.right.fill",withConfiguration: config)?.withTintColor(.black
-                                                                                                             , renderingMode: .alwaysOriginal)
-        
-        
-        
+        let image = UIImage(systemName: "arrowtriangle.right.fill",withConfiguration: config)?.withTintColor(.black                                          , renderingMode: .alwaysOriginal)
         buttonMemory.setImage(image, for: .normal)
-        
         buttonMemory.imageEdgeInsets.left = -buttonMemory.frame.width*0.75
         
-        var label = UILabel()
         
+        let label = UILabel()
         label.frame = CGRect(x: 0, y: 0, width: buttonMemory.frame.width, height: buttonMemory.frame.height*0.9)
-        
         label.backgroundColor = .white
-        
-        
         label.textColor = .black
-        
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        
-        
         label.text = "мемори"
-        
-        
         buttonMemory.addSubview(label)
         label.pinCenter(to: buttonMemory)
         
         
-        var imageMemory = UIImage(named: "memoryColor.png")!
-        var newImage: UIImage = imageWithImage(image: imageMemory, scaledToSize: CGSize(width: buttonMemory.frame.height/2.2, height: buttonMemory.frame.height/2.2))
-        
-        
-//        var imagePuzzle = UIImage(named: "tictac.png",withConfiguration: config2)?.withTintColor(UIColor(red: 0.747, green: 0.917, blue: 0.386, alpha: 1)
-//                                                                                                            , renderingMode: .alwaysOriginal)
-        
-        var imageMemoryView = UIImageView(image: newImage)
+        let imageMemory = UIImage(named: "memoryColor.png")!
+        let newImage: UIImage = imageWithImage(image: imageMemory, scaledToSize: CGSize(width: buttonMemory.frame.height/2.2, height: buttonMemory.frame.height/2.2))
+    
+        let imageMemoryView = UIImageView(image: newImage)
         
         buttonMemory.addSubview(imageMemoryView)
         imageMemoryView.pin(to: buttonMemory, [.top: buttonMemory.frame.height/3.4, .right: viewRect.frame.width/20])
@@ -328,8 +259,6 @@ class MenuViewController: UIViewController {
         setupButtonMemory()
         
     }
-    
-    
     
 }
 

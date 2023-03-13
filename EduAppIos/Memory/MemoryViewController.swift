@@ -188,7 +188,7 @@ class MemoryViewController: UIViewController {
         viewRect.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height*0.7)
         viewRect.backgroundColor = .white
         viewRect.layer.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
-        var parent = self.view!
+        let parent = self.view!
         parent.addSubview(viewRect)
         viewRect.translatesAutoresizingMaskIntoConstraints = false
         viewRect.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true

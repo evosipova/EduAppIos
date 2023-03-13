@@ -19,3 +19,6 @@ class Puzzle: Codable {
         self.unsolvedImages = self.solvedImages.shuffled()
     }
 }
+
+
+
