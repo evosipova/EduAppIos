@@ -15,6 +15,7 @@ class MenuViewController: UIViewController {
     var buttonMemory = UIButton()
     var ticTacController = TicTacToeViewController()
     var puzzleController = PuzzleViewController()
+    var memoryController = MemoryViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,17 @@ class MenuViewController: UIViewController {
        private func buttonTicTacPressed(){
           
            self.navigationController?.pushViewController(ticTacController, animated: true)
+
+           let generator = UIImpactFeedbackGenerator(style: .medium)
+           generator.impactOccurred()
+           
+         
+       }
+    
+    @objc
+       private func buttonMemoryPressed(){
+          
+           self.navigationController?.pushViewController(memoryController, animated: true)
 
            let generator = UIImpactFeedbackGenerator(style: .medium)
            generator.impactOccurred()
@@ -305,6 +317,8 @@ class MenuViewController: UIViewController {
         
         buttonMemory.addSubview(imageMemoryView)
         imageMemoryView.pin(to: buttonMemory, [.top: buttonMemory.frame.height/3.4, .right: viewRect.frame.width/20])
+        
+        buttonMemory.addTarget(self, action: #selector(buttonMemoryPressed), for: .touchUpInside)
         
     }
     
