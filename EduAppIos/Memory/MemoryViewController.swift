@@ -83,6 +83,24 @@ class MemoryViewController: UIViewController {
             button.isEnabled = true // Make sure the button is enabled
         }
     }
+    
+    private func checkForWin() {
+       
+        var flippedCount = 0
+        for button in buttons {
+            if !button.isEnabled {
+                flippedCount += 1
+            }
+        }
+        print(flippedCount);
+        if flippedCount == buttons.count {
+            endGameContoller.resLabel.text = "Победа!"
+            navigationController?.pushViewController(endGameContoller, animated: true)
+        }
+    }
+
+
+
 
 
     @objc private func buttonTapped(_ sender: UIButton) {
@@ -103,6 +121,8 @@ class MemoryViewController: UIViewController {
             if selectedButtons.count == 2 {
                 view.isUserInteractionEnabled = false
                 
+                
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                     guard let self = self else { return }
                     
@@ -122,6 +142,9 @@ class MemoryViewController: UIViewController {
                     
                     self.selectedButtons.removeAll()
                     self.view.isUserInteractionEnabled = true
+                    
+                    // Check for win
+                    self.checkForWin()
                 }
             }
         }
