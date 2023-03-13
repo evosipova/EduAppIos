@@ -13,9 +13,9 @@ class MenuViewController: UIViewController {
     var buttonPuzzles = UIButton()
     var buttonTicTac = UIButton()
     var buttonMemory = UIButton()
-    var ticTacController = TicTacToeViewController()
-    var puzzleController = PuzzleViewController()
-    var memoryController = MemoryViewController()
+//    var ticTacController = TicTacToeViewController()
+//    var puzzleController = PuzzleViewController()
+//    var memoryController = MemoryViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class MenuViewController: UIViewController {
     @objc
        private func buttonTicTacPressed(){
           
-           self.navigationController?.pushViewController(ticTacController, animated: true)
+           self.navigationController?.pushViewController(TicTacToeViewController(), animated: true)
 
            let generator = UIImpactFeedbackGenerator(style: .medium)
            generator.impactOccurred()
@@ -36,7 +36,7 @@ class MenuViewController: UIViewController {
     @objc
        private func buttonMemoryPressed(){
           
-           self.navigationController?.pushViewController(memoryController, animated: true)
+           self.navigationController?.pushViewController(MemoryViewController(), animated: true)
 
            let generator = UIImpactFeedbackGenerator(style: .medium)
            generator.impactOccurred()
@@ -46,7 +46,7 @@ class MenuViewController: UIViewController {
     
     @objc
     func buttonPuzzlesPressed(){
-        self.navigationController?.pushViewController(puzzleController, animated: true)
+        self.navigationController?.pushViewController(PuzzleViewController(), animated: true)
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
     }

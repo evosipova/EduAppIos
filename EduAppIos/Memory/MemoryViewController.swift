@@ -53,7 +53,17 @@ class MemoryViewController: UIViewController {
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
         
     
+        backButton.target = self
+        backButton.action = #selector(backButtonPressed)
     }
+    
+  
+
+    @objc func backButtonPressed() {
+        restartGame()
+        navigationController?.popViewController(animated: true)
+    }
+
 
     private func setupView() {
         self.view.backgroundColor = UIColor(red: 0.118, green: 0.118, blue: 0.118, alpha: 1)
