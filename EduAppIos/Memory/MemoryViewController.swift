@@ -91,7 +91,7 @@ class MemoryViewController: UIViewController {
         for (index, button) in buttons.enumerated() {
             button.tag = index
             button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-            button.isEnabled = true // Make sure the button is enabled
+            button.isEnabled = true
         }
     }
     
@@ -115,17 +115,17 @@ class MemoryViewController: UIViewController {
 
 
     private func restartGame() {
-        // Reset all variables and properties
+    
         selectedButtons.removeAll()
         
-        // Reset all buttons to their original state
+        
         for button in buttons {
             button.isEnabled = true
             button.isSelected = false
-            button.setImage(UIImage(named: "card-back"), for: .normal) // устанавливаем рубашку вниз
+            button.setImage(UIImage(named: "card-back"), for: .normal)
         }
         
-        // Shuffle the buttons
+      
         buttons.shuffle()
         for (index, button) in buttons.enumerated() {
             button.tag = index
@@ -140,10 +140,10 @@ class MemoryViewController: UIViewController {
         guard !selectedButtons.contains(sender) else { return }
         
         if selectedButtons.count < 2 {
-            // Check if sender.tag is a valid index for buttonsImages
+            
             guard sender.tag < buttonsImages.count else { return }
             
-            // Flip the button over to reveal the image
+           
             UIView.transition(with: sender, duration: 0.3, options: .transitionFlipFromLeft, animations: {
                 let image = self.buttonsImages[sender.tag]
                 sender.setImage(image, for: .normal)
@@ -160,11 +160,9 @@ class MemoryViewController: UIViewController {
                     guard let self = self else { return }
                     
                     if self.selectedButtons[0].currentImage == self.selectedButtons[1].currentImage {
-                        // Disable the buttons if they match
                         self.selectedButtons[0].isEnabled = false
                         self.selectedButtons[1].isEnabled = false
                     } else {
-                        // Flip the buttons back over if they don't match
                         UIView.transition(with: self.selectedButtons[0], duration: 0.3, options: .transitionFlipFromLeft, animations: {
                             self.selectedButtons[0].setImage(nil, for: .normal)
                         }, completion: nil)
@@ -176,7 +174,6 @@ class MemoryViewController: UIViewController {
                     self.selectedButtons.removeAll()
                     self.view.isUserInteractionEnabled = true
                     
-                    // Check for win
                     self.checkForWin()
                 }
             }
@@ -210,7 +207,7 @@ class MemoryViewController: UIViewController {
     
     
     private func setupStackView() {
-        let buttonCount = 16 // Changed the button count to 16
+        let buttonCount = 16
         var const1: CGFloat =  (viewRect.frame.width*0.2 - 15)/2
         var const2: CGFloat = (viewRect.frame.height-viewRect.frame.width*0.8-15)/2
         for i in 0..<buttonCount {
@@ -228,7 +225,7 @@ class MemoryViewController: UIViewController {
                 const1 = (viewRect.frame.width*0.2 - 15)/2
                 const2 += viewRect.frame.width*0.8/4 + 5
             }
-            buttons[i].isEnabled = true // Make sure the button is enabled
+            buttons[i].isEnabled = true 
         }
     }
 

@@ -81,7 +81,6 @@
 		819E087E29B768C900E4CFDF /* EduAppIos */ = {
 			isa = PBXGroup;
 			children = (
-				5EB2A6F229BE888D00895B68 /* Memory */,
 				819E087F29B768C900E4CFDF /* AppDelegate.swift */,
 				819E088129B768C900E4CFDF /* SceneDelegate.swift */,
 				819E088829B768CB00E4CFDF /* Assets.xcassets */,
@@ -90,6 +89,7 @@
 				819E089329B769F200E4CFDF /* MenuViewController.swift */,
 				819E089529B771A400E4CFDF /* UIView+Pin.swift */,
 				81FB4E4C29BFDFF100D16BAE /* TicTacToe */,
+				5EB2A6F229BE888D00895B68 /* Memory */,
 				81E99C3A29BCCF3900D3B0BD /* Puzzles */,
 			);
 			path = EduAppIos;
