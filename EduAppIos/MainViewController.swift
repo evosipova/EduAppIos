@@ -28,17 +28,21 @@ class MainViewController: UIViewController {
     }
     
     private func setupView() {
-        // Создаем градиентный слой
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
         gradientLayer.colors = [
+            UIColor.white.cgColor,
+            UIColor.cyan.cgColor,
             UIColor.green.cgColor,
-            UIColor.purple.cgColor
+            UIColor(red: 1, green: 1, blue: 1, alpha: 1.0).cgColor
         ]
-        gradientLayer.locations = [0, 1]
-        
-        // Добавляем градиентный слой в качестве подслоя view
-        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
+
+        view.layer.insertSublayer(gradientLayer, at: 0)
+
+
+
         
         let registerButton = UIButton()
                registerButton.setTitle("Регистрация", for: .normal)
