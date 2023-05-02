@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+
 class MemoryViewController: UIViewController {
     var viewRect = UILabel()
     var stackView = UIStackView()
@@ -25,7 +26,7 @@ class MemoryViewController: UIViewController {
     var buttons : [UIButton] = []
     
     
-    var buttonsImages = [UIImage(named: "1"), UIImage(named: "1"), UIImage(named: "2"), UIImage(named: "2"), UIImage(named: "3"), UIImage(named: "3"), UIImage(named: "4"), UIImage(named: "4"), UIImage(named: "5"), UIImage(named: "5"), UIImage(named: "6"), UIImage(named: "6"), UIImage(named: "7"), UIImage(named: "7"), UIImage(named: "8"), UIImage(named: "8")]
+    var buttonsImages = [UIImage(named: "apple"), UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "pepper"), UIImage(named: "radish"), UIImage(named: "radish")]
     
     var selectedButtons: [UIButton] = []
     
@@ -225,7 +226,7 @@ class MemoryViewController: UIViewController {
                 const1 = (viewRect.frame.width*0.2 - 15)/2
                 const2 += viewRect.frame.width*0.8/4 + 5
             }
-            buttons[i].isEnabled = true 
+            buttons[i].isEnabled = true
         }
     }
 
