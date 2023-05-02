@@ -13,6 +13,9 @@ class RegistrationViewController: UIViewController {
     private let emailTextField = UITextField()
        private let sendCodeButton = UIButton()
        private var codeTextFields: [UITextField] = []
+    
+    private var randomPassword: String?
+    
        private let numberButtons: [UIButton] = (0...9).map { number in
            let button = UIButton(type: .system)
            button.setTitle("\(number)", for: .normal)
@@ -30,6 +33,15 @@ class RegistrationViewController: UIViewController {
 
            return button
        }
+    
+    private let errorMessageLabel: UILabel = {
+           let label = UILabel()
+           label.textColor = .red
+           label.textAlignment = .center
+           label.text = "Неверный пароль"
+           label.isHidden = true
+           return label
+       }()
        
     private lazy var deleteButton: UIButton = {
         let button = UIButton(type: .system)
@@ -37,7 +49,6 @@ class RegistrationViewController: UIViewController {
         button.tintColor = .gray
         button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
 
-        // Устанавливаем круглую форму и серый фон
         button.layer.cornerRadius = 40
         button.clipsToBounds = true
         button.backgroundColor = UIColor(white: 0.9, alpha: 1)
@@ -92,6 +103,7 @@ class RegistrationViewController: UIViewController {
                sendCodeButton.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20)
            ])
 
+        
            let spacerView = UIView()
            view.addSubview(spacerView)
            spacerView.translatesAutoresizingMaskIntoConstraints = false
@@ -116,18 +128,24 @@ class RegistrationViewController: UIViewController {
                codeStackView.widthAnchor.constraint(equalTo: emailTextField.widthAnchor)
            ])
         
-        // Установите ограничения размера для текстовых полей кода после их добавления на экран
            for i in 1..<codeTextFields.count {
                let textField = codeTextFields[i]
                let previousTextField = codeTextFields[i - 1]
                textField.widthAnchor.constraint(equalTo: previousTextField.widthAnchor).isActive = true
                textField.heightAnchor.constraint(equalTo: textField.widthAnchor).isActive = true
            }
-           // Установите начальный размер для первого текстового поля
+
            codeTextFields[0].widthAnchor.constraint(equalToConstant: 48).isActive = true
            codeTextFields[0].heightAnchor.constraint(equalTo: codeTextFields[0].widthAnchor).isActive = true
 
-
+        view.addSubview(errorMessageLabel)
+               errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+               
+               NSLayoutConstraint.activate([
+                   errorMessageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                   errorMessageLabel.topAnchor.constraint(equalTo: codeStackView.bottomAnchor, constant: 20),
+                   errorMessageLabel.widthAnchor.constraint(equalTo: emailTextField.widthAnchor)
+               ])
                
                let numberPadStackView = UIStackView()
                numberPadStackView.axis = .vertical
@@ -164,24 +182,58 @@ class RegistrationViewController: UIViewController {
         }
                view.addSubview(numberPadStackView)
                numberPadStackView.translatesAutoresizingMaskIntoConstraints = false
-               NSLayoutConstraint.activate([
-                   numberPadStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                   numberPadStackView.topAnchor.constraint(equalTo: codeStackView.bottomAnchor, constant: 40)
-               ])
+        NSLayoutConstraint.activate([
+                  numberPadStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                  numberPadStackView.topAnchor.constraint(equalTo: codeStackView.bottomAnchor, constant: 80) 
+              ])
     }
     
     @objc private func sendCodeButtonTapped() {
-        // Здесь вы можете реализовать отправку кода на электронную почту пользователя
-        print("Отправка кода на адрес: \(emailTextField.text ?? "")")
+        guard let email = emailTextField.text, !email.isEmpty else {
+                   print("Неверный адрес электронной почты")
+                   return
+               }
+
+               randomPassword = generateRandomPassword()
+               print("Сгенерированный пароль: \(randomPassword ?? "")")
+
+               print("Отправка кода на адрес: \(email)")
+
+               codeTextFields.forEach { $0.text = "" }
     }
     
+    private func generateRandomPassword(length: Int = 4) -> String {
+           let characters = "0123456789"
+           return String((0..<length).map { _ in characters.randomElement()! })
+       }
+    
     @objc private func numberButtonTapped(sender: UIButton) {
-          let number = sender.tag
-          if let emptyTextField = codeTextFields.first(where: { $0.text?.isEmpty ?? false }) {
-              emptyTextField.text = "\(number)"
-          }
+        let number = sender.tag
+                if let emptyTextField = codeTextFields.first(where: { $0.text?.isEmpty ?? false }) {
+                    emptyTextField.text = "\(number)"
+
+                    // Если все текстовые поля заполнены, проверьте пароль
+                    if codeTextFields.allSatisfy({ !($0.text?.isEmpty ?? true) }) {
+                        let enteredPassword = codeTextFields.map { $0.text! }.joined()
+                        checkPassword(enteredPassword)
+                    }
+                }
       }
       
+    private func checkPassword(_ enteredPassword: String) {
+           if enteredPassword == randomPassword {
+               print("Пароль верный")
+               errorMessageLabel.isHidden = true
+               
+        
+               let newUserViewController = NewUserViewController()
+               navigationController?.pushViewController(newUserViewController, animated: true)
+           } else {
+               print("Пароль неверный")
+               errorMessageLabel.isHidden = false
+           }
+       }
+    
       @objc private func deleteButtonTapped() {
           if let lastFilledTextField = codeTextFields.last(where: { !($0.text?.isEmpty ?? true) }) {
               lastFilledTextField.text = ""

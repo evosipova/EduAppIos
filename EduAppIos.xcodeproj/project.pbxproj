@@ -11,6 +11,7 @@
 		5EB2A6F829BE972F00895B68 /* memoryPhoto.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F729BE972F00895B68 /* memoryPhoto.xcassets */; };
 		5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DD62A00830F00C54F18 /* MainViewController.swift */; };
 		5EF37DD92A01096300C54F18 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */; };
+		5EF37DDB2A0126A600C54F18 /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DDA2A0126A600C54F18 /* NewUserViewController.swift */; };
 		8103B3B629B91D8D002AF007 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */; };
 		819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E087F29B768C900E4CFDF /* AppDelegate.swift */; };
 		819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E088129B768C900E4CFDF /* SceneDelegate.swift */; };
@@ -30,6 +31,7 @@
 		5EB2A6F729BE972F00895B68 /* memoryPhoto.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = memoryPhoto.xcassets; sourceTree = "<group>"; };
 		5EF37DD62A00830F00C54F18 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		5EF37DDA2A0126A600C54F18 /* NewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
 		8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
 		819E087C29B768C900E4CFDF /* EduAppIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduAppIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		819E087F29B768C900E4CFDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				819E088829B768CB00E4CFDF /* Assets.xcassets */,
 				819E088A29B768CB00E4CFDF /* LaunchScreen.storyboard */,
 				819E088D29B768CB00E4CFDF /* Info.plist */,
+				5EF37DDA2A0126A600C54F18 /* NewUserViewController.swift */,
 				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
 				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
 				819E089329B769F200E4CFDF /* MenuViewController.swift */,
@@ -198,6 +201,7 @@
 				5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */,
 				5EF37DD92A01096300C54F18 /* RegistrationViewController.swift in Sources */,
 				81E99C3529BCA41000D3B0BD /* PuzzleViewController.swift in Sources */,
+				5EF37DDB2A0126A600C54F18 /* NewUserViewController.swift in Sources */,
 				81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */,
 				81FB4E4B29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift in Sources */,
 				8103B3B629B91D8D002AF007 /* TicTacToeViewController.swift in Sources */,
