@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		5EB2A6F129BE875F00895B68 /* MemoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */; };
-		5EB2A6F829BE972F00895B68 /* memoryPhoto.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F729BE972F00895B68 /* memoryPhoto.xcassets */; };
+		5EB2A6F829BE972F00895B68 /* fruitsAndVegetables.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F729BE972F00895B68 /* fruitsAndVegetables.xcassets */; };
 		5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DD62A00830F00C54F18 /* MainViewController.swift */; };
 		5EF37DD92A01096300C54F18 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */; };
 		5EF37DDB2A0126A600C54F18 /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DDA2A0126A600C54F18 /* NewUserViewController.swift */; };
+		5EF37DDD2A01BB0C00C54F18 /* MemoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */; };
+		5EF37DE12A0280FD00C54F18 /* cars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EF37DE02A0280FD00C54F18 /* cars.xcassets */; };
+		5EF37DE32A02824900C54F18 /* flowers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EF37DE22A02824900C54F18 /* flowers.xcassets */; };
+		5EF37DE52A02826000C54F18 /* animals.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EF37DE42A02826000C54F18 /* animals.xcassets */; };
 		8103B3B629B91D8D002AF007 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */; };
 		819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E087F29B768C900E4CFDF /* AppDelegate.swift */; };
 		819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E088129B768C900E4CFDF /* SceneDelegate.swift */; };
@@ -28,10 +32,14 @@
 
 /* Begin PBXFileReference section */
 		5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewController.swift; sourceTree = "<group>"; };
-		5EB2A6F729BE972F00895B68 /* memoryPhoto.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = memoryPhoto.xcassets; sourceTree = "<group>"; };
+		5EB2A6F729BE972F00895B68 /* fruitsAndVegetables.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = fruitsAndVegetables.xcassets; sourceTree = "<group>"; };
 		5EF37DD62A00830F00C54F18 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		5EF37DDA2A0126A600C54F18 /* NewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
+		5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCollectionViewController.swift; sourceTree = "<group>"; };
+		5EF37DE02A0280FD00C54F18 /* cars.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = cars.xcassets; sourceTree = "<group>"; };
+		5EF37DE22A02824900C54F18 /* flowers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = flowers.xcassets; sourceTree = "<group>"; };
+		5EF37DE42A02826000C54F18 /* animals.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = animals.xcassets; sourceTree = "<group>"; };
 		8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
 		819E087C29B768C900E4CFDF /* EduAppIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduAppIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		819E087F29B768C900E4CFDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,7 +71,11 @@
 			isa = PBXGroup;
 			children = (
 				5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */,
-				5EB2A6F729BE972F00895B68 /* memoryPhoto.xcassets */,
+				5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */,
+				5EB2A6F729BE972F00895B68 /* fruitsAndVegetables.xcassets */,
+				5EF37DE02A0280FD00C54F18 /* cars.xcassets */,
+				5EF37DE22A02824900C54F18 /* flowers.xcassets */,
+				5EF37DE42A02826000C54F18 /* animals.xcassets */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -97,8 +109,8 @@
 				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
 				819E089329B769F200E4CFDF /* MenuViewController.swift */,
 				819E089529B771A400E4CFDF /* UIView+Pin.swift */,
-				81FB4E4C29BFDFF100D16BAE /* TicTacToe */,
 				5EB2A6F229BE888D00895B68 /* Memory */,
+				81FB4E4C29BFDFF100D16BAE /* TicTacToe */,
 				81E99C3A29BCCF3900D3B0BD /* Puzzles */,
 			);
 			path = EduAppIos;
@@ -182,8 +194,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EB2A6F829BE972F00895B68 /* memoryPhoto.xcassets in Resources */,
+				5EB2A6F829BE972F00895B68 /* fruitsAndVegetables.xcassets in Resources */,
 				819E088C29B768CB00E4CFDF /* LaunchScreen.storyboard in Resources */,
+				5EF37DE12A0280FD00C54F18 /* cars.xcassets in Resources */,
+				5EF37DE52A02826000C54F18 /* animals.xcassets in Resources */,
+				5EF37DE32A02824900C54F18 /* flowers.xcassets in Resources */,
 				819E088929B768CB00E4CFDF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,6 +219,7 @@
 				5EF37DDB2A0126A600C54F18 /* NewUserViewController.swift in Sources */,
 				81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */,
 				81FB4E4B29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift in Sources */,
+				5EF37DDD2A01BB0C00C54F18 /* MemoryCollectionViewController.swift in Sources */,
 				8103B3B629B91D8D002AF007 /* TicTacToeViewController.swift in Sources */,
 				81E99C3929BCCD5800D3B0BD /* ImageCollectionViewCell.swift in Sources */,
 				819E089629B771A400E4CFDF /* UIView+Pin.swift in Sources */,
