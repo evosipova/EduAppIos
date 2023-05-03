@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E6C35362A03028D00A6F5AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E6C35352A03028D00A6F5AC /* GoogleService-Info.plist */; };
 		5EB2A6F129BE875F00895B68 /* MemoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */; };
 		5EB2A6F829BE972F00895B68 /* fruitsAndVegetables.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F729BE972F00895B68 /* fruitsAndVegetables.xcassets */; };
 		5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DD62A00830F00C54F18 /* MainViewController.swift */; };
@@ -16,6 +17,7 @@
 		5EF37DE12A0280FD00C54F18 /* cars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EF37DE02A0280FD00C54F18 /* cars.xcassets */; };
 		5EF37DE32A02824900C54F18 /* flowers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EF37DE22A02824900C54F18 /* flowers.xcassets */; };
 		5EF37DE52A02826000C54F18 /* animals.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EF37DE42A02826000C54F18 /* animals.xcassets */; };
+		69F2DC949346DCF003C45DB9 /* Pods_EduAppIos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ED8AB50A54A517EFF2DDB65 /* Pods_EduAppIos.framework */; };
 		8103B3B629B91D8D002AF007 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */; };
 		818ED5092A02C063002ED41B /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818ED5082A02C063002ED41B /* Dynamic.swift */; };
 		818ED50C2A02C0A4002ED41B /* TicTacToeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818ED50B2A02C0A4002ED41B /* TicTacToeModel.swift */; };
@@ -34,6 +36,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2BAB3C5F6FB93FCBDFD79FF1 /* Pods-EduAppIos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduAppIos.release.xcconfig"; path = "Target Support Files/Pods-EduAppIos/Pods-EduAppIos.release.xcconfig"; sourceTree = "<group>"; };
+		5E6C35352A03028D00A6F5AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewController.swift; sourceTree = "<group>"; };
 		5EB2A6F729BE972F00895B68 /* fruitsAndVegetables.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = fruitsAndVegetables.xcassets; sourceTree = "<group>"; };
 		5EF37DD62A00830F00C54F18 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 		81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCollectionViewController.swift; sourceTree = "<group>"; };
+		9ED8AB50A54A517EFF2DDB65 /* Pods_EduAppIos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EduAppIos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFF2CAE77AF99F8A1C4C1DD0 /* Pods-EduAppIos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduAppIos.debug.xcconfig"; path = "Target Support Files/Pods-EduAppIos/Pods-EduAppIos.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69F2DC949346DCF003C45DB9 /* Pods_EduAppIos.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +93,15 @@
 			path = Memory;
 			sourceTree = "<group>";
 		};
+		66445AF2ADCF96A7B481416F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DFF2CAE77AF99F8A1C4C1DD0 /* Pods-EduAppIos.debug.xcconfig */,
+				2BAB3C5F6FB93FCBDFD79FF1 /* Pods-EduAppIos.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		818ED50A2A02C081002ED41B /* Binding */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +115,8 @@
 			children = (
 				819E087E29B768C900E4CFDF /* EduAppIos */,
 				819E087D29B768C900E4CFDF /* Products */,
+				66445AF2ADCF96A7B481416F /* Pods */,
+				DDCAF694B3348D348872FBAE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +131,7 @@
 		819E087E29B768C900E4CFDF /* EduAppIos */ = {
 			isa = PBXGroup;
 			children = (
+				5E6C35352A03028D00A6F5AC /* GoogleService-Info.plist */,
 				819E087F29B768C900E4CFDF /* AppDelegate.swift */,
 				819E088129B768C900E4CFDF /* SceneDelegate.swift */,
 				819E088829B768CB00E4CFDF /* Assets.xcassets */,
@@ -153,6 +172,14 @@
 			path = TicTacToe;
 			sourceTree = "<group>";
 		};
+		DDCAF694B3348D348872FBAE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9ED8AB50A54A517EFF2DDB65 /* Pods_EduAppIos.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -160,9 +187,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 819E089029B768CB00E4CFDF /* Build configuration list for PBXNativeTarget "EduAppIos" */;
 			buildPhases = (
+				C141972A648EFE5586F82A03 /* [CP] Check Pods Manifest.lock */,
 				819E087829B768C900E4CFDF /* Sources */,
 				819E087929B768C900E4CFDF /* Frameworks */,
 				819E087A29B768C900E4CFDF /* Resources */,
+				690776553345B2AF67672DFF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -217,10 +246,53 @@
 				5EF37DE52A02826000C54F18 /* animals.xcassets in Resources */,
 				5EF37DE32A02824900C54F18 /* flowers.xcassets in Resources */,
 				819E088929B768CB00E4CFDF /* Assets.xcassets in Resources */,
+				5E6C35362A03028D00A6F5AC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		690776553345B2AF67672DFF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EduAppIos/Pods-EduAppIos-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EduAppIos/Pods-EduAppIos-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EduAppIos/Pods-EduAppIos-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C141972A648EFE5586F82A03 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EduAppIos-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		819E087829B768C900E4CFDF /* Sources */ = {
@@ -378,6 +450,7 @@
 		};
 		819E089129B768CB00E4CFDF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DFF2CAE77AF99F8A1C4C1DD0 /* Pods-EduAppIos.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -395,7 +468,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-.EduAppIos";
+				PRODUCT_BUNDLE_IDENTIFIER = com.elizaveta.eduappios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -405,6 +478,7 @@
 		};
 		819E089229B768CB00E4CFDF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BAB3C5F6FB93FCBDFD79FF1 /* Pods-EduAppIos.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -422,7 +496,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-.EduAppIos";
+				PRODUCT_BUNDLE_IDENTIFIER = com.elizaveta.eduappios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
