@@ -17,6 +17,9 @@
 		5EF37DE32A02824900C54F18 /* flowers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EF37DE22A02824900C54F18 /* flowers.xcassets */; };
 		5EF37DE52A02826000C54F18 /* animals.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EF37DE42A02826000C54F18 /* animals.xcassets */; };
 		8103B3B629B91D8D002AF007 /* TicTacToeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */; };
+		818ED5092A02C063002ED41B /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818ED5082A02C063002ED41B /* Dynamic.swift */; };
+		818ED50C2A02C0A4002ED41B /* TicTacToeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818ED50B2A02C0A4002ED41B /* TicTacToeModel.swift */; };
+		818ED50E2A02C0B5002ED41B /* TicTacToeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818ED50D2A02C0B5002ED41B /* TicTacToeViewModel.swift */; };
 		819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E087F29B768C900E4CFDF /* AppDelegate.swift */; };
 		819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E088129B768C900E4CFDF /* SceneDelegate.swift */; };
 		819E088929B768CB00E4CFDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 819E088829B768CB00E4CFDF /* Assets.xcassets */; };
@@ -41,6 +44,9 @@
 		5EF37DE22A02824900C54F18 /* flowers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = flowers.xcassets; sourceTree = "<group>"; };
 		5EF37DE42A02826000C54F18 /* animals.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = animals.xcassets; sourceTree = "<group>"; };
 		8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewController.swift; sourceTree = "<group>"; };
+		818ED5082A02C063002ED41B /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
+		818ED50B2A02C0A4002ED41B /* TicTacToeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeModel.swift; sourceTree = "<group>"; };
+		818ED50D2A02C0B5002ED41B /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
 		819E087C29B768C900E4CFDF /* EduAppIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduAppIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		819E087F29B768C900E4CFDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		819E088129B768C900E4CFDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +84,14 @@
 				5EF37DE42A02826000C54F18 /* animals.xcassets */,
 			);
 			path = Memory;
+			sourceTree = "<group>";
+		};
+		818ED50A2A02C081002ED41B /* Binding */ = {
+			isa = PBXGroup;
+			children = (
+				818ED5082A02C063002ED41B /* Dynamic.swift */,
+			);
+			path = Binding;
 			sourceTree = "<group>";
 		};
 		819E087329B768C900E4CFDF = {
@@ -123,6 +137,7 @@
 				81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */,
 				81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */,
 				81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */,
+				818ED50A2A02C081002ED41B /* Binding */,
 			);
 			path = Puzzles;
 			sourceTree = "<group>";
@@ -132,6 +147,8 @@
 			children = (
 				8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */,
 				81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */,
+				818ED50B2A02C0A4002ED41B /* TicTacToeModel.swift */,
+				818ED50D2A02C0B5002ED41B /* TicTacToeViewModel.swift */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -211,11 +228,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */,
+				818ED50C2A02C0A4002ED41B /* TicTacToeModel.swift in Sources */,
 				81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */,
 				819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */,
 				5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */,
 				5EF37DD92A01096300C54F18 /* RegistrationViewController.swift in Sources */,
 				81E99C3529BCA41000D3B0BD /* PuzzleViewController.swift in Sources */,
+				818ED50E2A02C0B5002ED41B /* TicTacToeViewModel.swift in Sources */,
 				5EF37DDB2A0126A600C54F18 /* NewUserViewController.swift in Sources */,
 				81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */,
 				81FB4E4B29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift in Sources */,
@@ -223,6 +242,7 @@
 				8103B3B629B91D8D002AF007 /* TicTacToeViewController.swift in Sources */,
 				81E99C3929BCCD5800D3B0BD /* ImageCollectionViewCell.swift in Sources */,
 				819E089629B771A400E4CFDF /* UIView+Pin.swift in Sources */,
+				818ED5092A02C063002ED41B /* Dynamic.swift in Sources */,
 				819E089429B769F200E4CFDF /* MenuViewController.swift in Sources */,
 				5EB2A6F129BE875F00895B68 /* MemoryViewController.swift in Sources */,
 			);

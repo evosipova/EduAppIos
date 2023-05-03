@@ -9,13 +9,12 @@ import Foundation
 import UIKit
 
 class TicTacToeViewController: UIViewController {
-    enum Turn{
-        case X
-        case O
-    }
+
+    var viewModel = TicTacToeViewModel()
     
     var viewRect = UILabel()
     var stackView = UIStackView()
+    
     var turnLabel: UILabel! = {
         var turnLabel = UILabel()
         turnLabel.text = "Очередь: X"
@@ -36,122 +35,45 @@ class TicTacToeViewController: UIViewController {
     }()
     
     var buttons : [UIButton] = []
-    
-    var firstTurn = Turn.X
-    var currentTurn = Turn.X
-    
-    var X = "X"
-    var O = "O"
-    
+
     var endGameContoller = EndGameViewController()
     var backButton = UIButton()
     
-    @objc func boardTapAction( _ sender: UIButton!){
+    func bindViewModel(){
+        for i in 0...8{
+            viewModel.buttons[i].bind({_ in self.buttons[i].title(for: .normal)
+                
+            })
+        }
+        
+        viewModel.turnLabel.bind({ (turnLabel) in
+            DispatchQueue.main.async {
+                self.turnLabel.text = turnLabel
+            }
+            
+        })
+    }
+    
+   @objc func boardTapAction( _ sender: UIButton!){
         addToBoard(sender)
         
     }
     
     func win(winner : String){
         endGameContoller.resLabel.text = "Победитель: " + winner
-        clearBoard()
+        viewModel.clearBoard()
+        for button in buttons {
+            button.setTitle("", for: .normal)
+            button.isEnabled = true
+        }
         self.navigationController?.pushViewController(endGameContoller, animated: true)
     }
     
     func addToBoard(_ sender: UIButton!){
-        if(sender.title(for: .normal) == nil){
-            if(currentTurn == Turn.X){
-                sender.setTitle(X, for: .normal)
-                sender.setTitleColor(.black, for: .normal)
-                sender.titleLabel!.font = UIFont(name: "Raleway-Bold", size: 40)
-                sender.titleLabel!.font = UIFont.boldSystemFont(ofSize: 60)
-                sender.isEnabled = false
-                checkWinner()
-                currentTurn = Turn.O
-                turnLabel.text = "Очередь: O"
-            }
-            else if(currentTurn == Turn.O){
-                sender.setTitle(O, for: .normal)
-                sender.setTitleColor(.black, for: .normal)
-                sender.titleLabel!.font = UIFont(name: "Raleway-Bold", size: 40)
-                sender.titleLabel!.font = UIFont.boldSystemFont(ofSize: 60)
-                sender.isEnabled = false
-                checkWinner()
-                currentTurn = Turn.X
-                turnLabel.text = "Очередь: X"
-                
-            }
-            
+        viewModel.buttonPressed(sender: sender, index: buttons.firstIndex(of: sender)!)
+        if viewModel.winner.value != ""{
+            win(winner: viewModel.winner.value)
         }
-        
-        if (isBoardFull()){
-            endGameContoller.resLabel.text = "Ничья!"
-            clearBoard()
-            self.navigationController?.pushViewController(endGameContoller, animated: true)
-            
-            
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
-        }
-    }
-    
-    func clearBoard(){
-        for button in buttons {
-            button.setTitle(nil, for: .normal)
-            button.isEnabled = true
-        }
-        if(firstTurn == Turn.X){
-            firstTurn = Turn.O
-            turnLabel.text = "Очередь: O"
-        }
-        else{
-            firstTurn = Turn.X
-            turnLabel.text = "Очередь: X"
-        }
-        currentTurn = firstTurn
-    }
-    
-    func checkWinner(){
-        var cur = "O"
-        if (currentTurn == Turn.X){
-            cur = "X"
-        }
-        var i = 0
-        while(i < 7){
-            if(buttons[i].title(for: .normal) == cur && buttons[i+1].title(for: .normal) == cur && buttons[i+2].title(for: .normal) == cur){
-                win(winner : cur)
-                return;
-            }
-            i += 3
-        }
-        i=0
-        while(i < 3){
-            if(buttons[i].title(for: .normal)  == cur && buttons[i+3].title(for: .normal)  == cur && buttons[i+6].title(for: .normal)  == cur){
-                win(winner : cur)
-                return;
-            }
-            i += 1
-        }
-        
-        if(buttons[0].title(for: .normal) == cur && buttons[4].title(for: .normal)  == cur && buttons[8].title(for: .normal) == cur){
-            win(winner : cur)
-            return;
-        }
-        
-        if(buttons[2].title(for: .normal)  == cur && buttons[4].title(for: .normal)  == cur && buttons[6].title(for: .normal)  == cur){
-            win(winner : cur)
-            return;
-        }
-        return;
-    }
-    
-    func isBoardFull() -> Bool{
-        for button in buttons {
-            if(button.title(for: .normal) == nil){
-                return false
-            }
-        }
-        return true
-        
     }
     
     override func viewDidLoad() {
@@ -180,6 +102,7 @@ class TicTacToeViewController: UIViewController {
         self.navigationController?.navigationBar.backIndicatorImage = image
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
     
+        bindViewModel()
     }
     
     
@@ -239,6 +162,7 @@ class TicTacToeViewController: UIViewController {
         button.layer.backgroundColor = UIColor(red: 0.897, green: 0.897, blue: 0.897, alpha: 1).cgColor
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isEnabled = true
         view.addSubview(button)
         return button
     }
@@ -276,6 +200,7 @@ class TicTacToeViewController: UIViewController {
         }
         for button in buttons {
             button.addTarget(self ,action: #selector(boardTapAction), for: .touchUpInside)
+            button.setTitle("", for: .normal)
             
         }
         
