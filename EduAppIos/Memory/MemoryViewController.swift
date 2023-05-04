@@ -238,7 +238,7 @@ class MemoryViewController: UIViewController {
         for i in 0...3{
             if(buttons[i].layer.borderColor == UIColor(red: 0.755, green: 0.962, blue: 0.417, alpha: 1).cgColor){
                 memoryCollectionController = MemoryCollectionViewController()
-                
+
             
                 break
             }
