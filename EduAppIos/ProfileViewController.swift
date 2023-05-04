@@ -119,8 +119,11 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
     }
 
     @objc private func editButtonPressed() {
-            // добавьте ваш код для отображения контроллера редактирования информации пользователя
-        }
+        let editProfileViewController = EditProfileViewController()
+        let navigationController = UINavigationController(rootViewController: editProfileViewController)
+        self.present(navigationController, animated: true, completion: nil)
+    }
+
 
     @objc private func showAvatarGallery() {
         let avatarGalleryViewController = AvatarGalleryViewController()
