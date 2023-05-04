@@ -37,9 +37,7 @@ class MemoryCollectionViewController: UIViewController {
 
         [UIImage(named: "cactus"), UIImage(named: "chamomile"), UIImage(named: "forget-me-not"), UIImage(named: "hyacinth"), UIImage(named: "marigold"), UIImage(named: "sunflower"), UIImage(named: "tulip"), UIImage(named: "cactus"), UIImage(named: "chamomile"), UIImage(named: "forget-me-not"), UIImage(named: "hyacinth"), UIImage(named: "marigold"), UIImage(named: "sunflower"), UIImage(named: "tulip")],
 
-        [UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit"), UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit")]
-
-        // Add more categories here
+        [UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"),UIImage(named: "hedgehog"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit"), UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"),UIImage(named: "hedgehog"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit")]
     ]
 
     var buttonsImages: [UIImage?] = []
