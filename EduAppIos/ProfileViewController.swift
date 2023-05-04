@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, AvatarGalleryDelegate {
+
+    let avatarImageView = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +35,9 @@ class ProfileViewController: UIViewController {
         layer0.frame = view.frame
         view.layer.addSublayer(layer0)
 
-
         setupTitleLabel()
         setupBackButton()
+        setupAvatarImageView()
     }
 
     private func setupTitleLabel() {
@@ -48,6 +50,38 @@ class ProfileViewController: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+    }
+
+    private func setupAvatarImageView() {
+        avatarImageView.image = UIImage(named: "user1")
+        avatarImageView.layer.cornerRadius = 60
+        avatarImageView.clipsToBounds = true
+
+        view.addSubview(avatarImageView)
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        avatarImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
+        avatarImageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        avatarImageView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+
+        let avatarButton = UIButton(type: .system)
+        avatarButton.addTarget(self, action: #selector(showAvatarGallery), for: .touchUpInside)
+        view.addSubview(avatarButton)
+        avatarButton.translatesAutoresizingMaskIntoConstraints = false
+        avatarButton.centerXAnchor.constraint(equalTo: avatarImageView.centerXAnchor).isActive = true
+        avatarButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
+        avatarButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        avatarButton.heightAnchor.constraint(equalToConstant: 120).isActive = true
+    }
+
+    @objc private func showAvatarGallery() {
+        let avatarGalleryViewController = AvatarGalleryViewController()
+        avatarGalleryViewController.delegate = self
+        self.present(avatarGalleryViewController, animated: true, completion: nil)
+    }
+
+    func didSelectAvatar(image: UIImage) {
+        avatarImageView.image = image
     }
 
     @objc
@@ -66,3 +100,6 @@ class ProfileViewController: UIViewController {
         backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
     }
 }
+
+
+

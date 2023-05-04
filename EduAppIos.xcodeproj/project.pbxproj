@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5E95568B2A045EBB002A2878 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95568A2A045EBB002A2878 /* ProfileViewController.swift */; };
+		5E95568D2A046263002A2878 /* UserProfile.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E95568C2A046263002A2878 /* UserProfile.xcassets */; };
+		5E95568F2A046322002A2878 /* AvatarGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */; };
 		5EB2A6F129BE875F00895B68 /* MemoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */; };
 		5EB2A6F829BE972F00895B68 /* fruitsAndVegetables.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F729BE972F00895B68 /* fruitsAndVegetables.xcassets */; };
 		5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DD62A00830F00C54F18 /* MainViewController.swift */; };
@@ -39,6 +41,8 @@
 
 /* Begin PBXFileReference section */
 		5E95568A2A045EBB002A2878 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		5E95568C2A046263002A2878 /* UserProfile.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = UserProfile.xcassets; sourceTree = "<group>"; };
+		5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGalleryViewController.swift; sourceTree = "<group>"; };
 		5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewController.swift; sourceTree = "<group>"; };
 		5EB2A6F729BE972F00895B68 /* fruitsAndVegetables.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = fruitsAndVegetables.xcassets; sourceTree = "<group>"; };
 		5EF37DD62A00830F00C54F18 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -128,7 +132,9 @@
 				819E088A29B768CB00E4CFDF /* LaunchScreen.storyboard */,
 				819E088D29B768CB00E4CFDF /* Info.plist */,
 				5E95568A2A045EBB002A2878 /* ProfileViewController.swift */,
+				5E95568C2A046263002A2878 /* UserProfile.xcassets */,
 				5EF37DDA2A0126A600C54F18 /* NewUserViewController.swift */,
+				5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */,
 				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
 				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
 				819E089329B769F200E4CFDF /* MenuViewController.swift */,
@@ -228,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E95568D2A046263002A2878 /* UserProfile.xcassets in Resources */,
 				5EB2A6F829BE972F00895B68 /* fruitsAndVegetables.xcassets in Resources */,
 				819E088C29B768CB00E4CFDF /* LaunchScreen.storyboard in Resources */,
 				5EF37DE12A0280FD00C54F18 /* cars.xcassets in Resources */,
@@ -247,6 +254,7 @@
 			files = (
 				819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */,
 				818ED50C2A02C0A4002ED41B /* TicTacToeModel.swift in Sources */,
+				5E95568F2A046322002A2878 /* AvatarGalleryViewController.swift in Sources */,
 				81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */,
 				819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */,
 				5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */,
