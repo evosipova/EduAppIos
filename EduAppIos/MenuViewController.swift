@@ -143,15 +143,13 @@ class MenuViewController: UIViewController {
         buttonPuzzles.addSubview(label)
         label.pinCenter(to: buttonPuzzles)
         
-        
-        let config2 = UIImage.SymbolConfiguration(textStyle: .largeTitle)
-        let imagePuzzle = UIImage(systemName: "puzzlepiece.fill",withConfiguration: config2)?.withTintColor(UIColor(red: 0.747, green: 0.917, blue: 0.386, alpha: 1)
-                                                                                                            , renderingMode: .alwaysOriginal)
-        
-        let imagePuzzleView = UIImageView(image: imagePuzzle)
+        let imagePuzzle = UIImage(named: "puzzle_icon.svg")!
+        let newImage: UIImage = imageWithImage(image: imagePuzzle, scaledToSize: CGSize(width: buttonPuzzles.frame.height/2, height: buttonPuzzles.frame.height/2))
+
+        let imagePuzzleView = UIImageView(image: newImage)
         
         buttonPuzzles.addSubview(imagePuzzleView)
-        imagePuzzleView.pin(to: buttonPuzzles, [.top: buttonPuzzles.frame.height/2.8, .right: viewRect.frame.width/40])
+        imagePuzzleView.pin(to: buttonPuzzles, [.top: buttonPuzzles.frame.height/3.2, .right: viewRect.frame.width/40])
         buttonPuzzles.addTarget(self, action: #selector(buttonPuzzlesPressed), for: .touchUpInside)
         
     }
@@ -198,8 +196,8 @@ class MenuViewController: UIViewController {
         label.pinCenter(to: buttonTicTac)
         
         
-        let imageTicTac = UIImage(named: "tictac.png")!
-        let newImage: UIImage = imageWithImage(image: imageTicTac, scaledToSize: CGSize(width: buttonTicTac.frame.height/3, height: buttonTicTac.frame.height/3))
+        let imageTicTac = UIImage(named: "tictactoe_icon.svg")!
+        let newImage: UIImage = imageWithImage(image: imageTicTac, scaledToSize: CGSize(width: buttonTicTac.frame.height/2.5, height: buttonTicTac.frame.height/2.5))
 
         let imageTicTacView = UIImageView(image: newImage)
         
@@ -241,13 +239,13 @@ class MenuViewController: UIViewController {
         label.pinCenter(to: buttonMemory)
         
         
-        let imageMemory = UIImage(named: "memoryColor.png")!
-        let newImage: UIImage = imageWithImage(image: imageMemory, scaledToSize: CGSize(width: buttonMemory.frame.height/2.2, height: buttonMemory.frame.height/2.2))
+        let imageMemory = UIImage(named: "memory_icon.svg")!
+        let newImage: UIImage = imageWithImage(image: imageMemory, scaledToSize: CGSize(width: buttonMemory.frame.height/1.8, height: buttonMemory.frame.height/1.8))
     
         let imageMemoryView = UIImageView(image: newImage)
         
         buttonMemory.addSubview(imageMemoryView)
-        imageMemoryView.pin(to: buttonMemory, [.top: buttonMemory.frame.height/3.4, .right: viewRect.frame.width/20])
+        imageMemoryView.pin(to: buttonMemory, [.top: buttonMemory.frame.height/3.4, .right: viewRect.frame.width/30])
         
         buttonMemory.addTarget(self, action: #selector(buttonMemoryPressed), for: .touchUpInside)
         
