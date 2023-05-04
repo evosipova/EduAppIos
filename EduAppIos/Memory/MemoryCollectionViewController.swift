@@ -12,7 +12,8 @@ import UIKit
 class MemoryCollectionViewController: UIViewController {
     var viewRect = UILabel()
     var stackView = UIStackView()
-    
+    var selectedCategoryIndex: Int = -1
+
     var label: UILabel! = {
         let label = UILabel()
         label.text = "мемори"
@@ -22,28 +23,47 @@ class MemoryCollectionViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     var buttons : [UIButton] = []
-    
-    
-    var buttonsImages = [UIImage(named: "apple"), UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "pepper"), UIImage(named: "radish"), UIImage(named: "radish")]
-    
+
+
+
+
+    // Replace the fixed array with a nested array of categories and images
+    let categoriesImages: [[UIImage?]] = [
+        [UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish"),UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish")],
+
+        [UIImage(named: "airplane"), UIImage(named: "bus"), UIImage(named: "excavator"), UIImage(named: "fighterJet"), UIImage(named: "greenCar"), UIImage(named: "redCar"), UIImage(named: "rocket"), UIImage(named: "tractor"), UIImage(named: "airplane"), UIImage(named: "bus"), UIImage(named: "excavator"), UIImage(named: "fighterJet"), UIImage(named: "greenCar"), UIImage(named: "redCar"), UIImage(named: "rocket"), UIImage(named: "tractor")],
+
+        [UIImage(named: "cactus"), UIImage(named: "chamomile"), UIImage(named: "forget-me-not"), UIImage(named: "hyacinth"), UIImage(named: "marigold"), UIImage(named: "sunflower"), UIImage(named: "tulip"), UIImage(named: "cactus"), UIImage(named: "chamomile"), UIImage(named: "forget-me-not"), UIImage(named: "hyacinth"), UIImage(named: "marigold"), UIImage(named: "sunflower"), UIImage(named: "tulip")],
+
+        [UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit"), UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit")]
+
+        // Add more categories here
+    ]
+
+    var buttonsImages: [UIImage?] = []
+
     var selectedButtons: [UIButton] = []
-    
+
     var endGameContoller = EndGameViewController()
     var backButton = UIButton()
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard selectedCategoryIndex >= 0, selectedCategoryIndex < categoriesImages.count else { return }
+        buttonsImages = categoriesImages[selectedCategoryIndex]
+
         setupView()
         setupStackView()
         setupGame()
-        
+
         view.addSubview(label)
         label.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height*0.06).isActive = true
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
+
         let config = UIImage.SymbolConfiguration(textStyle: .title1)
         let image = UIImage(systemName: "arrow.turn.up.left",withConfiguration: config)?.withTintColor(.white, renderingMode: .alwaysOriginal)
 
@@ -52,13 +72,13 @@ class MemoryCollectionViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         self.navigationController?.navigationBar.backIndicatorImage = image
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
-        
-    
+
+
         backButton.target = self
         backButton.action = #selector(backButtonPressed)
     }
-    
-  
+
+
 
     @objc func backButtonPressed() {
         restartGame()
@@ -71,7 +91,7 @@ class MemoryCollectionViewController: UIViewController {
         let layer0 = CAGradientLayer()
         layer0.colors = [
             UIColor(red: 0.554, green: 0.599, blue: 1, alpha: 1).cgColor,
-            
+
             UIColor(red: 0.867, green: 0.65, blue: 1, alpha: 1).cgColor,
         ]
         layer0.locations = [0, 1]
@@ -82,7 +102,7 @@ class MemoryCollectionViewController: UIViewController {
         view.layer.addSublayer(layer0)
         setupRectangle()
     }
-    
+
 
     private func setupGame() {
         buttonsImages.shuffle()
@@ -95,9 +115,9 @@ class MemoryCollectionViewController: UIViewController {
             button.isEnabled = true
         }
     }
-    
+
     private func checkForWin() {
-       
+
         var flippedCount = 0
         for button in buttons {
             if !button.isEnabled {
@@ -106,7 +126,7 @@ class MemoryCollectionViewController: UIViewController {
         }
         print(flippedCount);
         if flippedCount == buttons.count {
-            
+
             endGameContoller.resLabel.text = "Победа!"
             navigationController?.pushViewController(endGameContoller, animated: true)
             restartGame()
@@ -116,21 +136,21 @@ class MemoryCollectionViewController: UIViewController {
 
 
     private func restartGame() {
-    
+
         selectedButtons.removeAll()
-        
-        
+
+
         for button in buttons {
             button.isEnabled = true
             button.isSelected = false
             button.setImage(UIImage(named: "card-back"), for: .normal)
         }
-        
-      
+
+
         buttons.shuffle()
         for (index, button) in buttons.enumerated() {
             button.tag = index
-          
+
         }
     }
 
@@ -139,27 +159,27 @@ class MemoryCollectionViewController: UIViewController {
 
     @objc private func buttonTapped(_ sender: UIButton) {
         guard !selectedButtons.contains(sender) else { return }
-        
+
         if selectedButtons.count < 2 {
-            
+
             guard sender.tag < buttonsImages.count else { return }
-            
-           
+
+
             UIView.transition(with: sender, duration: 0.3, options: .transitionFlipFromLeft, animations: {
                 let image = self.buttonsImages[sender.tag]
                 sender.setImage(image, for: .normal)
             }, completion: nil)
-            
+
             selectedButtons.append(sender)
-            
+
             if selectedButtons.count == 2 {
                 view.isUserInteractionEnabled = false
-                
-                
-                
+
+
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                     guard let self = self else { return }
-                    
+
                     if self.selectedButtons[0].currentImage == self.selectedButtons[1].currentImage {
                         self.selectedButtons[0].isEnabled = false
                         self.selectedButtons[1].isEnabled = false
@@ -171,17 +191,17 @@ class MemoryCollectionViewController: UIViewController {
                             self.selectedButtons[1].setImage(nil, for: .normal)
                         }, completion: nil)
                     }
-                    
+
                     self.selectedButtons.removeAll()
                     self.view.isUserInteractionEnabled = true
-                    
+
                     self.checkForWin()
                 }
             }
         }
     }
 
-    
+
     private func setupRectangle() {
         viewRect.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height*0.7)
         viewRect.backgroundColor = .white
@@ -196,7 +216,7 @@ class MemoryCollectionViewController: UIViewController {
         viewRect.layer.cornerRadius = view.frame.width/9
         viewRect.clipsToBounds = true
     }
-    
+
     private func createButton()->UIButton{
         let button = UIButton()
         button.layer.backgroundColor = UIColor(red: 0.897, green: 0.897, blue: 0.897, alpha: 1).cgColor
@@ -205,8 +225,8 @@ class MemoryCollectionViewController: UIViewController {
         view.addSubview(button)
         return button
     }
-    
-    
+
+
     private func setupStackView() {
         let buttonCount = 16
         var const1: CGFloat =  (viewRect.frame.width*0.2 - 15)/2
@@ -217,10 +237,10 @@ class MemoryCollectionViewController: UIViewController {
             buttons[i].translatesAutoresizingMaskIntoConstraints = false
             buttons[i].widthAnchor.constraint(equalToConstant: viewRect.frame.width*0.8/4).isActive = true
             buttons[i].heightAnchor.constraint(equalToConstant: viewRect.frame.width*0.8/4).isActive = true
-            
+
             buttons[i].leadingAnchor.constraint(equalTo: viewRect.leadingAnchor, constant: const1 ).isActive = true
             const1 += 5 + viewRect.frame.width*0.8/4
-            
+
             buttons[i].topAnchor.constraint(equalTo: viewRect.topAnchor, constant: const2).isActive = true
             if((i+1)%4 == 0){
                 const1 = (viewRect.frame.width*0.2 - 15)/2
