@@ -11,65 +11,69 @@ import FirebaseAuth
 
 import UIKit
 
+import Foundation
+import Firebase
+import FirebaseAuth
+
+import UIKit
+
 class RegistrationViewController: UIViewController {
     private let emailTextField = UITextField()
-       private let sendCodeButton = UIButton()
-       private var codeTextFields: [UITextField] = []
+    private let sendCodeButton = UIButton()
+    private var codeTextFields: [UITextField] = []
 
     private var randomPassword: String?
 
-       private let numberButtons: [UIButton] = (0...9).map { number in
-           let button = UIButton(type: .system)
-           button.setTitle("\(number)", for: .normal)
-           button.tintColor = .gray
-           button.titleLabel?.font = UIFont.systemFont(ofSize: 36)
-           button.tag = number
-           button.addTarget(RegistrationViewController.self, action: #selector(numberButtonTapped), for: .touchUpInside)
+    private let numberButtons: [UIButton] = (0...9).map { number in
+        let button = UIButton(type: .system)
+        button.setTitle("\(number)", for: .normal)
+        button.tintColor = .gray
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 36)
+        button.tag = number
+        button.addTarget(self, action: #selector(numberButtonTapped), for: .touchUpInside)
 
-           button.layer.cornerRadius = 40
-               button.clipsToBounds = true
-               button.backgroundColor = UIColor(white: 0.9, alpha: 1)
-               button.widthAnchor.constraint(equalToConstant: 80).isActive = true
-               button.heightAnchor.constraint(equalTo: button.widthAnchor).isActive = true
+        button.layer.cornerRadius = 40
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        button.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        button.heightAnchor.constraint(equalTo: button.widthAnchor).isActive = true
 
-
-           return button
-       }
+        return button
+    }
 
     @objc private func sendCodeButtonTapped() {
-           guard let email = emailTextField.text, !email.isEmpty else {
-               print("Введите вашу почту")
-               return
-           }
+        guard let email = emailTextField.text, !email.isEmpty else {
+            print("Введите вашу почту")
+            return
+        }
 
-           randomPassword = String(format: "%06d", Int(arc4random_uniform(10000)))
+        randomPassword = String(format: "%06d", Int(arc4random_uniform(10000)))
 
-           print("Одноразовый код: \(randomPassword!)")
+        print("Одноразовый код: \(randomPassword!)")
 
-           Auth.auth().createUser(withEmail: email, password: randomPassword!) { (authResult, error) in
-               if let error = error {
-                   print("Ошибка создания пользователя: \(error)")
-               } else {
-                   Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-                       if let error = error {
-                           print("Ошибка отправки кода: \(error)")
-                       } else {
-                           print("Код успешно отправлен на почту")
-                       }
-                   }
-               }
-           }
-       }
-
+        Auth.auth().createUser(withEmail: email, password: randomPassword!) { (authResult, error) in
+            if let error = error {
+                print("Ошибка создания пользователя: \(error)")
+            } else {
+                Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+                    if let error = error {
+                        print("Ошибка отправки кода: \(error)")
+                    } else {
+                        print("Код успешно отправлен на почту")
+                    }
+                }
+            }
+        }
+    }
 
     private let errorMessageLabel: UILabel = {
-           let label = UILabel()
-           label.textColor = .red
-           label.textAlignment = .center
-           label.text = "Неверный пароль"
-           label.isHidden = true
-           return label
-       }()
+        let label = UILabel()
+        label.textColor = .red
+        label.textAlignment = .center
+        label.text = "Неверный пароль"
+        label.isHidden = true
+        return label
+    }()
 
     private lazy var deleteButton: UIButton = {
         let button = UIButton(type: .system)
@@ -85,7 +89,6 @@ class RegistrationViewController: UIViewController {
 
         return button
     }()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,24 +107,22 @@ class RegistrationViewController: UIViewController {
         return textField
     }
 
-
     private func setupView() {
         view.backgroundColor = .white
-           codeTextFields = (0..<6).map { _ in createCodeTextField() }
+        codeTextFields = (0..<6).map { _ in createCodeTextField() }
 
-           emailTextField.borderStyle = .roundedRect
-           emailTextField.placeholder = "Введите вашу почту"
-           view.addSubview(emailTextField)
-           emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        emailTextField.borderStyle = .roundedRect
+        emailTextField.placeholder = "Введите вашу почту"
+        view.addSubview(emailTextField)
+        emailTextField.translatesAutoresizingMaskIntoConstraints = false
 
-           sendCodeButton.setTitle("Отправить код", for: .normal)
+        sendCodeButton.setTitle("Отправить код", for: .normal)
         sendCodeButton.setTitleColor(.systemBlue, for: .normal)
         sendCodeButton.addTarget(self, action: #selector(sendCodeButtonTapped), for: .touchUpInside)
         view.addSubview(sendCodeButton)
         sendCodeButton.translatesAutoresizingMaskIntoConstraints = false
 
-
-     NSLayoutConstraint.activate([
+        NSLayoutConstraint.activate([
             emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
@@ -130,7 +131,6 @@ class RegistrationViewController: UIViewController {
             sendCodeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             sendCodeButton.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20)
         ])
-
 
         let spacerView = UIView()
         view.addSubview(spacerView)
@@ -143,8 +143,7 @@ class RegistrationViewController: UIViewController {
             spacerView.widthAnchor.constraint(equalTo: emailTextField.widthAnchor)
         ])
 
-
-     let codeStackView = UIStackView(arrangedSubviews: codeTextFields)
+        let codeStackView = UIStackView(arrangedSubviews: codeTextFields)
         codeStackView.axis = .horizontal
         codeStackView.spacing = 8
         view.addSubview(codeStackView)
@@ -166,92 +165,92 @@ class RegistrationViewController: UIViewController {
         codeTextFields[0].widthAnchor.constraint(equalToConstant: 48).isActive = true
         codeTextFields[0].heightAnchor.constraint(equalTo: codeTextFields[0].widthAnchor).isActive = true
 
-     view.addSubview(errorMessageLabel)
-            errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(errorMessageLabel)
+        errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
 
-            NSLayoutConstraint.activate([
-                errorMessageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                errorMessageLabel.topAnchor.constraint(equalTo: codeStackView.bottomAnchor, constant: 20),
-                errorMessageLabel.widthAnchor.constraint(equalTo: emailTextField.widthAnchor)
-            ])
+        NSLayoutConstraint.activate([
+            errorMessageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            errorMessageLabel.topAnchor.constraint(equalTo: codeStackView.bottomAnchor, constant: 20),
+            errorMessageLabel.widthAnchor.constraint(equalTo: emailTextField.widthAnchor)
+        ])
 
-            let numberPadStackView = UIStackView()
-            numberPadStackView.axis = .vertical
-            numberPadStackView.spacing = 16
+        let numberPadStackView = UIStackView()
+        numberPadStackView.axis = .vertical
+        numberPadStackView.spacing = 16
 
-            let numberOfRows = 4
-            let numberOfColumns = 3
+        let numberOfRows = 4
+        let numberOfColumns = 3
 
-     for i in 0..<numberOfRows {
-         let rowStackView = UIStackView()
-         rowStackView.axis = .horizontal
-         rowStackView.spacing = 16
-         rowStackView.distribution = .equalSpacing
+        for i in 0..<numberOfRows {
+            let rowStackView = UIStackView()
+            rowStackView.axis = .horizontal
+            rowStackView.spacing = 16
+            rowStackView.distribution = .equalSpacing
 
-         for j in 0..<numberOfColumns {
-             let index = i * numberOfColumns + j
-             if i == numberOfRows - 1 {
-                 if j == 0 {
-                     let emptyView = UIView()
-                                   let emptyViewWidth: CGFloat = 86
-                                   emptyView.widthAnchor.constraint(equalToConstant: emptyViewWidth).isActive = true
-                     rowStackView.addArrangedSubview(emptyView)
-   } else if j == 1 {
-       rowStackView.addArrangedSubview(numberButtons[9])
-   } else if j == numberOfColumns - 1 {
-       rowStackView.addArrangedSubview(deleteButton)
-   }
-} else if index < numberButtons.count - 1 {
-   rowStackView.addArrangedSubview(numberButtons[index])
+            for j in 0..<numberOfColumns {
+                let index = i * numberOfColumns + j
+                if i == numberOfRows - 1 {
+                    if j == 0 {
+                        let emptyView = UIView()
+                        let emptyViewWidth: CGFloat = 86
+                        emptyView.widthAnchor.constraint(equalToConstant: emptyViewWidth).isActive = true
+                        rowStackView.addArrangedSubview(emptyView)
+                    } else if j == 1 {
+                        rowStackView.addArrangedSubview(numberButtons[9])
+                    } else if j == numberOfColumns - 1 {
+                        rowStackView.addArrangedSubview(deleteButton)
+                    }
+                } else if index < numberButtons.count - 1 {
+                    rowStackView.addArrangedSubview(numberButtons[index])
+                }
+            }
+
+            numberPadStackView.addArrangedSubview(rowStackView)
+        }
+        view.addSubview(numberPadStackView)
+        numberPadStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            numberPadStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            numberPadStackView.topAnchor.constraint(equalTo: codeStackView.bottomAnchor, constant: 80)
+        ])
+    }
+
+    private func generateRandomPassword(length: Int = 6 ) -> String {
+        let characters = "0123456789"
+        return String((0..<length).map { _ in characters.randomElement()! })
+    }
+
+    @objc private func numberButtonTapped(sender: UIButton) {
+        let number = sender.tag
+        if let emptyTextField = codeTextFields.first(where: { $0.text?.isEmpty ?? false }) {
+            emptyTextField.text = "\(number)"
+
+            // Если все текстовые поля заполнены, проверьте пароль
+            if codeTextFields.allSatisfy({ !($0.text?.isEmpty ?? true) }) {
+                let enteredPassword = codeTextFields.map { $0.text! }.joined()
+                checkPassword(enteredPassword)
+            }
+        }
+    }
+
+    private func checkPassword(_ enteredPassword: String) {
+        if enteredPassword == randomPassword {
+            print("Пароль верный")
+            errorMessageLabel.isHidden = true
+
+            let newUserViewController = NewUserViewController()
+            navigationController?.pushViewController(newUserViewController, animated: true)
+        } else {
+            print("Пароль неверный")
+            errorMessageLabel.isHidden = false
+        }
+    }
+
+    @objc private func deleteButtonTapped() {
+        if let lastFilledTextField = codeTextFields.last(where: { !($0.text?.isEmpty ?? true) }) {
+            lastFilledTextField.text = ""
+        }
+    }
 }
-}
-
-numberPadStackView.addArrangedSubview(rowStackView)
-}
-view.addSubview(numberPadStackView)
-numberPadStackView.translatesAutoresizingMaskIntoConstraints = false
-NSLayoutConstraint.activate([
- numberPadStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
- numberPadStackView.topAnchor.constraint(equalTo: codeStackView.bottomAnchor, constant: 80)
-])
-}
 
 
-private func generateRandomPassword(length: Int = 6 ) -> String {
-let characters = "0123456789"
-return String((0..<length).map { _ in characters.randomElement()! })
-}
-
-@objc private func numberButtonTapped(sender: UIButton) {
-let number = sender.tag
-if let emptyTextField = codeTextFields.first(where: { $0.text?.isEmpty ?? false }) {
-   emptyTextField.text = "\(number)"
-
-   // Если все текстовые поля заполнены, проверьте пароль
-   if codeTextFields.allSatisfy({ !($0.text?.isEmpty ?? true) }) {
-       let enteredPassword = codeTextFields.map { $0.text! }.joined()
-       checkPassword(enteredPassword)
-   }
-}
-}
-
-private func checkPassword(_ enteredPassword: String) {
-if enteredPassword == randomPassword {
-print("Пароль верный")
-errorMessageLabel.isHidden = true
-
-
-let newUserViewController = NewUserViewController()
-navigationController?.pushViewController(newUserViewController, animated: true)
-} else {
-print("Пароль неверный")
-errorMessageLabel.isHidden = false
-}
-}
-
-@objc private func deleteButtonTapped() {
-if let lastFilledTextField = codeTextFields.last(where: { !($0.text?.isEmpty ?? true) }) {
-lastFilledTextField.text = ""
-}
-}
-}
