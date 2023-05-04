@@ -10,7 +10,11 @@ import UIKit
 
 class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
+    
     let avatarImageView = UIImageView()
+       let nameLabel = UILabel()
+       let emailLabel = UILabel()
+       let editButton = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +57,8 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
     }
 
     private func setupAvatarImageView() {
+
+        
         avatarImageView.image = UIImage(named: "user1")
         avatarImageView.layer.cornerRadius = 60
         avatarImageView.clipsToBounds = true
@@ -72,7 +78,49 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         avatarButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
         avatarButton.widthAnchor.constraint(equalToConstant: 120).isActive = true
         avatarButton.heightAnchor.constraint(equalToConstant: 120).isActive = true
+
+
+        setupNameLabel()
+          setupEmailLabel()
+          setupEditButton()
     }
+
+    private func setupNameLabel() {
+        nameLabel.text = "Имя пользователя"
+        nameLabel.font = UIFont.systemFont(ofSize: 18)
+        nameLabel.textColor = .white
+
+        view.addSubview(nameLabel)
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 20).isActive = true
+    }
+
+    private func setupEmailLabel() {
+        emailLabel.text = "email@example.com"
+        emailLabel.font = UIFont.systemFont(ofSize: 14)
+        emailLabel.textColor = .white
+
+        view.addSubview(emailLabel)
+        emailLabel.translatesAutoresizingMaskIntoConstraints = false
+        emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10).isActive = true
+    }
+
+    private func setupEditButton() {
+        editButton.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+        editButton.tintColor = .white
+        editButton.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
+
+        view.addSubview(editButton)
+        editButton.translatesAutoresizingMaskIntoConstraints = false
+        editButton.leadingAnchor.constraint(equalTo: emailLabel.trailingAnchor, constant: 8).isActive = true
+        editButton.centerYAnchor.constraint(equalTo: emailLabel.centerYAnchor).isActive = true
+    }
+
+    @objc private func editButtonPressed() {
+            // добавьте ваш код для отображения контроллера редактирования информации пользователя
+        }
 
     @objc private func showAvatarGallery() {
         let avatarGalleryViewController = AvatarGalleryViewController()
