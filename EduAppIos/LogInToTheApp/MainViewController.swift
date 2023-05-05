@@ -78,34 +78,8 @@ class MainViewController: UIViewController {
         let image = UIImage(named: "grad_buttons")
         let containerView = UIImageView(image: image)
         containerView.contentMode =  UIView.ContentMode.scaleAspectFit
-        //containerView.layer.cornerRadius = 30
         containerView.isUserInteractionEnabled = true
         
-    
-//
-       
-        
-        
-        //self.view.sendSubviewToBack(containerView)
-        
-        
-//        let containerView = UIView()
-//        containerView.layer.cornerRadius = 5
-//        containerView.clipsToBounds = true
-//
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.frame = CGRect(x: 0, y: 0, width: 210, height: 50)
-//        gradientLayer.colors = [
-//            UIColor.blue.cgColor,
-//            UIColor.blue.cgColor,
-//            UIColor.purple.cgColor,
-//            UIColor.green.cgColor,
-//            UIColor.red.cgColor
-//        ]
-//        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-//        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-//
-//        containerView.layer.addSublayer(gradientLayer)
 
         let button = UIButton()
         button.setTitle(title, for: .normal)
