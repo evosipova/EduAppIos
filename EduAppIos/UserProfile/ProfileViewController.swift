@@ -10,6 +10,12 @@ import UIKit
 
 class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
+    struct User {
+            let username: String
+            let email: String
+        }
+
+    var currentUser: User?
     
     let avatarImageView = UIImageView()
        let nameLabel = UILabel()
@@ -86,27 +92,27 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
     }
 
     private func setupNameLabel() {
-        nameLabel.text = "Имя пользователя"
-        nameLabel.font = UIFont.systemFont(ofSize: 18)
-        nameLabel.textColor = .white
+           nameLabel.text = currentUser?.username ?? "Имя пользователя"
+           nameLabel.font = UIFont.systemFont(ofSize: 18)
+           nameLabel.textColor = .white
 
-        view.addSubview(nameLabel)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 20).isActive = true
-    }
+           view.addSubview(nameLabel)
+           nameLabel.translatesAutoresizingMaskIntoConstraints = false
+           nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+           nameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 20).isActive = true
+       }
 
-    private func setupEmailLabel() {
-        emailLabel.text = "email@example.com"
-        emailLabel.font = UIFont.systemFont(ofSize: 14)
-        emailLabel.textColor = .white
+       private func setupEmailLabel() {
+           emailLabel.text = currentUser?.email ?? "email@example.com"
+           emailLabel.font = UIFont.systemFont(ofSize: 14)
+           emailLabel.textColor = .white
 
-        view.addSubview(emailLabel)
-        emailLabel.translatesAutoresizingMaskIntoConstraints = false
-        emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10).isActive = true
-    }
-
+           view.addSubview(emailLabel)
+           emailLabel.translatesAutoresizingMaskIntoConstraints = false
+           emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+           emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10).isActive = true
+       }
+    
     private func setupEditButton() {
         editButton.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
         editButton.tintColor = .white

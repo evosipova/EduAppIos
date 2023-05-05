@@ -16,6 +16,7 @@ class RegistrationViewController: UIViewController {
     private let usernameTextField = UITextField()
     private let passwordTextField = UITextField()
     private let continueButton = UIButton()
+    private let errorLabel = UILabel()
 
     private var firestore: Firestore!
 
@@ -36,23 +37,28 @@ class RegistrationViewController: UIViewController {
 
         emailTextField.borderStyle = .roundedRect
         emailTextField.placeholder = "Введите вашу почту"
+        emailTextField.autocapitalizationType = .none
         view.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
 
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.placeholder = "Введите ваш пароль"
+        passwordTextField.autocapitalizationType = .none
         view.addSubview(passwordTextField)
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
 
-
-
         continueButton.setTitle("Продолжить", for: .normal)
-                continueButton.setTitleColor(.blue, for: .normal)
-                continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
-                view.addSubview(continueButton)
-                continueButton.translatesAutoresizingMaskIntoConstraints = false
+        continueButton.setTitleColor(.blue, for: .normal)
+        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
+        view.addSubview(continueButton)
+        continueButton.translatesAutoresizingMaskIntoConstraints = false
 
-
+        errorLabel.textColor = .red
+        errorLabel.numberOfLines = 0
+        errorLabel.textAlignment = .center
+        errorLabel.isHidden = true
+        view.addSubview(errorLabel)
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             usernameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -70,38 +76,64 @@ class RegistrationViewController: UIViewController {
             passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
 
-
-
             continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                        continueButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20)
-                    ])
+            continueButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
+
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            errorLabel.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 10)
+        ])
     }
 
+
+
+
     @objc private func continueButtonTapped() {
-           guard let email = emailTextField.text, let username = usernameTextField.text, let password = passwordTextField.text else { return }
+        guard let email = emailTextField.text, let username = usernameTextField.text, let password = passwordTextField.text else { return }
 
-           Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
-               guard let strongSelf = self else { return }
+        // Проверка корректности введенной почты
+        if !isValidEmail(email) {
+            showError(message: "Пожалуйста, введите корректный адрес электронной почты.")
+            return
+        }
 
-               if let error = error {
-                   print("Ошибка при создании пользователя: \(error.localizedDescription)")
-                   return
-               }
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
+            guard let strongSelf = self else { return }
 
-               guard let user = authResult?.user else { return }
+            if let error = error {
+                print("Ошибка при создании пользователя: \(error.localizedDescription)")
+                strongSelf.showError(message: "Ошибка при создании пользователя: \(error.localizedDescription)")
+                return
+            }
 
-               let userRef = strongSelf.firestore.collection("users").document(user.uid)
-               let userData: [String: Any] = ["email": email, "username": username, "password" : password]
+            guard let user = authResult?.user else { return }
 
-               userRef.setData(userData) { error in
-                   if let error = error {
-                       print("Ошибка при сохранении данных пользователя: \(error.localizedDescription)")
-                       return
-                   }
+            let userRef = strongSelf.firestore.collection("users").document(user.uid)
+            let userData: [String: Any] = ["email": email, "username": username, "password" : password]
 
-                   let menuVC = MenuViewController()
-                   strongSelf.navigationController?.pushViewController(menuVC, animated: true)
-               }
-           }
-       }
+            userRef.setData(userData) { error in
+                if let error = error {
+                    print("Ошибка при сохранении данных пользователя: \(error.localizedDescription)")
+                    strongSelf.showError(message: "Ошибка при сохранении данных пользователя: \(error.localizedDescription)")
+                    return
+                }
+
+                strongSelf.errorLabel.isHidden = true
+                let menuVC = MenuViewController()
+                strongSelf.navigationController?.pushViewController(menuVC, animated: true)
+            }
+        }
+    }
+
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPredicate.evaluate(with: email)
+    }
+
+    func showError(message: String) {
+        errorLabel.text = message
+        errorLabel.isHidden = false
+    }
+
    }
