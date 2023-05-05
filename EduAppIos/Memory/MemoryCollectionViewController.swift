@@ -27,6 +27,12 @@ class MemoryCollectionViewController: UIViewController {
     var buttons : [UIButton] = []
 
 
+    var infoButton: UIButton!
+       var rulesView: UIView!
+       var rulesLabel: UILabel!
+
+
+    // Replace the fixed array with a nested array of categories and images
     let categoriesImages: [[UIImage?]] = [
         [UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish"),UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish")],
 
@@ -71,14 +77,70 @@ class MemoryCollectionViewController: UIViewController {
 
         backButton.target = self
         backButton.action = #selector(backButtonPressed)
+        setupInfoButton()
     }
 
+    private let infoButtonConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium, scale: .large)
+
+    private func setupInfoButton() {
+          infoButton = UIButton(type: .system)
+          infoButton.setImage(UIImage(systemName: "questionmark.circle", withConfiguration: infoButtonConfig), for: .normal)
+          infoButton.tintColor = .white
+          infoButton.translatesAutoresizingMaskIntoConstraints = false
+          infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
+
+          view.addSubview(infoButton)
+          infoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -20).isActive = true
+          infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+      }
 
 
     @objc func backButtonPressed() {
         restartGame()
         navigationController?.popViewController(animated: true)
     }
+
+    @objc private func infoButtonTapped() {
+         if rulesView == nil {
+             setupRulesView()
+         }
+
+         rulesView.isHidden = !rulesView.isHidden
+     }
+
+    private func setupRulesView() {
+        let rulesViewWidth = view.frame.width * 0.8
+                let rulesViewHeight = view.frame.height * 0.4
+                let rulesViewSize = CGSize(width: rulesViewWidth, height: rulesViewHeight)
+
+                rulesView = UIView(frame: CGRect(origin: .zero, size: rulesViewSize))
+                rulesView.center = view.center
+                rulesView.backgroundColor = .white
+                rulesView.layer.cornerRadius = 10
+                rulesView.clipsToBounds = true
+                rulesView.isHidden = true
+
+
+
+                let rulesLabel = UILabel()
+                rulesLabel.text = "Here are the game rules..." // Replace with the actual rules
+                rulesLabel.numberOfLines = 0
+                rulesLabel.textAlignment = .center
+                rulesLabel.font = UIFont.systemFont(ofSize: 20)
+                rulesLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        
+
+                rulesView.addSubview(rulesLabel)
+                NSLayoutConstraint.activate([
+                    rulesLabel.leadingAnchor.constraint(equalTo: rulesView.leadingAnchor, constant: 10),
+                    rulesLabel.trailingAnchor.constraint(equalTo: rulesView.trailingAnchor, constant: -10),
+                    rulesLabel.topAnchor.constraint(equalTo: rulesView.topAnchor, constant: 10),
+                    rulesLabel.bottomAnchor.constraint(equalTo: rulesView.bottomAnchor, constant: -10)
+                ])
+
+                view.addSubview(rulesView)
+            }
 
 
     private func setupView() {
