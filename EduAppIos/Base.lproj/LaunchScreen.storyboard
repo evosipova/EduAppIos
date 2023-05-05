@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SmartPlay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="be3-1J-RGp">
-                                <rect key="frame" x="70" y="404" width="253" height="44"/>
+                                <rect key="frame" x="99.000000000000014" y="209" width="195.33333333333337" height="45.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -32,11 +32,9 @@
                             <constraint firstAttribute="trailing" secondItem="Nee-90-EIE" secondAttribute="trailing" id="3bK-Nf-O51"/>
                             <constraint firstItem="Nee-90-EIE" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="4VN-MG-1w2"/>
                             <constraint firstAttribute="bottom" secondItem="Nee-90-EIE" secondAttribute="bottom" id="SKK-rA-vtJ"/>
-                            <constraint firstItem="be3-1J-RGp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="Sxc-XL-fMw"/>
-                            <constraint firstItem="be3-1J-RGp" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="VJ2-P0-be9"/>
                             <constraint firstItem="Nee-90-EIE" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="bkU-Em-fNi"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="be3-1J-RGp" secondAttribute="trailing" constant="70" id="cc2-hv-uRL"/>
-                            <constraint firstItem="be3-1J-RGp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="345" id="sfe-qU-Ycg"/>
+                            <constraint firstItem="be3-1J-RGp" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="g7V-zL-6CD"/>
+                            <constraint firstItem="be3-1J-RGp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="150" id="jMG-aP-iU1"/>
                         </constraints>
                     </view>
                 </viewController>

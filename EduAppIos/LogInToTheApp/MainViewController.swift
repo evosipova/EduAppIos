@@ -31,7 +31,7 @@ class MainViewController: UIViewController {
     private func setupView() {
         
         let image = UIImage(named: "launch")
-        var imageView = UIImageView(frame: view.bounds)
+        let imageView = UIImageView(frame: view.bounds)
         imageView.contentMode =  UIView.ContentMode.scaleAspectFill
         imageView.clipsToBounds = true
         imageView.image = image
@@ -40,21 +40,21 @@ class MainViewController: UIViewController {
         self.view.sendSubviewToBack(imageView)
         
         let appNameLabel = UILabel()
-        appNameLabel.text = "SmartGames"
+        appNameLabel.text = "SmartPlay"
         appNameLabel.textAlignment = .center
-        appNameLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        appNameLabel.font = UIFont(name: "Futura Bold", size: 35)
         appNameLabel.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(appNameLabel)
         NSLayoutConstraint.activate([
             appNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            appNameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150)
+            appNameLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 135)
         ])
 
         let buttons = [
-            createGradientButton(title: "Регистрация", action: #selector(registerButtonTapped)),
-            createGradientButton(title: "Авторизация", action: #selector(loginButtonTapped)),
-            createGradientButton(title: "Гостевой режим", action: #selector(continueButtonTapped))
+            createGradientButton(title: "регистрация", action: #selector(registerButtonTapped)),
+            createGradientButton(title: "авторизация", action: #selector(loginButtonTapped)),
+            createGradientButton(title: "гостевой режим", action: #selector(continueButtonTapped))
         ]
 
         let buttonStackView = UIStackView(arrangedSubviews: buttons)
@@ -67,43 +67,63 @@ class MainViewController: UIViewController {
         NSLayoutConstraint.activate([
             buttonStackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             buttonStackView.topAnchor.constraint(equalTo: appNameLabel.bottomAnchor, constant: 100),
-            buttonStackView.widthAnchor.constraint(equalToConstant: 210)
+            buttonStackView.widthAnchor.constraint(equalToConstant: 210),
+            buttonStackView.heightAnchor.constraint(equalToConstant: 210)
         ])
     }
 
-    private func createGradientButton(title: String, action: Selector) -> UIView {
-        let containerView = UIView()
-        containerView.layer.cornerRadius = 5
-        containerView.clipsToBounds = true
-
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: 210, height: 50)
-        gradientLayer.colors = [
-            UIColor.blue.cgColor,
-            UIColor.blue.cgColor,
-            UIColor.purple.cgColor,
-            UIColor.green.cgColor,
-            UIColor.red.cgColor
-        ]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-
-        containerView.layer.addSublayer(gradientLayer)
+    private func createGradientButton(title: String, action: Selector) -> UIImageView {
+        
+        
+        let image = UIImage(named: "grad_buttons")
+        let containerView = UIImageView(image: image)
+        containerView.contentMode =  UIView.ContentMode.scaleAspectFit
+        //containerView.layer.cornerRadius = 30
+        containerView.isUserInteractionEnabled = true
+        
+    
+//
+       
+        
+        
+        //self.view.sendSubviewToBack(containerView)
+        
+        
+//        let containerView = UIView()
+//        containerView.layer.cornerRadius = 5
+//        containerView.clipsToBounds = true
+//
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.frame = CGRect(x: 0, y: 0, width: 210, height: 50)
+//        gradientLayer.colors = [
+//            UIColor.blue.cgColor,
+//            UIColor.blue.cgColor,
+//            UIColor.purple.cgColor,
+//            UIColor.green.cgColor,
+//            UIColor.red.cgColor
+//        ]
+//        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+//        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+//
+//        containerView.layer.addSublayer(gradientLayer)
 
         let button = UIButton()
         button.setTitle(title, for: .normal)
+        button.titleLabel!.font = UIFont(name: "Raleway-Bold", size: 17)
+        button.titleLabel!.font = UIFont.boldSystemFont(ofSize: 17)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.addTarget(self, action: action, for: .touchUpInside)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 15
         button.clipsToBounds = true
 
         containerView.addSubview(button)
+    
         button.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 2),
-            button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -2),
+            button.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 4),
+            button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -4),
             button.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 2),
             button.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -2)
         ])
@@ -124,6 +144,7 @@ class MainViewController: UIViewController {
 
     
     @objc private func continueButtonTapped() {
+        
           signOutCurrentUser()
           let menuViewController = MenuViewController()
           self.navigationController?.pushViewController(menuViewController, animated: true)

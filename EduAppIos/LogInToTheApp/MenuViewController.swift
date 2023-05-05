@@ -23,6 +23,7 @@ class MenuViewController: UIViewController {
 
     @objc
        private func buttonProfilePressed(){
+           print("0")
            self.navigationController?.pushViewController(ProfileViewController(), animated: true)
        }
 
@@ -59,6 +60,7 @@ class MenuViewController: UIViewController {
         
         layer0.frame = view.frame
         view.layer.addSublayer(layer0)
+        self.navigationItem.hidesBackButton = true
         
         setupRectangle()
         setupButtons()
@@ -73,6 +75,7 @@ class MenuViewController: UIViewController {
            buttonProfile.setImage(imageUser, for: .normal)
 
            view.addSubview(buttonProfile)
+         buttonProfile.backgroundColor = .blue
            buttonProfile.translatesAutoresizingMaskIntoConstraints = false
            buttonProfile.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 20).isActive = true
            buttonProfile.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.08).isActive = true
@@ -83,12 +86,12 @@ class MenuViewController: UIViewController {
        }
     
     private func setupUser() {
-        let config2 = UIImage.SymbolConfiguration(textStyle: .largeTitle)
-        let imageUser = UIImage(systemName: "person", withConfiguration: config2)?.withTintColor(.white, renderingMode: .alwaysOriginal)
-
-        let imageUserView = UIImageView(image: imageUser)
-        view.addSubview(imageUserView)
-        imageUserView.pin(to: view, [.top: view.frame.height * 0.08, .right: view.frame.width / 20])
+//        let config2 = UIImage.SymbolConfiguration(textStyle: .largeTitle)
+//        let imageUser = UIImage(systemName: "person", withConfiguration: config2)?.withTintColor(.white, renderingMode: .alwaysOriginal)
+//
+//        let imageUserView = UIImageView(image: imageUser)
+//        view.addSubview(imageUserView)
+//        imageUserView.pin(to: view, [.top: view.frame.height * 0.08, .right: view.frame.width / 20])
 
         let label = UILabel()
         label.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.9)
@@ -100,24 +103,20 @@ class MenuViewController: UIViewController {
         label.pin(to: view, [.top: view.frame.height * 0.09, .left: view.frame.width / 20])
 
         // Создание и настройка кнопки userProfileButton
-        let userProfileButton = UIButton(type: .custom)
-        userProfileButton.frame = CGRect(x: 0, y: 0, width: imageUserView.frame.width * 7, height: imageUserView.frame.height * 7)
-        userProfileButton.backgroundColor = .clear
-        userProfileButton.addTarget(self, action: #selector(userProfileButtonPressed), for: .touchUpInside)
-
-        view.addSubview(userProfileButton)
-        userProfileButton.translatesAutoresizingMaskIntoConstraints = false
-        userProfileButton.centerXAnchor.constraint(equalTo: imageUserView.centerXAnchor).isActive = true
-        userProfileButton.centerYAnchor.constraint(equalTo: imageUserView.centerYAnchor).isActive = true
-        userProfileButton.widthAnchor.constraint(equalToConstant: imageUserView.frame.width * 2).isActive = true
-        userProfileButton.heightAnchor.constraint(equalToConstant: imageUserView.frame.height * 2).isActive = true
+//        let userProfileButton = UIButton(type: .custom)
+//        userProfileButton.frame = CGRect(x: 0, y: 0, width: imageUserView.frame.width * 7, height: imageUserView.frame.height * 7)
+//        userProfileButton.backgroundColor = .clear
+//        userProfileButton.addTarget(self, action: #selector(userProfileButtonPressed), for: .touchUpInside)
+//
+//        view.addSubview(userProfileButton)
+//        userProfileButton.translatesAutoresizingMaskIntoConstraints = false
+//        userProfileButton.centerXAnchor.constraint(equalTo: imageUserView.centerXAnchor).isActive = true
+//        userProfileButton.centerYAnchor.constraint(equalTo: imageUserView.centerYAnchor).isActive = true
+//        userProfileButton.widthAnchor.constraint(equalToConstant: imageUserView.frame.width * 2).isActive = true
+//        userProfileButton.heightAnchor.constraint(equalToConstant: imageUserView.frame.height * 2).isActive = true
     }
 
-    @objc
-    private func userProfileButtonPressed() {
-        self.navigationController?.pushViewController(ProfileViewController(), animated: true)
-    }
-
+   
     private func setupRectangle() {
         
         viewRect.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height*0.7)
