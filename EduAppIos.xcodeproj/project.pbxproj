@@ -87,6 +87,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E9556932A0519B0002A2878 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				5EF37DDA2A0126A600C54F18 /* NewUserViewController.swift */,
+				5E9556902A0469D8002A2878 /* EditProfileViewController.swift */,
+				5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */,
+				5E95568A2A045EBB002A2878 /* ProfileViewController.swift */,
+				5E95568C2A046263002A2878 /* UserProfile.xcassets */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
 		5EB2A6F229BE888D00895B68 /* Memory */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,15 +145,11 @@
 				819E088829B768CB00E4CFDF /* Assets.xcassets */,
 				819E088A29B768CB00E4CFDF /* LaunchScreen.storyboard */,
 				819E088D29B768CB00E4CFDF /* Info.plist */,
-				5E95568A2A045EBB002A2878 /* ProfileViewController.swift */,
-				5E95568C2A046263002A2878 /* UserProfile.xcassets */,
-				5EF37DDA2A0126A600C54F18 /* NewUserViewController.swift */,
-				5E9556902A0469D8002A2878 /* EditProfileViewController.swift */,
-				5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */,
-				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
 				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
 				819E089329B769F200E4CFDF /* MenuViewController.swift */,
 				819E089529B771A400E4CFDF /* UIView+Pin.swift */,
+				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
+				5E9556932A0519B0002A2878 /* UserProfile */,
 				5EB2A6F229BE888D00895B68 /* Memory */,
 				81FB4E4C29BFDFF100D16BAE /* TicTacToe */,
 				81E99C3A29BCCF3900D3B0BD /* Puzzles */,
