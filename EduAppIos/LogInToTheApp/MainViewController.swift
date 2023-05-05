@@ -121,7 +121,12 @@ class MainViewController: UIViewController {
         
           signOutCurrentUser()
           let menuViewController = MenuViewController()
-          self.navigationController?.pushViewController(menuViewController, animated: true)
+        
+        let navigation = UINavigationController(rootViewController: menuViewController)
+                    navigation.modalPresentationStyle = .fullScreen
+                    present(navigation, animated: true)
+                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    generator.impactOccurred()
       }
 
     private func signOutCurrentUser() {
