@@ -41,20 +41,18 @@ class MainViewController: UIViewController {
 
         view.layer.insertSublayer(gradientLayer, at: 0)
 
-
-
         
         let registerButton = UIButton()
                registerButton.setTitle("Регистрация", for: .normal)
                registerButton.setTitleColor(.white, for: .normal)
                registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
         
-        // Add your target function for registerButton
+
         
         let loginButton = UIButton()
         loginButton.setTitle("Авторизация", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
-        // Add your target function for loginButton
+    
         
         let guestModeButton = UIButton()
         guestModeButton.setTitle("Гостевой режим", for: .normal)

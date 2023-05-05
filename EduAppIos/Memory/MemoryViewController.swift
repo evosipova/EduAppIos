@@ -62,7 +62,6 @@ class MemoryViewController: UIViewController {
 
     private func setupView() {
         self.view.backgroundColor = .white
-        // Здесь вы можете настроить дополнительные элементы интерфейса, если это необходимо
 
         self.view.backgroundColor = UIColor(red: 0.118, green: 0.118, blue: 0.118, alpha: 1)
         let layer0 = CAGradientLayer()

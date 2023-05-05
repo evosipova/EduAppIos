@@ -27,9 +27,6 @@ class MemoryCollectionViewController: UIViewController {
     var buttons : [UIButton] = []
 
 
-
-
-    // Replace the fixed array with a nested array of categories and images
     let categoriesImages: [[UIImage?]] = [
         [UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish"),UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish")],
 

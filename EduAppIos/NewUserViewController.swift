@@ -138,10 +138,10 @@ class NewUserViewController: UIViewController {
             guard let text = textField.text else { return }
             password += text
         }
-        // TODO: сохранение пользователя в базе данных
+
     }
     
-    // обработчик нажатия на кнопку "Сохранить"
+
     @objc private func saveButtonTapped() {
         saveUser()
         navigationController?.popViewController(animated: true)
