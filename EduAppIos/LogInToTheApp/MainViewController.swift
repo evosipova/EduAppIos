@@ -41,38 +41,78 @@ class MainViewController: UIViewController {
 
         view.layer.insertSublayer(gradientLayer, at: 0)
 
-        
-        let registerButton = UIButton()
-               registerButton.setTitle("Регистрация", for: .normal)
-               registerButton.setTitleColor(.white, for: .normal)
-               registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
-        
+        let appNameLabel = UILabel()
+        appNameLabel.text = "SmartGames"
+        appNameLabel.textAlignment = .center
+        appNameLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        appNameLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        
-        let loginButton = UIButton()
-        loginButton.setTitle("Авторизация", for: .normal)
-        loginButton.setTitleColor(.white, for: .normal)
-        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-    
-        
-        let guestModeButton = UIButton()
-        guestModeButton.setTitle("Гостевой режим", for: .normal)
-        guestModeButton.setTitleColor(.white, for: .normal)
-        guestModeButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
-        
-        let buttonStackView = UIStackView(arrangedSubviews: [registerButton, loginButton, guestModeButton])
+        view.addSubview(appNameLabel)
+        NSLayoutConstraint.activate([
+            appNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            appNameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150)
+        ])
+
+        let buttons = [
+            createGradientButton(title: "Регистрация", action: #selector(registerButtonTapped)),
+            createGradientButton(title: "Авторизация", action: #selector(loginButtonTapped)),
+            createGradientButton(title: "Гостевой режим", action: #selector(continueButtonTapped))
+        ]
+
+        let buttonStackView = UIStackView(arrangedSubviews: buttons)
         buttonStackView.axis = .vertical
         buttonStackView.spacing = 20
         buttonStackView.distribution = .fillEqually
-        
+
         self.view.addSubview(buttonStackView)
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             buttonStackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            buttonStackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            buttonStackView.widthAnchor.constraint(equalToConstant: 200)
+            buttonStackView.topAnchor.constraint(equalTo: appNameLabel.bottomAnchor, constant: 100),
+            buttonStackView.widthAnchor.constraint(equalToConstant: 210)
         ])
     }
+
+    private func createGradientButton(title: String, action: Selector) -> UIView {
+        let containerView = UIView()
+        containerView.layer.cornerRadius = 5
+        containerView.clipsToBounds = true
+
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: 210, height: 50)
+        gradientLayer.colors = [
+            UIColor.blue.cgColor,
+            UIColor.blue.cgColor,
+            UIColor.purple.cgColor,
+            UIColor.green.cgColor,
+            UIColor.red.cgColor,
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+
+        containerView.layer.addSublayer(gradientLayer)
+
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.addTarget(self, action: action, for: .touchUpInside)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+
+        containerView.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 2),
+            button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -2),
+            button.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 2),
+            button.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -2)
+        ])
+        return containerView
+     }
+
+
     
     @objc private func registerButtonTapped() {
            let registrationViewController = RegistrationViewController()
