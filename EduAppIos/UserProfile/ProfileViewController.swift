@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import Firebase
+
 
 class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
@@ -24,6 +26,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchUserData()
         setupView()
     }
 
@@ -48,7 +51,28 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         setupTitleLabel()
         setupBackButton()
         setupAvatarImageView()
+
+        let logoutButton = UIButton(type: .system)
+        logoutButton.setTitle("Выйти", for: .normal)
+        logoutButton.setTitleColor(.white, for: .normal)
+        logoutButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+
+        view.addSubview(logoutButton)
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            logoutButton.widthAnchor.constraint(equalToConstant: 100),
+            logoutButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+
+
     }
+
+    @objc private func logoutButtonTapped() {
+           self.navigationController?.popToRootViewController(animated: true)
+       }
 
     private func setupTitleLabel() {
         let titleLabel = UILabel()
@@ -88,11 +112,45 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
         setupNameLabel()
           setupEmailLabel()
-          setupEditButton()
     }
 
+    func fetchUserData() {
+        // Проверка, авторизован ли пользователь
+        guard let user = Auth.auth().currentUser else {
+            // Если пользователь не авторизован, установите пустые значения
+            currentUser = User(username: "", email: "")
+            updateLabels()
+            return
+        }
+
+        // Если пользователь авторизован, запросите информацию из базы данных Firebase
+        let userRef = Firestore.firestore().collection("users").document(user.uid)
+
+        userRef.getDocument { [weak self] (document, error) in
+            guard let strongSelf = self else { return }
+
+            if let error = error {
+                print("Ошибка при получении данных пользователя: \(error.localizedDescription)")
+            } else if let document = document, document.exists {
+                if let data = document.data() {
+                    strongSelf.currentUser = User(username: data["username"] as? String ?? "",
+                                                  email: data["email"] as? String ?? "")
+                    strongSelf.updateLabels()
+                }
+            }
+        }
+    }
+
+
+    func updateLabels() {
+        nameLabel.text = currentUser?.username ?? ""
+        emailLabel.text = currentUser?.email ?? ""
+    }
+
+
+
     private func setupNameLabel() {
-           nameLabel.text = currentUser?.username ?? "Имя пользователя"
+           nameLabel.text = currentUser?.username ?? ""
            nameLabel.font = UIFont.systemFont(ofSize: 18)
            nameLabel.textColor = .white
 
@@ -103,7 +161,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
        }
 
        private func setupEmailLabel() {
-           emailLabel.text = currentUser?.email ?? "email@example.com"
+           emailLabel.text = currentUser?.email ?? ""
            emailLabel.font = UIFont.systemFont(ofSize: 14)
            emailLabel.textColor = .white
 
@@ -112,23 +170,6 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
            emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
            emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10).isActive = true
        }
-    
-    private func setupEditButton() {
-        editButton.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
-        editButton.tintColor = .white
-        editButton.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
-
-        view.addSubview(editButton)
-        editButton.translatesAutoresizingMaskIntoConstraints = false
-        editButton.leadingAnchor.constraint(equalTo: emailLabel.trailingAnchor, constant: 8).isActive = true
-        editButton.centerYAnchor.constraint(equalTo: emailLabel.centerYAnchor).isActive = true
-    }
-
-    @objc private func editButtonPressed() {
-        let editProfileViewController = EditProfileViewController()
-        let navigationController = UINavigationController(rootViewController: editProfileViewController)
-        self.present(navigationController, animated: true, completion: nil)
-    }
 
 
     @objc private func showAvatarGallery() {

@@ -31,7 +31,7 @@ class RegistrationViewController: UIViewController {
         view.backgroundColor = .white
 
         usernameTextField.borderStyle = .roundedRect
-        usernameTextField.placeholder = "Введите ваше имя пользователя"
+        usernameTextField.placeholder = "Введите ваше имя"
         view.addSubview(usernameTextField)
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
 
@@ -91,6 +91,11 @@ class RegistrationViewController: UIViewController {
     @objc private func continueButtonTapped() {
         guard let email = emailTextField.text, let username = usernameTextField.text, let password = passwordTextField.text else { return }
 
+        if email.isEmpty || username.isEmpty || password.isEmpty {
+            showError(message: "Пожалуйста, заполните все поля.")
+            return
+        }
+        
         // Проверка корректности введенной почты
         if !isValidEmail(email) {
             showError(message: "Пожалуйста, введите корректный адрес электронной почты.")

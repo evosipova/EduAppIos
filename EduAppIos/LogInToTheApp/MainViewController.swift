@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class MainViewController: UIViewController {
     
@@ -85,7 +86,7 @@ class MainViewController: UIViewController {
             UIColor.blue.cgColor,
             UIColor.purple.cgColor,
             UIColor.green.cgColor,
-            UIColor.red.cgColor,
+            UIColor.red.cgColor
         ]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
@@ -126,7 +127,16 @@ class MainViewController: UIViewController {
 
     
     @objc private func continueButtonTapped() {
-        let menuViewController = MenuViewController()
-        self.navigationController?.pushViewController(menuViewController, animated: true)
-    }
+          signOutCurrentUser()
+          let menuViewController = MenuViewController()
+          self.navigationController?.pushViewController(menuViewController, animated: true)
+      }
+
+    private func signOutCurrentUser() {
+           do {
+               try Auth.auth().signOut()
+           } catch let signOutError as NSError {
+               print("Ошибка выхода из аккаунта: %@", signOutError)
+           }
+       }
 }
