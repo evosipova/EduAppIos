@@ -52,6 +52,7 @@ class MainViewController: UIViewController {
         let loginButton = UIButton()
         loginButton.setTitle("Авторизация", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     
         
         let guestModeButton = UIButton()
@@ -77,7 +78,12 @@ class MainViewController: UIViewController {
            let registrationViewController = RegistrationViewController()
            self.navigationController?.pushViewController(registrationViewController, animated: true)
        }
-       
+
+    @objc private func loginButtonTapped() {
+           let loginViewController = LoginViewController()
+           self.navigationController?.pushViewController(loginViewController, animated: true)
+       }
+
     
     @objc private func continueButtonTapped() {
         let menuViewController = MenuViewController()

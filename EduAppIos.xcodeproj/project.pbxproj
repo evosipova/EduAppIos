@@ -11,6 +11,7 @@
 		5E95568D2A046263002A2878 /* UserProfile.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E95568C2A046263002A2878 /* UserProfile.xcassets */; };
 		5E95568F2A046322002A2878 /* AvatarGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */; };
 		5E9556912A0469D8002A2878 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9556902A0469D8002A2878 /* EditProfileViewController.swift */; };
+		5E9556952A053E6E002A2878 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9556942A053E6E002A2878 /* LoginViewController.swift */; };
 		5EB2A6F129BE875F00895B68 /* MemoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */; };
 		5EB2A6F829BE972F00895B68 /* fruitsAndVegetables.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F729BE972F00895B68 /* fruitsAndVegetables.xcassets */; };
 		5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DD62A00830F00C54F18 /* MainViewController.swift */; };
@@ -45,6 +46,7 @@
 		5E95568C2A046263002A2878 /* UserProfile.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = UserProfile.xcassets; sourceTree = "<group>"; };
 		5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGalleryViewController.swift; sourceTree = "<group>"; };
 		5E9556902A0469D8002A2878 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		5E9556942A053E6E002A2878 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewController.swift; sourceTree = "<group>"; };
 		5EB2A6F729BE972F00895B68 /* fruitsAndVegetables.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = fruitsAndVegetables.xcassets; sourceTree = "<group>"; };
 		5EF37DD62A00830F00C54F18 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +101,17 @@
 			path = UserProfile;
 			sourceTree = "<group>";
 		};
+		5E9556962A0542F3002A2878 /* LogInToTheApp */ = {
+			isa = PBXGroup;
+			children = (
+				5E9556942A053E6E002A2878 /* LoginViewController.swift */,
+				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
+				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
+				819E089329B769F200E4CFDF /* MenuViewController.swift */,
+			);
+			path = LogInToTheApp;
+			sourceTree = "<group>";
+		};
 		5EB2A6F229BE888D00895B68 /* Memory */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,10 +158,8 @@
 				819E088829B768CB00E4CFDF /* Assets.xcassets */,
 				819E088A29B768CB00E4CFDF /* LaunchScreen.storyboard */,
 				819E088D29B768CB00E4CFDF /* Info.plist */,
-				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
-				819E089329B769F200E4CFDF /* MenuViewController.swift */,
 				819E089529B771A400E4CFDF /* UIView+Pin.swift */,
-				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
+				5E9556962A0542F3002A2878 /* LogInToTheApp */,
 				5E9556932A0519B0002A2878 /* UserProfile */,
 				5EB2A6F229BE888D00895B68 /* Memory */,
 				81FB4E4C29BFDFF100D16BAE /* TicTacToe */,
@@ -273,6 +284,7 @@
 				81E99C3529BCA41000D3B0BD /* PuzzleViewController.swift in Sources */,
 				818ED50E2A02C0B5002ED41B /* TicTacToeViewModel.swift in Sources */,
 				5EF37DDB2A0126A600C54F18 /* NewUserViewController.swift in Sources */,
+				5E9556952A053E6E002A2878 /* LoginViewController.swift in Sources */,
 				5E95568B2A045EBB002A2878 /* ProfileViewController.swift in Sources */,
 				81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */,
 				81FB4E4B29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift in Sources */,
