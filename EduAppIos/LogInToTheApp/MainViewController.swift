@@ -29,19 +29,16 @@ class MainViewController: UIViewController {
     }
     
     private func setupView() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = view.bounds
-        gradientLayer.colors = [
-            UIColor.white.cgColor,
-            UIColor.cyan.cgColor,
-            UIColor.green.cgColor,
-            UIColor(red: 1, green: 1, blue: 1, alpha: 1.0).cgColor
-        ]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.0)
-
-        view.layer.insertSublayer(gradientLayer, at: 0)
-
+        
+        let image = UIImage(named: "launch")
+        var imageView = UIImageView(frame: view.bounds)
+        imageView.contentMode =  UIView.ContentMode.scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = image
+        imageView.center = view.center
+        view.addSubview(imageView)
+        self.view.sendSubviewToBack(imageView)
+        
         let appNameLabel = UILabel()
         appNameLabel.text = "SmartGames"
         appNameLabel.textAlignment = .center
