@@ -14,13 +14,13 @@ import FirebaseFirestore
 class RegistrationViewController: UIViewController {
     private let emailTextField = UITextField()
     private let usernameTextField = UITextField()
-    //private let passwordTextField = UITextField()
+    private let passwordTextField = UITextField()
     private let continueButton = UIButton()
     private let errorLabel = UILabel()
+    let numberPadStackView = UIStackView()
     private var firestore: Firestore!
     private var codeTextFields: [UITextField] = []
    
-    
     
     
     private let numberButtons: [UIButton] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map { number in
@@ -29,7 +29,7 @@ class RegistrationViewController: UIViewController {
         button.tintColor = .gray
         button.titleLabel?.font = UIFont.systemFont(ofSize: 36)
         button.tag = number
-               button.addTarget(self, action: #selector(numberButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(numberButtonTapped), for: .touchUpInside)
         
         button.layer.cornerRadius = 40
         button.clipsToBounds = true
@@ -57,24 +57,10 @@ class RegistrationViewController: UIViewController {
     
     
     
-    
-    
-    private func createCodeTextField() -> UITextField {
-        let textField = UITextField()
-        textField.backgroundColor = UIColor(white: 0.9, alpha: 1)
-        textField.layer.cornerRadius = 8
-        textField.clipsToBounds = true
-        textField.textAlignment = .center
-        textField.isUserInteractionEnabled = false
-        textField.widthAnchor.constraint(equalToConstant: 48).isActive = true
-        textField.heightAnchor.constraint(equalTo: textField.widthAnchor).isActive = true
-        return textField
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        
+        hideKeyboardWhenTappedAround()
         firestore = Firestore.firestore()
     }
     
@@ -85,35 +71,55 @@ class RegistrationViewController: UIViewController {
         setupLabels()
         setupCodeTextFields()
         setupPasswordInputButtons()
+        setupContinueButton()
+       
         
-        
-        continueButton.setTitle("Продолжить", for: .normal)
-        continueButton.setTitleColor(.blue, for: .normal)
-        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
-        view.addSubview(continueButton)
+    }
+    
+    private func createCodeTextField() -> UITextField {
+        let textField = UITextField()
+        textField.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        textField.layer.cornerRadius = 10
+        textField.clipsToBounds = true
+        textField.textAlignment = .center
+        textField.isUserInteractionEnabled = false
+        // поч не работает потом починить
+        textField.font = UIFont.init(name: "Montserrat-Medium", size: 20)
+        textField.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        textField.heightAnchor.constraint(equalTo: textField.widthAnchor).isActive = true
+        return textField
+    }
+    
+    private func setupContinueButton(){
         continueButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(continueButton)
+        continueButton.isHidden = true
         
-        errorLabel.textColor = .red
-        errorLabel.numberOfLines = 0
-        errorLabel.textAlignment = .center
-        errorLabel.isHidden = true
-        view.addSubview(errorLabel)
-        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        continueButton.frame = CGRect(x: 0, y: 0, width: view.frame.width*0.7, height: view.frame.height*0.07)
+        continueButton.layer.backgroundColor = UIColor(red: 0.553, green: 0.6, blue: 1, alpha: 1).cgColor
+        continueButton.layer.cornerRadius = 20
+        continueButton.layer.borderWidth = 0
+        continueButton.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
+        let label = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: view.frame.width*0.7, height: view.frame.height*0.07)
+        label.textColor = .white
+        label.font = UIFont(name: "Raleway-Bold", size: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.text = "продолжить"
+        continueButton.addSubview(label)
+        label.pinCenter(to: continueButton)
         
         NSLayoutConstraint.activate([
             
             continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            continueButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 1000),
-            
-            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            errorLabel.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 10)
-        ])
+            continueButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 500),
+            continueButton.setHeight(Int(view.frame.height*0.07)),
+            continueButton.setWidth(Int(view.frame.width*0.7))])
+        
     }
-    
     private func setupPasswordInputButtons(){
         
-        let numberPadStackView = UIStackView()
+        
         numberPadStackView.axis = .vertical
         numberPadStackView.spacing = 16
         
@@ -150,9 +156,9 @@ class RegistrationViewController: UIViewController {
         numberPadStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             numberPadStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            numberPadStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height*0.5)
+            numberPadStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height*0.45)
         ])
-        
+        numberPadStackView.isHidden = true
         
     }
     
@@ -164,9 +170,11 @@ class RegistrationViewController: UIViewController {
         view.addSubview(codeStackView)
         codeStackView.translatesAutoresizingMaskIntoConstraints = false
         
+        
+        
         NSLayoutConstraint.activate([
             codeStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            codeStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 360),
+            codeStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 300),
             codeStackView.widthAnchor.constraint(equalTo: emailTextField.widthAnchor)
         ])
         
@@ -197,36 +205,41 @@ class RegistrationViewController: UIViewController {
     
     private func setupTextFields(){
         usernameTextField.borderStyle = .roundedRect
-        usernameTextField.placeholder = "Введите ваше имя"
+        usernameTextField.layer.borderWidth = 1.0
+        usernameTextField.layer.cornerRadius = 10
+        usernameTextField.layer.borderColor = UIColor.black.cgColor
+        usernameTextField.font = UIFont(name: "Raleway-Regular", size: 20)
+        usernameTextField.placeholder = "имя"
         view.addSubview(usernameTextField)
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         
         emailTextField.borderStyle = .roundedRect
-        emailTextField.placeholder = "Введите вашу почту"
+        emailTextField.layer.borderWidth = 1.0
+        emailTextField.layer.cornerRadius = 10
+        emailTextField.layer.borderColor = UIColor.black.cgColor
+        emailTextField.placeholder = "почта"
+        emailTextField.font = UIFont(name: "Raleway-Regular", size: 20)
         emailTextField.autocapitalizationType = .none
         view.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-//        passwordTextField.borderStyle = .roundedRect
-//        passwordTextField.placeholder = "Введите ваш пароль"
-//        passwordTextField.autocapitalizationType = .none
-//        view.addSubview(passwordTextField)
-//        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
             usernameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             usernameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             usernameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             usernameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            usernameTextField.setHeight(50),
+            usernameTextField.setWidth(80),
+            
             
             emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 20),
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)])
+            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            emailTextField.setHeight(50),
+            emailTextField.setWidth(80)])
             
-//            passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
-//            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-//            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)])
+
     }
     
     private func setupLabels(){
@@ -239,6 +252,30 @@ class RegistrationViewController: UIViewController {
         view.addSubview(label)
         label.pin(to: view, [.top: view.frame.height * 0.07])
         label.pinCenterX(to: view)
+        
+        let passLabel = UILabel()
+        passLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.9)
+        passLabel.textColor = .black
+        passLabel.font = UIFont(name: "Raleway-Bold", size: 18)
+        passLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        passLabel.text = "пароль"
+        view.addSubview(passLabel)
+        passLabel.pin(to: view, [.top: view.frame.height * 0.315, .left: view.frame.width * 0.11])
+        
+        errorLabel.textColor = .red
+        errorLabel.numberOfLines = 0
+        errorLabel.textAlignment = .center
+        errorLabel.isHidden = true
+        view.addSubview(errorLabel)
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            
+            errorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            errorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            errorLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 600)
+        ])
+        
     }
     
     
@@ -247,15 +284,27 @@ class RegistrationViewController: UIViewController {
     @objc private func continueButtonTapped() {
         
         // починить
-        guard let email = emailTextField.text, let username = usernameTextField.text, let password = usernameTextField.text else { return }
+        guard let email = emailTextField.text, let username = usernameTextField.text, let password = passwordTextField.text else { return }
         
         if email.isEmpty || username.isEmpty || password.isEmpty {
+            //continueButton.isHidden = true
+            if(password.isEmpty){
+                numberPadStackView.isHidden = false
+            }else{
+                numberPadStackView.isHidden = true
+            }
             showError(message: "Пожалуйста, заполните все поля.")
+            
             return
         }
         
         // Проверка корректности введенной почты
         if !isValidEmail(email) {
+            if(password.isEmpty){
+                numberPadStackView.isHidden = false
+            }else{
+                numberPadStackView.isHidden = true
+            }
             showError(message: "Пожалуйста, введите корректный адрес электронной почты.")
             return
         }
@@ -318,8 +367,11 @@ class RegistrationViewController: UIViewController {
             // Если все текстовые поля заполнены, проверьте пароль
             if codeTextFields.allSatisfy({ !($0.text?.isEmpty ?? true) }) {
                 let enteredPassword = codeTextFields.map { $0.text! }.joined()
-                print(enteredPassword)
-                //checkPassword(enteredPassword)
+                passwordTextField.text = enteredPassword
+                numberPadStackView.isHidden = true
+                continueButton.isHidden = false
+                continueButton.isEnabled = true
+               
             }
         }
     }
@@ -331,4 +383,20 @@ class RegistrationViewController: UIViewController {
     
     
     
-   
+extension RegistrationViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(RegistrationViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+        if (emailTextField.text != "") && (usernameTextField.text != ""){
+            
+            if(passwordTextField.text?.count != 6){
+                numberPadStackView.isHidden = false
+            }
+        }
+    }
+}
