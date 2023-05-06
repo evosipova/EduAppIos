@@ -42,8 +42,9 @@ class RegistrationViewController: UIViewController {
     
     private lazy var deleteButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "delete.left"), for: .normal)
-        button.tintColor = .gray
+        let config = UIImage.SymbolConfiguration(textStyle: .title1)
+        button.setImage(UIImage(systemName: "delete.left", withConfiguration: config), for: .normal)
+        button.tintColor = UIColor(red: 0.553, green: 0.6, blue: 1, alpha: 1)
         button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         
         button.layer.cornerRadius = 40
@@ -144,6 +145,7 @@ class RegistrationViewController: UIViewController {
                         rowStackView.addArrangedSubview(numberButtons[9])
                     } else if j == numberOfColumns - 1 {
                         rowStackView.addArrangedSubview(deleteButton)
+                        rowStackView.arrangedSubviews.last?.backgroundColor = .clear
                     }
                 } else if index < numberButtons.count - 1 {
                     rowStackView.addArrangedSubview(numberButtons[index])

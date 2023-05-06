@@ -112,6 +112,7 @@ class MainViewController: UIViewController {
        }
 
     @objc private func loginButtonTapped() {
+        print("0000")
            let loginViewController = LoginViewController()
            self.navigationController?.pushViewController(loginViewController, animated: true)
        }
