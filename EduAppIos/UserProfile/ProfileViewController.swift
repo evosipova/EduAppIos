@@ -70,24 +70,24 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         
         
     }
-
+    
     private func loadSavedAvatar() {
-            if let avatarData = UserDefaults.standard.object(forKey: "selectedAvatar") as? Data,
-               let avatarImage = UIImage(data: avatarData) {
-                avatarImageView.image = avatarImage
-            }
+        if let avatarData = UserDefaults.standard.object(forKey: "selectedAvatar") as? Data,
+           let avatarImage = UIImage(data: avatarData) {
+            avatarImageView.image = avatarImage
         }
-
+    }
+    
     private func saveAvatar(avatarImage: UIImage) {
-            if let avatarData = avatarImage.pngData() {
-                UserDefaults.standard.set(avatarData, forKey: "selectedAvatar")
-            }
+        if let avatarData = avatarImage.pngData() {
+            UserDefaults.standard.set(avatarData, forKey: "selectedAvatar")
         }
-
+    }
+    
     func didSelectAvatar(image: UIImage) {
-           avatarImageView.image = image
-           saveAvatar(avatarImage: image)
-       }
+        avatarImageView.image = image
+        saveAvatar(avatarImage: image)
+    }
     
     private func setupBackButton(){
         let config = UIImage.SymbolConfiguration(textStyle: .title1)
@@ -214,7 +214,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         self.present(avatarGalleryViewController, animated: true, completion: nil)
     }
     
-
+    
     @objc
     private func backButtonPressed() {
         self.navigationController?.popViewController(animated: true)
