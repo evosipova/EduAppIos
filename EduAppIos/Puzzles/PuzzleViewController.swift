@@ -59,7 +59,7 @@ class PuzzleViewController : UIViewController{
         view.addSubview(label)
         label.pinCenterX(to: view)
         label.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height*0.06).isActive = true
-
+        
         let config = UIImage.SymbolConfiguration(textStyle: .title1)
         let image = UIImage(systemName: "arrow.turn.up.left",withConfiguration: config)?.withTintColor(.white
                                                                                                        , renderingMode: .alwaysOriginal)
@@ -232,7 +232,7 @@ class PuzzleViewController : UIViewController{
         
         continueButton.isEnabled = false;
         continueButton.addTarget(self, action: #selector(continueButtonPressed), for: .touchUpInside)
-
+        
     }
     
 }

@@ -20,7 +20,7 @@ class RegistrationViewController: UIViewController {
     let numberPadStackView = UIStackView()
     private var firestore: Firestore!
     private var codeTextFields: [UITextField] = []
-   
+    
     
     
     private let numberButtons: [UIButton] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map { number in
@@ -73,7 +73,7 @@ class RegistrationViewController: UIViewController {
         setupCodeTextFields()
         setupPasswordInputButtons()
         setupContinueButton()
-       
+        
         
     }
     
@@ -224,7 +224,7 @@ class RegistrationViewController: UIViewController {
         emailTextField.autocapitalizationType = .none
         view.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             usernameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             usernameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
@@ -240,8 +240,8 @@ class RegistrationViewController: UIViewController {
             emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             emailTextField.setHeight(50),
             emailTextField.setWidth(80)])
-            
-
+        
+        
     }
     
     private func setupLabels(){
@@ -373,7 +373,7 @@ class RegistrationViewController: UIViewController {
                 numberPadStackView.isHidden = true
                 continueButton.isHidden = false
                 continueButton.isEnabled = true
-               
+                
             }
         }
     }
@@ -382,9 +382,9 @@ class RegistrationViewController: UIViewController {
     
     
 }
-    
-    
-    
+
+
+
 extension RegistrationViewController {
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(RegistrationViewController.dismissKeyboard))

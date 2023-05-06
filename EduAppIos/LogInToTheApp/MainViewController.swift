@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         updateBackButton()
     }
-     
+    
     private func updateBackButton() {
         let backButtonImage = UIImage(systemName: "arrow.turn.up.left")
         navigationController?.navigationBar.backIndicatorImage = backButtonImage
@@ -44,24 +44,24 @@ class MainViewController: UIViewController {
         appNameLabel.textAlignment = .center
         appNameLabel.font = UIFont(name: "Futura Bold", size: 35)
         appNameLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        
         view.addSubview(appNameLabel)
         NSLayoutConstraint.activate([
             appNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             appNameLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 135)
         ])
-
+        
         let buttons = [
             createGradientButton(title: "регистрация", action: #selector(registerButtonTapped)),
             createGradientButton(title: "авторизация", action: #selector(loginButtonTapped)),
             createGradientButton(title: "гостевой режим", action: #selector(continueButtonTapped))
         ]
-
+        
         let buttonStackView = UIStackView(arrangedSubviews: buttons)
         buttonStackView.axis = .vertical
         buttonStackView.spacing = 20
         buttonStackView.distribution = .fillEqually
-
+        
         self.view.addSubview(buttonStackView)
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -71,7 +71,7 @@ class MainViewController: UIViewController {
             buttonStackView.heightAnchor.constraint(equalToConstant: 210)
         ])
     }
-
+    
     private func createGradientButton(title: String, action: Selector) -> UIImageView {
         
         
@@ -80,7 +80,7 @@ class MainViewController: UIViewController {
         containerView.contentMode =  UIView.ContentMode.scaleAspectFit
         containerView.isUserInteractionEnabled = true
         
-
+        
         let button = UIButton()
         button.setTitle(title, for: .normal)
         button.titleLabel!.font = UIFont(name: "Raleway-Bold", size: 17)
@@ -90,11 +90,11 @@ class MainViewController: UIViewController {
         button.addTarget(self, action: action, for: .touchUpInside)
         button.layer.cornerRadius = 15
         button.clipsToBounds = true
-
+        
         containerView.addSubview(button)
-    
+        
         button.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 4),
             button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -4),
@@ -102,39 +102,39 @@ class MainViewController: UIViewController {
             button.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -2)
         ])
         return containerView
-     }
-
-
+    }
+    
+    
     
     @objc private func registerButtonTapped() {
-           let registrationViewController = RegistrationViewController()
-           self.navigationController?.pushViewController(registrationViewController, animated: true)
-       }
-
+        let registrationViewController = RegistrationViewController()
+        self.navigationController?.pushViewController(registrationViewController, animated: true)
+    }
+    
     @objc private func loginButtonTapped() {
         print("0000")
-           let loginViewController = LoginViewController()
-           self.navigationController?.pushViewController(loginViewController, animated: true)
-       }
-
+        let loginViewController = LoginViewController()
+        self.navigationController?.pushViewController(loginViewController, animated: true)
+    }
+    
     
     @objc private func continueButtonTapped() {
         
-          signOutCurrentUser()
-          let menuViewController = MenuViewController()
+        signOutCurrentUser()
+        let menuViewController = MenuViewController()
         
         let navigation = UINavigationController(rootViewController: menuViewController)
-                    navigation.modalPresentationStyle = .fullScreen
-                    present(navigation, animated: true)
-                    let generator = UIImpactFeedbackGenerator(style: .medium)
-                    generator.impactOccurred()
-      }
-
+        navigation.modalPresentationStyle = .fullScreen
+        present(navigation, animated: true)
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
+    
     private func signOutCurrentUser() {
-           do {
-               try Auth.auth().signOut()
-           } catch let signOutError as NSError {
-               print("Ошибка выхода из аккаунта: %@", signOutError)
-           }
-       }
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print("Ошибка выхода из аккаунта: %@", signOutError)
+        }
+    }
 }

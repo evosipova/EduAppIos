@@ -13,20 +13,20 @@ class MenuViewController: UIViewController {
     var buttonPuzzles = UIButton()
     var buttonTicTac = UIButton()
     var buttonMemory = UIButton()
-
+    
     var buttonProfile = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
-
+    
     @objc
-       private func buttonProfilePressed(){
-           self.navigationController?.pushViewController(ProfileViewController(), animated: true)
-       }
-
-
+    private func buttonProfilePressed(){
+        self.navigationController?.pushViewController(ProfileViewController(), animated: true)
+    }
+    
+    
     @objc
     private func buttonTicTacPressed(){
         self.navigationController?.pushViewController(TicTacToeViewController(), animated: true)
@@ -67,27 +67,27 @@ class MenuViewController: UIViewController {
         setupProfileButton()
         
     }
-
+    
     private func setupProfileButton() {
-           let config = UIImage.SymbolConfiguration(textStyle: .largeTitle)
-           let imageUser = UIImage(systemName: "person", withConfiguration: config)?.withTintColor(.white, renderingMode: .alwaysOriginal)
-           buttonProfile.setImage(imageUser, for: .normal)
+        let config = UIImage.SymbolConfiguration(textStyle: .largeTitle)
+        let imageUser = UIImage(systemName: "person", withConfiguration: config)?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        buttonProfile.setImage(imageUser, for: .normal)
         
-
-           view.addSubview(buttonProfile)
-         buttonProfile.backgroundColor = .clear
-           buttonProfile.translatesAutoresizingMaskIntoConstraints = false
-           buttonProfile.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 20).isActive = true
-           buttonProfile.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.1).isActive = true
-           buttonProfile.widthAnchor.constraint(equalToConstant: view.frame.width * 0.13).isActive = true
-           buttonProfile.heightAnchor.constraint(equalToConstant: view.frame.width * 0.1).isActive = true
-
+        
+        view.addSubview(buttonProfile)
+        buttonProfile.backgroundColor = .clear
+        buttonProfile.translatesAutoresizingMaskIntoConstraints = false
+        buttonProfile.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.frame.width / 20).isActive = true
+        buttonProfile.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 0.1).isActive = true
+        buttonProfile.widthAnchor.constraint(equalToConstant: view.frame.width * 0.13).isActive = true
+        buttonProfile.heightAnchor.constraint(equalToConstant: view.frame.width * 0.1).isActive = true
+        
         buttonProfile.addTarget(self, action: #selector(buttonProfilePressed), for: .touchUpInside)
-       }
+    }
     
     private func setupUser() {
-
-
+        
+        
         let label = UILabel()
         label.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.9)
         label.textColor = .white
@@ -96,11 +96,11 @@ class MenuViewController: UIViewController {
         label.text = "игры"
         view.addSubview(label)
         label.pin(to: view, [.top: view.frame.height * 0.09, .left: view.frame.width / 20])
-
-
+        
+        
     }
-
-   
+    
+    
     private func setupRectangle() {
         
         viewRect.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height*0.7)
@@ -165,7 +165,7 @@ class MenuViewController: UIViewController {
         
         let imagePuzzle = UIImage(named: "puzzle_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imagePuzzle, scaledToSize: CGSize(width: buttonPuzzles.frame.height/2, height: buttonPuzzles.frame.height/2))
-
+        
         let imagePuzzleView = UIImageView(image: newImage)
         
         buttonPuzzles.addSubview(imagePuzzleView)
@@ -218,7 +218,7 @@ class MenuViewController: UIViewController {
         
         let imageTicTac = UIImage(named: "tictactoe_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imageTicTac, scaledToSize: CGSize(width: buttonTicTac.frame.height/2.5, height: buttonTicTac.frame.height/2.5))
-
+        
         let imageTicTacView = UIImageView(image: newImage)
         
         buttonTicTac.addSubview(imageTicTacView)
@@ -261,7 +261,7 @@ class MenuViewController: UIViewController {
         
         let imageMemory = UIImage(named: "memory_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imageMemory, scaledToSize: CGSize(width: buttonMemory.frame.height/1.8, height: buttonMemory.frame.height/1.8))
-    
+        
         let imageMemoryView = UIImageView(image: newImage)
         
         buttonMemory.addSubview(imageMemoryView)

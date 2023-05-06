@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E95568B2A045EBB002A2878 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95568A2A045EBB002A2878 /* ProfileViewController.swift */; };
 		5E95568D2A046263002A2878 /* UserProfile.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E95568C2A046263002A2878 /* UserProfile.xcassets */; };
 		5E95568F2A046322002A2878 /* AvatarGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */; };
 		5E9556952A053E6E002A2878 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9556942A053E6E002A2878 /* LoginViewController.swift */; };
@@ -33,6 +32,7 @@
 		819E088C29B768CB00E4CFDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 819E088A29B768CB00E4CFDF /* LaunchScreen.storyboard */; };
 		819E089429B769F200E4CFDF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E089329B769F200E4CFDF /* MenuViewController.swift */; };
 		819E089629B771A400E4CFDF /* UIView+Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E089529B771A400E4CFDF /* UIView+Pin.swift */; };
+		81DD9AD82A06D71D0015EE45 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */; };
 		81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */; };
 		81E99C3529BCA41000D3B0BD /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */; };
 		81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */; };
@@ -41,7 +41,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5E95568A2A045EBB002A2878 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.plist; };
 		5E95568C2A046263002A2878 /* UserProfile.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = UserProfile.xcassets; sourceTree = "<group>"; };
 		5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGalleryViewController.swift; sourceTree = "<group>"; };
 		5E9556942A053E6E002A2878 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 		819E088D29B768CB00E4CFDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		819E089329B769F200E4CFDF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		819E089529B771A400E4CFDF /* UIView+Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Pin.swift"; sourceTree = "<group>"; };
+		81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
 		81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
 		81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
@@ -96,8 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */,
-				5E95568A2A045EBB002A2878 /* ProfileViewController.swift */,
 				5E95568C2A046263002A2878 /* UserProfile.xcassets */,
+				81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -284,6 +284,7 @@
 				819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */,
 				818ED50C2A02C0A4002ED41B /* TicTacToeModel.swift in Sources */,
 				5E95568F2A046322002A2878 /* AvatarGalleryViewController.swift in Sources */,
+				81DD9AD82A06D71D0015EE45 /* ProfileViewController.swift in Sources */,
 				81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */,
 				819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */,
 				5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */,
@@ -292,7 +293,6 @@
 				818ED50E2A02C0B5002ED41B /* TicTacToeViewModel.swift in Sources */,
 				5EF37DDB2A0126A600C54F18 /* NewUserViewController.swift in Sources */,
 				5E9556952A053E6E002A2878 /* LoginViewController.swift in Sources */,
-				5E95568B2A045EBB002A2878 /* ProfileViewController.swift in Sources */,
 				81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */,
 				81FB4E4B29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift in Sources */,
 				5EF37DDD2A01BB0C00C54F18 /* MemoryCollectionViewController.swift in Sources */,

@@ -11,11 +11,11 @@ import UIKit
 class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
     
     var endGameController = EndGameViewController()
-
-
+    
+    
     var infoButton: UIButton!
-       var rulesView: UIView!
-       var rulesLabel: UILabel!
+    var rulesView: UIView!
+    var rulesLabel: UILabel!
     
     var label: UILabel! = {
         var label = UILabel()
@@ -36,7 +36,7 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
     var gameTimer: Timer?
     
     
-   
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -78,7 +78,7 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
         collectionView.dragInteractionEnabled = true
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
-
+        
         let config = UIImage.SymbolConfiguration(textStyle: .title1)
         let image = UIImage(systemName: "arrow.turn.up.left",withConfiguration: config)?.withTintColor(.white
                                                                                                        , renderingMode: .alwaysOriginal)
@@ -90,7 +90,7 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
         
         self.navigationController?.navigationBar.backIndicatorImage = image
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
-
+        
         setupInfoButton()
     }
     
@@ -159,81 +159,81 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
         collectionView.layer.cornerRadius = 35
         self.view.addSubview(collectionView)
     }
-
-
+    
+    
     private func setupRulesView() {
         let rulesViewWidth = view.frame.width * 0.75
-                let rulesViewHeight = view.frame.height * 0.35
-                let rulesViewSize = CGSize(width: rulesViewWidth, height: rulesViewHeight)
-
-                rulesView = UIView(frame: CGRect(origin: .zero, size: rulesViewSize))
-                rulesView.center = view.center
-                rulesView.backgroundColor = .white
-                rulesView.layer.cornerRadius = 10
-                rulesView.clipsToBounds = true
-                rulesView.isHidden = true
-                rulesView.layer.borderColor = UIColor.black.cgColor
-                rulesView.layer.borderWidth = 2.0
-
-
-
-                let rulesLabel = UILabel()
-                rulesLabel.text = "Игрок должен собрать из фрагментов изображение, перетаскивая их на игровом поле до тех пор, пока не получится полноценная картинка." 
-                rulesLabel.numberOfLines = 0
-                rulesLabel.textAlignment = .center
-                rulesLabel.font = UIFont.systemFont(ofSize: 20)
-                rulesLabel.translatesAutoresizingMaskIntoConstraints = false
-
-
-
-                rulesView.addSubview(rulesLabel)
-                NSLayoutConstraint.activate([
-                    rulesLabel.leadingAnchor.constraint(equalTo: rulesView.leadingAnchor, constant: 10),
-                    rulesLabel.trailingAnchor.constraint(equalTo: rulesView.trailingAnchor, constant: -10),
-                    rulesLabel.topAnchor.constraint(equalTo: rulesView.topAnchor, constant: 10),
-                    rulesLabel.bottomAnchor.constraint(equalTo: rulesView.bottomAnchor, constant: -10)
-                ])
-
-                view.addSubview(rulesView)
-            }
-
+        let rulesViewHeight = view.frame.height * 0.35
+        let rulesViewSize = CGSize(width: rulesViewWidth, height: rulesViewHeight)
+        
+        rulesView = UIView(frame: CGRect(origin: .zero, size: rulesViewSize))
+        rulesView.center = view.center
+        rulesView.backgroundColor = .white
+        rulesView.layer.cornerRadius = 10
+        rulesView.clipsToBounds = true
+        rulesView.isHidden = true
+        rulesView.layer.borderColor = UIColor.black.cgColor
+        rulesView.layer.borderWidth = 2.0
+        
+        
+        
+        let rulesLabel = UILabel()
+        rulesLabel.text = "Игрок должен собрать из фрагментов изображение, перетаскивая их на игровом поле до тех пор, пока не получится полноценная картинка."
+        rulesLabel.numberOfLines = 0
+        rulesLabel.textAlignment = .center
+        rulesLabel.font = UIFont.systemFont(ofSize: 20)
+        rulesLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        
+        rulesView.addSubview(rulesLabel)
+        NSLayoutConstraint.activate([
+            rulesLabel.leadingAnchor.constraint(equalTo: rulesView.leadingAnchor, constant: 10),
+            rulesLabel.trailingAnchor.constraint(equalTo: rulesView.trailingAnchor, constant: -10),
+            rulesLabel.topAnchor.constraint(equalTo: rulesView.topAnchor, constant: 10),
+            rulesLabel.bottomAnchor.constraint(equalTo: rulesView.bottomAnchor, constant: -10)
+        ])
+        
+        view.addSubview(rulesView)
+    }
+    
     @objc private func infoButtonTapped() {
-         if rulesView == nil {
-             setupRulesView()
-         }
-
-         rulesView.isHidden = !rulesView.isHidden
-     }
-
+        if rulesView == nil {
+            setupRulesView()
+        }
+        
+        rulesView.isHidden = !rulesView.isHidden
+    }
+    
     private let infoButtonConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium, scale: .large)
-
+    
     private func setupInfoButton() {
-          infoButton = UIButton(type: .system)
-          infoButton.setImage(UIImage(systemName: "questionmark.circle", withConfiguration: infoButtonConfig), for: .normal)
-          infoButton.tintColor = .white
-          infoButton.translatesAutoresizingMaskIntoConstraints = false
-          infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
-
-          view.addSubview(infoButton)
-          infoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -20).isActive = true
-          infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-      }
+        infoButton = UIButton(type: .system)
+        infoButton.setImage(UIImage(systemName: "questionmark.circle", withConfiguration: infoButtonConfig), for: .normal)
+        infoButton.tintColor = .white
+        infoButton.translatesAutoresizingMaskIntoConstraints = false
+        infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
+        
+        view.addSubview(infoButton)
+        infoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -20).isActive = true
+        infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+    }
     
     private func gameEnd(){
         
-            let img = UIImage(named: puzzle[index].title)!
-            let imgView = UIImageView(image: imageWithImage(image: img, scaledToSize: CGSize(width: viewRect.bounds.width, height: viewRect.bounds.width)))
-            view.addSubview(imgView)
-            imgView.pinCenter(to: view)
-            
+        let img = UIImage(named: puzzle[index].title)!
+        let imgView = UIImageView(image: imageWithImage(image: img, scaledToSize: CGSize(width: viewRect.bounds.width, height: viewRect.bounds.width)))
+        view.addSubview(imgView)
+        imgView.pinCenter(to: view)
+        
         endGameController.initialcontrollerId = 1
         endGameController.resLabel.text = "Победа!"
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.navigationController?.pushViewController(self.endGameController, animated: true)
         }
-
+        
     }
-
+    
     
 }
 extension PuzzleCollectionViewController: UICollectionViewDragDelegate {
@@ -314,5 +314,5 @@ extension PuzzleCollectionViewController : UICollectionViewDelegateFlowLayout {
         let collectionViewWidth = collectionView.bounds.width
         return CGSize(width: collectionViewWidth/3, height: collectionViewWidth/3)
     }
-
+    
 }

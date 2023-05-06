@@ -138,10 +138,10 @@ class NewUserViewController: UIViewController {
             guard let text = textField.text else { return }
             password += text
         }
-
+        
     }
     
-
+    
     @objc private func saveButtonTapped() {
         saveUser()
         navigationController?.popViewController(animated: true)

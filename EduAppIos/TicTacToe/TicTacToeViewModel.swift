@@ -113,7 +113,7 @@ class TicTacToeViewModel {
         boardIsFull = false
         winner.value = ""
     }
-
+    
     
 }
 

@@ -61,7 +61,7 @@ class EndGameViewController: UIViewController {
     func buttonAgainPressed(){
         if(initialcontrollerId == 0 || initialcontrollerId == 1){
             let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
-                self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+            self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
         }else{
             _ = navigationController?.popViewController(animated: true)
         }
