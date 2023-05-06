@@ -115,15 +115,12 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
     }
 
     func fetchUserData() {
-        // Проверка, авторизован ли пользователь
         guard let user = Auth.auth().currentUser else {
-            // Если пользователь не авторизован, установите пустые значения
             currentUser = User(username: "", email: "")
             updateLabels()
             return
         }
 
-        // Если пользователь авторизован, запросите информацию из базы данных Firebase
         let userRef = Firestore.firestore().collection("users").document(user.uid)
 
         userRef.getDocument { [weak self] (document, error) in

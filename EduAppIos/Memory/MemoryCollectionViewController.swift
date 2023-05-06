@@ -32,13 +32,12 @@ class MemoryCollectionViewController: UIViewController {
        var rulesLabel: UILabel!
 
 
-    // Replace the fixed array with a nested array of categories and images
     let categoriesImages: [[UIImage?]] = [
         [UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish"),UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish")],
 
         [UIImage(named: "airplane"), UIImage(named: "bus"), UIImage(named: "excavator"), UIImage(named: "fighterJet"), UIImage(named: "greenCar"), UIImage(named: "redCar"), UIImage(named: "rocket"), UIImage(named: "tractor"), UIImage(named: "airplane"), UIImage(named: "bus"), UIImage(named: "excavator"), UIImage(named: "fighterJet"), UIImage(named: "greenCar"), UIImage(named: "redCar"), UIImage(named: "rocket"), UIImage(named: "tractor")],
 
-        [UIImage(named: "cactus"), UIImage(named: "chamomile"), UIImage(named: "forget-me-not"), UIImage(named: "hyacinth"), UIImage(named: "marigold"), UIImage(named: "sunflower"), UIImage(named: "tulip"), UIImage(named: "cactus"), UIImage(named: "chamomile"), UIImage(named: "forget-me-not"), UIImage(named: "hyacinth"), UIImage(named: "marigold"), UIImage(named: "sunflower"), UIImage(named: "tulip")],
+        [UIImage(named: "cactus"), UIImage(named: "chamomile"), UIImage(named: "forget-me-not"), UIImage(named: "hyacinth"), UIImage(named: "marigold"), UIImage(named: "sunflower"), UIImage(named: "tulip"), UIImage(named: "lily"), UIImage(named: "cactus"), UIImage(named: "chamomile"), UIImage(named: "forget-me-not"), UIImage(named: "hyacinth"), UIImage(named: "marigold"), UIImage(named: "sunflower"),UIImage(named: "tulip"), UIImage(named: "lily")],
 
         [UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"),UIImage(named: "hedgehog"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit"), UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"),UIImage(named: "hedgehog"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit")]
     ]
@@ -109,8 +108,8 @@ class MemoryCollectionViewController: UIViewController {
      }
 
     private func setupRulesView() {
-        let rulesViewWidth = view.frame.width * 0.8
-                let rulesViewHeight = view.frame.height * 0.4
+        let rulesViewWidth = view.frame.width * 0.75
+                let rulesViewHeight = view.frame.height * 0.35
                 let rulesViewSize = CGSize(width: rulesViewWidth, height: rulesViewHeight)
 
                 rulesView = UIView(frame: CGRect(origin: .zero, size: rulesViewSize))
@@ -119,11 +118,13 @@ class MemoryCollectionViewController: UIViewController {
                 rulesView.layer.cornerRadius = 10
                 rulesView.clipsToBounds = true
                 rulesView.isHidden = true
+                rulesView.layer.borderColor = UIColor.black.cgColor
+                rulesView.layer.borderWidth = 2.0
 
 
 
                 let rulesLabel = UILabel()
-                rulesLabel.text = "Here are the game rules..." // Replace with the actual rules
+                rulesLabel.text = "На игровом поле располагаются карточки с изображениями, которые нужно открыть и запомнить их расположение. Затем карточки закрываются, и игрок должен находить пары карточек с одинаковыми изображениями, открывая их по очереди."
                 rulesLabel.numberOfLines = 0
                 rulesLabel.textAlignment = .center
                 rulesLabel.font = UIFont.systemFont(ofSize: 20)

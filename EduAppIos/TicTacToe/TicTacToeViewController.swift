@@ -14,6 +14,11 @@ class TicTacToeViewController: UIViewController {
     
     var viewRect = UILabel()
     var stackView = UIStackView()
+
+
+    var infoButton: UIButton!
+       var rulesView: UIView!
+       var rulesLabel: UILabel!
     
     var turnLabel: UILabel! = {
         var turnLabel = UILabel()
@@ -103,6 +108,8 @@ class TicTacToeViewController: UIViewController {
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
     
         bindViewModel()
+
+        setupInfoButton()
     }
     
     
@@ -156,6 +163,64 @@ class TicTacToeViewController: UIViewController {
         viewRect.clipsToBounds = true
         
     }
+    private func setupRulesView() {
+        let rulesViewWidth = view.frame.width * 0.75
+                let rulesViewHeight = view.frame.height * 0.35
+                let rulesViewSize = CGSize(width: rulesViewWidth, height: rulesViewHeight)
+
+                rulesView = UIView(frame: CGRect(origin: .zero, size: rulesViewSize))
+                rulesView.center = view.center
+                rulesView.backgroundColor = .white
+                rulesView.layer.cornerRadius = 10
+                rulesView.clipsToBounds = true
+                rulesView.isHidden = true
+                rulesView.layer.borderColor = UIColor.black.cgColor
+                rulesView.layer.borderWidth = 2.0
+
+
+
+                let rulesLabel = UILabel()
+                rulesLabel.text = "Игроки по очереди ставят свои символы (крестики или нолики) на свободные клетки поля 3x3. Цель - расположить три своих символа в ряд вертикально, горизонтально или диагонально." 
+                rulesLabel.numberOfLines = 0
+                rulesLabel.textAlignment = .center
+                rulesLabel.font = UIFont.systemFont(ofSize: 20)
+                rulesLabel.translatesAutoresizingMaskIntoConstraints = false
+
+
+
+                rulesView.addSubview(rulesLabel)
+                NSLayoutConstraint.activate([
+                    rulesLabel.leadingAnchor.constraint(equalTo: rulesView.leadingAnchor, constant: 10),
+                    rulesLabel.trailingAnchor.constraint(equalTo: rulesView.trailingAnchor, constant: -10),
+                    rulesLabel.topAnchor.constraint(equalTo: rulesView.topAnchor, constant: 10),
+                    rulesLabel.bottomAnchor.constraint(equalTo: rulesView.bottomAnchor, constant: -10)
+                ])
+
+                view.addSubview(rulesView)
+            }
+
+    @objc private func infoButtonTapped() {
+         if rulesView == nil {
+             setupRulesView()
+         }
+
+         rulesView.isHidden = !rulesView.isHidden
+     }
+
+    private let infoButtonConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium, scale: .large)
+
+    private func setupInfoButton() {
+          infoButton = UIButton(type: .system)
+          infoButton.setImage(UIImage(systemName: "questionmark.circle", withConfiguration: infoButtonConfig), for: .normal)
+          infoButton.tintColor = .white
+          infoButton.translatesAutoresizingMaskIntoConstraints = false
+          infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
+
+          view.addSubview(infoButton)
+          infoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -20).isActive = true
+          infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+      }
+
     
     private func createButton()->UIButton{
         let button = UIButton()
