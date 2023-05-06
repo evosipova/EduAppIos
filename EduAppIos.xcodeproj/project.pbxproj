@@ -45,6 +45,11 @@
 		5E95568C2A046263002A2878 /* UserProfile.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = UserProfile.xcassets; sourceTree = "<group>"; };
 		5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGalleryViewController.swift; sourceTree = "<group>"; };
 		5E9556942A053E6E002A2878 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5E9556A52A069086002A2878 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		5E9556A62A0690B5002A2878 /* en-150 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-150"; path = "en-150.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		5E9556A72A0690C7002A2878 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		5E9556A82A0690CF002A2878 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		5E9556A92A0690E8002A2878 /* en-001 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-001"; path = "en-001.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewController.swift; sourceTree = "<group>"; };
 		5EB2A6F729BE972F00895B68 /* fruitsAndVegetables.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = fruitsAndVegetables.xcassets; sourceTree = "<group>"; };
 		5EF37DD62A00830F00C54F18 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +239,11 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
+				"en-150",
+				de,
+				ru,
+				"en-001",
 			);
 			mainGroup = 819E087329B768C900E4CFDF;
 			packageReferences = (
@@ -302,6 +312,11 @@
 			isa = PBXVariantGroup;
 			children = (
 				819E088B29B768CB00E4CFDF /* Base */,
+				5E9556A52A069086002A2878 /* fr */,
+				5E9556A62A0690B5002A2878 /* en-150 */,
+				5E9556A72A0690C7002A2878 /* de */,
+				5E9556A82A0690CF002A2878 /* ru */,
+				5E9556A92A0690E8002A2878 /* en-001 */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -313,6 +328,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -373,6 +389,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
