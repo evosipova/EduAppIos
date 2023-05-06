@@ -99,3 +99,4 @@ class AvatarCell: UICollectionViewCell {
         imageView.image = image
     }
 }
+
