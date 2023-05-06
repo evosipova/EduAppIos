@@ -161,6 +161,7 @@
 				819E088A29B768CB00E4CFDF /* LaunchScreen.storyboard */,
 				819E088D29B768CB00E4CFDF /* Info.plist */,
 				819E089529B771A400E4CFDF /* UIView+Pin.swift */,
+				81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */,
 				5E9556962A0542F3002A2878 /* LogInToTheApp */,
 				5E9556932A0519B0002A2878 /* UserProfile */,
 				5EB2A6F229BE888D00895B68 /* Memory */,
@@ -186,7 +187,6 @@
 			isa = PBXGroup;
 			children = (
 				8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */,
-				81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */,
 				818ED50B2A02C0A4002ED41B /* TicTacToeModel.swift */,
 				818ED50D2A02C0B5002ED41B /* TicTacToeViewModel.swift */,
 			);

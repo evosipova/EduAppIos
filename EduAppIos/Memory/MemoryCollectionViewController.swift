@@ -184,7 +184,7 @@ class MemoryCollectionViewController: UIViewController {
         }
         print(flippedCount);
         if flippedCount == buttons.count {
-
+            endGameContoller.initialcontrollerId = 0
             endGameContoller.resLabel.text = "Победа!"
             navigationController?.pushViewController(endGameContoller, animated: true)
             restartGame()

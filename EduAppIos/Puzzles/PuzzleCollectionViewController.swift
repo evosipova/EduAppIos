@@ -36,13 +36,7 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
     var gameTimer: Timer?
     
     
-    @objc func moveToNextPuzzle() {
-        index += 1
-        self.collectionView.reloadData()
-        self.collectionView.dragInteractionEnabled = true
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        navigationItem.leftBarButtonItem?.isEnabled = true
-    }
+   
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -224,6 +218,21 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
           infoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -20).isActive = true
           infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
       }
+    
+    private func gameEnd(){
+        
+            let img = UIImage(named: puzzle[index].title)!
+            let imgView = UIImageView(image: imageWithImage(image: img, scaledToSize: CGSize(width: viewRect.bounds.width, height: viewRect.bounds.width)))
+            view.addSubview(imgView)
+            imgView.pinCenter(to: view)
+            
+        endGameController.initialcontrollerId = 1
+        endGameController.resLabel.text = "Победа!"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.navigationController?.pushViewController(self.endGameController, animated: true)
+        }
+
+    }
 
     
 }
@@ -242,17 +251,17 @@ extension PuzzleCollectionViewController: UICollectionViewDropDelegate {
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidEnd session: UIDropSession) {
         if puzzle[index].unsolvedImages == puzzle[index].solvedImages {
-            collectionView.isHidden = true
-            let img = UIImage(named: puzzle[index].title)!
-            let imgView = UIImageView(image: imageWithImage(image: img, scaledToSize: CGSize(width: viewRect.bounds.width, height: viewRect.bounds.width)))
-            view.addSubview(imgView)
-            imgView.pinCenter(to: view)
+            
             collectionView.dragInteractionEnabled = false
             if index == puzzle.count - 1 {
                 navigationItem.rightBarButtonItem?.isEnabled = false
             } else {
                 navigationItem.rightBarButtonItem?.isEnabled = true
             }
+            collectionView.isHidden = true
+            gameEnd()
+            
+            
         }
     }
     

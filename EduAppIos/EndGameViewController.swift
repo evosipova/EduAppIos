@@ -10,6 +10,9 @@ import UIKit
 
 class EndGameViewController: UIViewController {
     
+    //мемори = 0, пазлы = 1, крестики-нолики = 2
+    var initialcontrollerId: Int = 2
+    
     var resLabel: UILabel! = {
         var resLabel = UILabel()
         resLabel.font = UIFont(name: "Raleway-Bold", size: 30)
@@ -56,8 +59,12 @@ class EndGameViewController: UIViewController {
     
     @objc
     func buttonAgainPressed(){
-        _ = navigationController?.popViewController(animated: true)
-        
+        if(initialcontrollerId == 0 || initialcontrollerId == 1){
+            let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+        }else{
+            _ = navigationController?.popViewController(animated: true)
+        }
     }
     
     private func setupButtons() {
