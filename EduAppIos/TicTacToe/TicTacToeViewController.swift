@@ -46,12 +46,12 @@ class TicTacToeViewController: UIViewController {
     
     func bindViewModel(){
         for i in 0...8{
-            viewModel.buttons[i].bind({_ in self.buttons[i].title(for: .normal)
+            viewModel.model.buttons[i].bind({_ in self.buttons[i].title(for: .normal)
                 
             })
         }
         
-        viewModel.turnLabel.bind({ (turnLabel) in
+        viewModel.model.turnLabel.bind({ (turnLabel) in
             DispatchQueue.main.async {
                 self.turnLabel.text = turnLabel
             }
@@ -69,6 +69,7 @@ class TicTacToeViewController: UIViewController {
         viewModel.clearBoard()
         for button in buttons {
             button.setTitle("", for: .normal)
+            button.setImage(nil, for: .normal)
             button.isEnabled = true
         }
         self.navigationController?.pushViewController(endGameContoller, animated: true)
@@ -76,8 +77,17 @@ class TicTacToeViewController: UIViewController {
     
     func addToBoard(_ sender: UIButton!){
         viewModel.buttonPressed(sender: sender, index: buttons.firstIndex(of: sender)!)
-        if viewModel.winner.value != ""{
-            win(winner: viewModel.winner.value)
+        if(viewModel.model.boardIsFull == true && viewModel.model.winner.value == ""){
+            endGameContoller.resLabel.text = "Ничья!"
+            viewModel.clearBoard()
+            for button in buttons {
+                button.setTitle("", for: .normal)
+                button.setImage(nil, for: .normal)
+                button.isEnabled = true
+            }
+            self.navigationController?.pushViewController(endGameContoller, animated: true)
+        }else if viewModel.model.winner.value != ""{
+            win(winner: viewModel.model.winner.value)
         }
     }
     

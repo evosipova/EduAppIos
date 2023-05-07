@@ -11,5 +11,15 @@ class TicTacToeModel{
         case X
         case O
     }
+    
+    var turnLabel = Dynamic("")
+    var boardIsFull = false
+    var winner = Dynamic("")
+    
+    var buttons  = [Dynamic(""),Dynamic(""),Dynamic(""),Dynamic(""),Dynamic(""),Dynamic(""),Dynamic(""),Dynamic(""),Dynamic("")]
+    
+    var firstTurn = Turn.X
+    var currentTurn = Turn.X
+    
 }
 
