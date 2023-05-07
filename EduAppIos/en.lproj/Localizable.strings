@@ -36,3 +36,4 @@
 "tie" = "Tie!";
 "tic_tac_toe_rules" = "Players take turns putting their symbols (crosses or zeros) on free cells of the 3x3 field. The goal is to arrange three of your symbols in a row vertically, horizontally or diagonally.";
 "turn_o" = "Turn: O";
+"puzzle_rules" = "The player must assemble an image from fragments by dragging them on the playing field until a complete picture is obtained.";
