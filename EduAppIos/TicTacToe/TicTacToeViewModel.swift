@@ -30,7 +30,7 @@ class TicTacToeViewModel {
                 sender.isEnabled = false
                 checkWinner()
                 model.currentTurn = TicTacToeModel.Turn.O
-                model.turnLabel.value = "Очередь: O"
+                model.turnLabel.value = "turn_o".localized
             }
             else if(model.currentTurn == TicTacToeModel.Turn.O){
                 model.buttons[index].value = "O"
@@ -48,7 +48,7 @@ class TicTacToeViewModel {
                 checkWinner()
                 //print(0)
                 model.currentTurn = TicTacToeModel.Turn.X
-                model.turnLabel.value = "Очередь: X"
+                model.turnLabel.value = "turn_x".localized
                 
             }
             
@@ -109,11 +109,11 @@ class TicTacToeViewModel {
         }
         if(model.firstTurn == TicTacToeModel.Turn.X){
             model.firstTurn = TicTacToeModel.Turn.O
-            model.turnLabel.value = "Очередь: O"
+            model.turnLabel.value = "turn_o".localized
         }
         else{
             model.firstTurn = TicTacToeModel.Turn.X
-            model.turnLabel.value = "Очередь: X"
+            model.turnLabel.value = "turn_x".localized
         }
         model.currentTurn = model.firstTurn
         model.boardIsFull = false

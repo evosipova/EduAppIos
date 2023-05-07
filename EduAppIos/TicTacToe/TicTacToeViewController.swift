@@ -22,7 +22,7 @@ class TicTacToeViewController: UIViewController {
     
     var turnLabel: UILabel! = {
         var turnLabel = UILabel()
-        turnLabel.text = "Очередь: X"
+        turnLabel.text = "turn_x".localized
         turnLabel.font = UIFont(name: "Raleway-Bold", size: 26)
         turnLabel.font = UIFont.boldSystemFont(ofSize: 26)
         turnLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -31,11 +31,12 @@ class TicTacToeViewController: UIViewController {
     
     var label: UILabel! = {
         var label = UILabel()
-        label.text = "крестики нолики"
+        label.text = "tic_tac_toe".localized
         label.font = UIFont(name: "Raleway-Bold", size: 20)
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
+        
         return label
     }()
     
@@ -65,7 +66,7 @@ class TicTacToeViewController: UIViewController {
     }
     
     func win(winner : String){
-        endGameContoller.resLabel.text = "Победитель: " + winner
+        endGameContoller.resLabel.text = "winner".localized + winner
         viewModel.clearBoard()
         for button in buttons {
             button.setTitle("", for: .normal)
@@ -78,7 +79,7 @@ class TicTacToeViewController: UIViewController {
     func addToBoard(_ sender: UIButton!){
         viewModel.buttonPressed(sender: sender, index: buttons.firstIndex(of: sender)!)
         if(viewModel.model.boardIsFull == true && viewModel.model.winner.value == ""){
-            endGameContoller.resLabel.text = "Ничья!"
+            endGameContoller.resLabel.text = "tie".localized
             viewModel.clearBoard()
             for button in buttons {
                 button.setTitle("", for: .normal)
@@ -192,10 +193,10 @@ class TicTacToeViewController: UIViewController {
         let rulesLabel = UILabel()
         rulesLabel.font = UIFont(name: "Raleway-Bold", size: 24)
         
-        rulesLabel.text = "Игроки по очереди ставят свои символы (крестики или нолики) на свободные клетки поля 3x3. Цель - расположить три своих символа в ряд вертикально, горизонтально или диагонально." 
+        rulesLabel.text = "tic_tac_toe_rules".localized
         rulesLabel.numberOfLines = 0
         rulesLabel.textAlignment = .center
-        //                rulesLabel.font = UIFont.systemFont(ofSize: 20)
+
         rulesLabel.translatesAutoresizingMaskIntoConstraints = false
         
         

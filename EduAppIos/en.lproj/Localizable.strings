@@ -31,3 +31,8 @@
 "settings" = "settings";
 "memory_rules" = "On the playing field there are cards with images that you need to open and remember their location. Then the cards are closed, and the player must find pairs of cards with the same images, opening them in turn.";
 "win" = "Win!";
+"turn_x" = "Turn: X";
+"winner" = "Winner: ";
+"tie" = "Tie!";
+"tic_tac_toe_rules" = "Players take turns putting their symbols (crosses or zeros) on free cells of the 3x3 field. The goal is to arrange three of your symbols in a row vertically, horizontally or diagonally.";
+"turn_o" = "Turn: O";
