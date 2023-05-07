@@ -54,7 +54,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         setupAvatarImageView()
         
         let logoutButton = UIButton(type: .system)
-        logoutButton.setTitle("Выйти", for: .normal)
+        logoutButton.setTitle("exit".localized, for: .normal)
         logoutButton.setTitleColor(.white, for: .normal)
         logoutButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
@@ -115,7 +115,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
     
     private func setupTitleLabel() {
         let titleLabel = UILabel()
-        titleLabel.text = "настройки"
+        titleLabel.text = "settings".localized
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.textColor = .white
         
@@ -166,7 +166,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
             guard let strongSelf = self else { return }
             
             if let error = error {
-                print("Ошибка при получении данных пользователя: \(error.localizedDescription)")
+                print("error_fetching_user_info" +  " \(error.localizedDescription)")
             } else if let document = document, document.exists {
                 if let data = document.data() {
                     strongSelf.currentUser = User(username: data["username"] as? String ?? "",
