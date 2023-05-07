@@ -87,7 +87,7 @@ class EndGameViewController: UIViewController {
         label.textColor = UIColor(red: 0.867, green: 0.651, blue: 1, alpha: 1)
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "Выйти"
+        label.text = "exit".localized
         
         buttonExit.addSubview(label)
         label.pinCenter(to: buttonExit)
@@ -112,7 +112,7 @@ class EndGameViewController: UIViewController {
         label2.textColor = UIColor(red: 0.867, green: 0.651, blue: 1, alpha: 1)
         label2.font = UIFont(name: "Raleway-Bold", size: 18)
         label2.font = UIFont.boldSystemFont(ofSize: 18)
-        label2.text = "Сыграть заново"
+        label2.text = "play_again".localized
         
         buttonAgain.addSubview(label2)
         label2.pinCenter(to: buttonAgain)
