@@ -16,7 +16,7 @@ class MemoryCollectionViewController: UIViewController {
     
     var label: UILabel! = {
         let label = UILabel()
-        label.text = "мемори"
+        label.text = "memory".localized
         label.font = UIFont(name: "Raleway-Bold", size: 20)
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
@@ -124,7 +124,7 @@ class MemoryCollectionViewController: UIViewController {
         
         
         let rulesLabel = UILabel()
-        rulesLabel.text = "На игровом поле располагаются карточки с изображениями, которые нужно открыть и запомнить их расположение. Затем карточки закрываются, и игрок должен находить пары карточек с одинаковыми изображениями, открывая их по очереди."
+        rulesLabel.text = "memory_rules".localized
         rulesLabel.numberOfLines = 0
         rulesLabel.textAlignment = .center
         rulesLabel.font = UIFont.systemFont(ofSize: 20)
@@ -185,7 +185,7 @@ class MemoryCollectionViewController: UIViewController {
         print(flippedCount);
         if flippedCount == buttons.count {
             endGameContoller.initialcontrollerId = 0
-            endGameContoller.resLabel.text = "Победа!"
+            endGameContoller.resLabel.text = "win".localized
             navigationController?.pushViewController(endGameContoller, animated: true)
             restartGame()
         }

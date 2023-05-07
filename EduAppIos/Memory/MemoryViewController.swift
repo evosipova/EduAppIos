@@ -22,7 +22,7 @@ class MemoryViewController: UIViewController {
     
     var label: UILabel! = {
         var label = UILabel()
-        label.text = "мемори"
+        label.text = "memory".localized
         label.font = UIFont(name: "Raleway-Bold", size: 20)
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
@@ -171,7 +171,7 @@ class MemoryViewController: UIViewController {
         label.textColor = .white
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "продолжить"
+        label.text = "continue".localized
         continueButton.addSubview(label)
         label.pinCenter(to: continueButton)
         

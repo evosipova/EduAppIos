@@ -29,3 +29,5 @@
 "exit" = "Exit";
 "play_again" = "Play again";
 "settings" = "settings";
+"memory_rules" = "On the playing field there are cards with images that you need to open and remember their location. Then the cards are closed, and the player must find pairs of cards with the same images, opening them in turn.";
+"win" = "Win!";
