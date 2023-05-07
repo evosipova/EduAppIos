@@ -32,6 +32,8 @@
 		81E99C3529BCA41000D3B0BD /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */; };
 		81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */; };
 		81E99C3929BCCD5800D3B0BD /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */; };
+		81F2A4A82A07D93A00C83862 /* PuzzleCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F2A4A72A07D93A00C83862 /* PuzzleCollectionViewModel.swift */; };
+		81F2A4AA2A07D9B000C83862 /* PuzzleCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F2A4A92A07D9B000C83862 /* PuzzleCollectionModel.swift */; };
 		81FB4E4B29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +68,8 @@
 		81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
 		81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		81F2A4A72A07D93A00C83862 /* PuzzleCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCollectionViewModel.swift; sourceTree = "<group>"; };
+		81F2A4A92A07D9B000C83862 /* PuzzleCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCollectionModel.swift; sourceTree = "<group>"; };
 		81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -163,6 +167,8 @@
 				81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */,
 				81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */,
 				81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */,
+				81F2A4A72A07D93A00C83862 /* PuzzleCollectionViewModel.swift */,
+				81F2A4A92A07D9B000C83862 /* PuzzleCollectionModel.swift */,
 				818ED50A2A02C081002ED41B /* Binding */,
 			);
 			path = Puzzles;
@@ -261,10 +267,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81F2A4A82A07D93A00C83862 /* PuzzleCollectionViewModel.swift in Sources */,
 				819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */,
 				818ED50C2A02C0A4002ED41B /* TicTacToeModel.swift in Sources */,
 				5E95568F2A046322002A2878 /* AvatarGalleryViewController.swift in Sources */,
 				81DD9AD82A06D71D0015EE45 /* ProfileViewController.swift in Sources */,
+				81F2A4AA2A07D9B000C83862 /* PuzzleCollectionModel.swift in Sources */,
 				81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */,
 				819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */,
 				5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */,
