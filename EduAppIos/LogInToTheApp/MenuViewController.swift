@@ -93,7 +93,7 @@ class MenuViewController: UIViewController {
         label.textColor = .white
         label.font = UIFont(name: "Raleway-Bold", size: 22)
         label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.text = "игры"
+        label.text = "games".localized
         view.addSubview(label)
         label.pin(to: view, [.top: view.frame.height * 0.09, .left: view.frame.width / 20])
         
@@ -159,7 +159,7 @@ class MenuViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "пазлы"
+        label.text = "puzzle".localized
         buttonPuzzles.addSubview(label)
         label.pinCenter(to: buttonPuzzles)
         
@@ -211,7 +211,7 @@ class MenuViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "крестики нолики"
+        label.text = "tic-tac-toe".localized
         buttonTicTac.addSubview(label)
         label.pinCenter(to: buttonTicTac)
         
@@ -254,7 +254,7 @@ class MenuViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "мемори"
+        label.text = "memory".localized
         buttonMemory.addSubview(label)
         label.pinCenter(to: buttonMemory)
         

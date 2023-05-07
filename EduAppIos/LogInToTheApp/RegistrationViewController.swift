@@ -106,7 +106,7 @@ class RegistrationViewController: UIViewController {
         label.textColor = .white
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "продолжить"
+        label.text = "continue".localized
         continueButton.addSubview(label)
         label.pinCenter(to: continueButton)
         
@@ -211,7 +211,7 @@ class RegistrationViewController: UIViewController {
         usernameTextField.layer.cornerRadius = 10
         usernameTextField.layer.borderColor = UIColor.black.cgColor
         usernameTextField.font = UIFont(name: "Raleway-Regular", size: 20)
-        usernameTextField.placeholder = "имя"
+        usernameTextField.placeholder = "name".localized
         view.addSubview(usernameTextField)
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -219,7 +219,7 @@ class RegistrationViewController: UIViewController {
         emailTextField.layer.borderWidth = 1.0
         emailTextField.layer.cornerRadius = 10
         emailTextField.layer.borderColor = UIColor.black.cgColor
-        emailTextField.placeholder = "почта"
+        emailTextField.placeholder = "email".localized
         emailTextField.font = UIFont(name: "Raleway-Regular", size: 20)
         emailTextField.autocapitalizationType = .none
         view.addSubview(emailTextField)
@@ -250,7 +250,7 @@ class RegistrationViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 22)
         label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.text = "регистрация"
+        label.text = "registration".localized
         view.addSubview(label)
         label.pin(to: view, [.top: view.frame.height * 0.07])
         label.pinCenterX(to: view)
@@ -260,7 +260,7 @@ class RegistrationViewController: UIViewController {
         passLabel.textColor = .black
         passLabel.font = UIFont(name: "Raleway-Bold", size: 18)
         passLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        passLabel.text = "пароль"
+        passLabel.text = "password".localized
         view.addSubview(passLabel)
         passLabel.pin(to: view, [.top: view.frame.height * 0.315, .left: view.frame.width * 0.11])
         
@@ -295,7 +295,7 @@ class RegistrationViewController: UIViewController {
             }else{
                 numberPadStackView.isHidden = true
             }
-            showError(message: "Пожалуйста, заполните все поля.")
+            showError(message: "error_complete_all_fields".localized)
             
             return
         }
@@ -307,7 +307,7 @@ class RegistrationViewController: UIViewController {
             }else{
                 numberPadStackView.isHidden = true
             }
-            showError(message: "Пожалуйста, введите корректный адрес электронной почты.")
+            showError(message: "error_enter_valid_email".localized)
             return
         }
         
@@ -315,8 +315,8 @@ class RegistrationViewController: UIViewController {
             guard let strongSelf = self else { return }
             
             if let error = error {
-                print("Ошибка при создании пользователя: \(error.localizedDescription)")
-                strongSelf.showError(message: "Ошибка при создании пользователя: \(error.localizedDescription)")
+                print("error_creating_new_user".localized + "\(error.localizedDescription)")
+                strongSelf.showError(message: "error_creating_new_user".localized + "\(error.localizedDescription)")
                 return
             }
             
@@ -327,8 +327,8 @@ class RegistrationViewController: UIViewController {
             
             userRef.setData(userData) { error in
                 if let error = error {
-                    print("Ошибка при сохранении данных пользователя: \(error.localizedDescription)")
-                    strongSelf.showError(message: "Ошибка при сохранении данных пользователя: \(error.localizedDescription)")
+                    print("error_saving_user_info".localized + "\(error.localizedDescription)")
+                    strongSelf.showError(message: "error_saving_user_info".localized + "\(error.localizedDescription)")
                     return
                 }
                 

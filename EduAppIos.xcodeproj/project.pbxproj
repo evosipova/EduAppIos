@@ -21,6 +21,8 @@
 		819808032A03F97500D9D3A1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 819808022A03F97500D9D3A1 /* FirebaseAuth */; };
 		819808052A03F97500D9D3A1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 819808042A03F97500D9D3A1 /* FirebaseFirestore */; };
 		819808072A03FADE00D9D3A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819808062A03FADE00D9D3A1 /* GoogleService-Info.plist */; };
+		819BD5952A0833BC00289165 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 819BD5972A0833BC00289165 /* Localizable.strings */; };
+		819BD59A2A08351B00289165 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819BD5992A08351B00289165 /* String+extension.swift */; };
 		819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E087F29B768C900E4CFDF /* AppDelegate.swift */; };
 		819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E088129B768C900E4CFDF /* SceneDelegate.swift */; };
 		819E088929B768CB00E4CFDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 819E088829B768CB00E4CFDF /* Assets.xcassets */; };
@@ -40,11 +42,6 @@
 /* Begin PBXFileReference section */
 		5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGalleryViewController.swift; sourceTree = "<group>"; };
 		5E9556942A053E6E002A2878 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		5E9556A52A069086002A2878 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		5E9556A62A0690B5002A2878 /* en-150 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-150"; path = "en-150.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		5E9556A72A0690C7002A2878 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		5E9556A82A0690CF002A2878 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		5E9556A92A0690E8002A2878 /* en-001 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-001"; path = "en-001.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewController.swift; sourceTree = "<group>"; };
 		5EF37DD62A00830F00C54F18 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -55,11 +52,15 @@
 		818ED50B2A02C0A4002ED41B /* TicTacToeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeModel.swift; sourceTree = "<group>"; };
 		818ED50D2A02C0B5002ED41B /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
 		819808062A03FADE00D9D3A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		819BD5912A08334F00289165 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		819BD5922A08337C00289165 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		819BD5962A0833BC00289165 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		819BD5982A0833BF00289165 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		819BD5992A08351B00289165 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		819E087C29B768C900E4CFDF /* EduAppIos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduAppIos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		819E087F29B768C900E4CFDF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		819E088129B768C900E4CFDF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		819E088829B768CB00E4CFDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		819E088B29B768CB00E4CFDF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		819E088D29B768CB00E4CFDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		819E089329B769F200E4CFDF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		819E089529B771A400E4CFDF /* UIView+Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Pin.swift"; sourceTree = "<group>"; };
@@ -156,6 +157,8 @@
 				5EB2A6F229BE888D00895B68 /* Memory */,
 				81FB4E4C29BFDFF100D16BAE /* TicTacToe */,
 				81E99C3A29BCCF3900D3B0BD /* Puzzles */,
+				819BD5972A0833BC00289165 /* Localizable.strings */,
+				819BD5992A08351B00289165 /* String+extension.swift */,
 			);
 			path = EduAppIos;
 			sourceTree = "<group>";
@@ -229,12 +232,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
-				fr,
-				"en-150",
-				de,
 				ru,
-				"en-001",
 			);
 			mainGroup = 819E087329B768C900E4CFDF;
 			packageReferences = (
@@ -255,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				819E088C29B768CB00E4CFDF /* LaunchScreen.storyboard in Resources */,
+				819BD5952A0833BC00289165 /* Localizable.strings in Resources */,
 				819E088929B768CB00E4CFDF /* Assets.xcassets in Resources */,
 				819808072A03FADE00D9D3A1 /* GoogleService-Info.plist in Resources */,
 			);
@@ -275,6 +274,7 @@
 				81F2A4AA2A07D9B000C83862 /* PuzzleCollectionModel.swift in Sources */,
 				81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */,
 				819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */,
+				819BD59A2A08351B00289165 /* String+extension.swift in Sources */,
 				5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */,
 				5EF37DD92A01096300C54F18 /* RegistrationViewController.swift in Sources */,
 				81E99C3529BCA41000D3B0BD /* PuzzleViewController.swift in Sources */,
@@ -296,15 +296,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		819BD5972A0833BC00289165 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				819BD5962A0833BC00289165 /* ru */,
+				819BD5982A0833BF00289165 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		819E088A29B768CB00E4CFDF /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				819E088B29B768CB00E4CFDF /* Base */,
-				5E9556A52A069086002A2878 /* fr */,
-				5E9556A62A0690B5002A2878 /* en-150 */,
-				5E9556A72A0690C7002A2878 /* de */,
-				5E9556A82A0690CF002A2878 /* ru */,
-				5E9556A92A0690E8002A2878 /* en-001 */,
+				819BD5912A08334F00289165 /* en */,
+				819BD5922A08337C00289165 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

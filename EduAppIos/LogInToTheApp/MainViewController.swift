@@ -52,9 +52,9 @@ class MainViewController: UIViewController {
         ])
         
         let buttons = [
-            createGradientButton(title: "регистрация", action: #selector(registerButtonTapped)),
-            createGradientButton(title: "авторизация", action: #selector(loginButtonTapped)),
-            createGradientButton(title: "гостевой режим", action: #selector(continueButtonTapped))
+            createGradientButton(title: "registration".localized, action: #selector(registerButtonTapped)),
+            createGradientButton(title: "authorization".localized, action: #selector(loginButtonTapped)),
+            createGradientButton(title: "guest".localized, action: #selector(continueButtonTapped))
         ]
         
         let buttonStackView = UIStackView(arrangedSubviews: buttons)
@@ -112,7 +112,6 @@ class MainViewController: UIViewController {
     }
     
     @objc private func loginButtonTapped() {
-        print("0000")
         let loginViewController = LoginViewController()
         self.navigationController?.pushViewController(loginViewController, animated: true)
     }
@@ -134,7 +133,7 @@ class MainViewController: UIViewController {
         do {
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
-            print("Ошибка выхода из аккаунта: %@", signOutError)
+            print("error_log_out".localized, signOutError)
         }
     }
 }

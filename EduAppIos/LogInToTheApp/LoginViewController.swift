@@ -129,7 +129,7 @@ class LoginViewController: UIViewController {
         emailTextField.layer.borderWidth = 1.0
         emailTextField.layer.cornerRadius = 10
         emailTextField.layer.borderColor = UIColor.black.cgColor
-        emailTextField.placeholder = "почта"
+        emailTextField.placeholder = "email".localized
         emailTextField.font = UIFont(name: "Raleway-Regular", size: 20)
         emailTextField.autocapitalizationType = .none
         view.addSubview(emailTextField)
@@ -170,7 +170,7 @@ class LoginViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 22)
         label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.text = "вход"
+        label.text = "log_in".localized
         view.addSubview(label)
         label.pin(to: view, [.top: view.frame.height * 0.07])
         label.pinCenterX(to: view)
@@ -180,7 +180,7 @@ class LoginViewController: UIViewController {
         passLabel.textColor = .black
         passLabel.font = UIFont(name: "Raleway-Bold", size: 18)
         passLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        passLabel.text = "пароль"
+        passLabel.text = "password".localized
         view.addSubview(passLabel)
         passLabel.pin(to: view, [.top: view.frame.height * 0.315, .left: view.frame.width * 0.11])
         
@@ -244,7 +244,7 @@ class LoginViewController: UIViewController {
         label.textColor = .white
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "продолжить"
+        label.text = "continue".localized
         continueButton.addSubview(label)
         label.pinCenter(to: continueButton)
         
@@ -306,14 +306,14 @@ class LoginViewController: UIViewController {
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             if let error = error {
-                print("Ошибка при входе в систему: \(error.localizedDescription)")
-                self?.showError(message: "Ошибка при входе в систему: \(error.localizedDescription)")
+                print("error_log_in".localized+" \(error.localizedDescription)")
+                self?.showError(message: "error_log_in".localized+" \(error.localizedDescription)")
                 return
             }
             
             guard let _ = authResult?.user else {
-                print("Не удалось получить данные пользователя")
-                self?.showError(message: "Не удалось получить данные пользователя")
+                print("error_fetching_user_info".localized)
+                self?.showError(message: "error_fetching_user_info".localized)
                 return
             }
             

@@ -1,0 +1,29 @@
+/* 
+  Localizable.strings
+  EduAppIos
+
+  Created by Настя Лазарева on 07.05.2023.
+  
+*/
+"registration" = "регистрация";
+"authorization" = "авторизация";
+"guest" = "гостевой режим";
+"error_log_out" = "Ошибка выхода из аккаунта: %@";
+"games" = "игры";
+"puzzle" = "пазлы";
+"tic-tac-toe" = "крестики нолики";
+"memory" = "мемори";
+"name" = "имя";
+"enter_name" = "введите ваше имя";
+"password" = "пароль";
+"save" = "сохранить";
+"continue" = "продолжить";
+"email" = "почта";
+"error_complete_all_fields" = "Пожалуйста, заполните все поля.";
+"error_enter_valid_email" = "Пожалуйста, введите корректный адрес электронной почты.";
+"error_creating_new_user" = "Ошибка при создании пользователя: ";
+"error_saving_user_info" = "Ошибка при сохранении данных пользователя: ";
+"log_in" = "вход";
+"error_log_in" = "Ошибка при входе в систему: ";
+"error_fetching_user_info" = "Не удалось получить данные пользователя";
+
