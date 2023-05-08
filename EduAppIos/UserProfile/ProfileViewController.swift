@@ -78,6 +78,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
         setupInfoButton()
     }
+    
 
     private func setupInfoButton() {
         let config = UIImage.SymbolConfiguration(textStyle: .title1)
