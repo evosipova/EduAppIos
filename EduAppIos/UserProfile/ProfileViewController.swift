@@ -18,6 +18,8 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
     }
     
     var currentUser: User?
+    var infoView: UIView?
+    var isInfoViewVisible = false
     
     let avatarImageView = UIImageView()
     let nameLabel = UILabel()
@@ -68,8 +70,61 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
             logoutButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         
-        
+        setupInfoButton()
     }
+
+    private func setupInfoButton() {
+        let config = UIImage.SymbolConfiguration(textStyle: .title1)
+        let infoImage = UIImage(systemName: "info.circle", withConfiguration: config)?.withTintColor(.white, renderingMode: .alwaysOriginal)
+
+        let infoButton = UIButton(type: .system)
+        infoButton.setImage(infoImage, for: .normal)
+        infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
+
+        view.addSubview(infoButton)
+        infoButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            infoButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            infoButton.widthAnchor.constraint(equalToConstant: 30),
+            infoButton.heightAnchor.constraint(equalToConstant: 30)
+        ])
+    }
+
+    @objc private func infoButtonTapped() {
+        if isInfoViewVisible {
+            infoView?.removeFromSuperview()
+        } else {
+            let infoViewSize = CGSize(width: view.frame.width * 0.75, height: view.frame.height * 0.35)
+            infoView = UIView(frame: CGRect(origin: .zero, size: infoViewSize))
+            infoView?.backgroundColor = .white
+            infoView?.center = view.center
+            infoView?.layer.cornerRadius = 10
+            infoView?.layer.borderColor = UIColor.black.cgColor
+            infoView?.layer.borderWidth = 1
+
+
+            let infoLabel = UILabel(frame: CGRect(x: 10, y: 10, width: infoView!.frame.width - 20, height: infoView!.frame.height - 20))
+
+            let string = "О нас\n\nКонцепт и программирование: Осипова Елизавета\n Лазарева Анастасия\n\nДизайн:\n Смирнова Мария\n Вышегородцева Алиса\n Осипова Елизавета\n\n2023"
+
+            let attributedString = NSMutableAttributedString(string: string)
+
+            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 17), range: NSRange(location: 0, length: 5))
+            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 17), range: NSRange(location: 7, length: 27))
+            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 17), range: NSRange(location: 74, length: 7))
+
+            infoLabel.attributedText = attributedString
+            
+            infoLabel.textAlignment = .center
+            infoLabel.numberOfLines = 0
+
+            infoView?.addSubview(infoLabel)
+            view.addSubview(infoView!)
+        }
+        isInfoViewVisible.toggle()
+    }
+
     
     private func loadSavedAvatar() {
         if let avatarData = UserDefaults.standard.object(forKey: "selectedAvatar") as? Data,
