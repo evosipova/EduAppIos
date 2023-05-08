@@ -37,5 +37,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func setRootViewController() {
+        let mainViewController = MainViewController()
+        let navigation = UINavigationController(rootViewController: mainViewController)
+        window?.rootViewController = navigation
+        window?.makeKeyAndVisible()
+    }
+
+    func setAppLanguage(_ languageCode: String) {
+        UserDefaults.standard.set([languageCode], forKey: "AppleLanguages")
+        UserDefaults.standard.synchronize()
+    }
 
 }
