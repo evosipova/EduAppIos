@@ -93,7 +93,6 @@ class RegistrationViewController: UIViewController {
         textField.clipsToBounds = true
         textField.textAlignment = .center
         textField.isUserInteractionEnabled = false
-        // поч не работает потом починить
         textField.font = UIFont.init(name: "Montserrat-Medium", size: 20)
         textField.widthAnchor.constraint(equalToConstant: 60).isActive = true
         textField.heightAnchor.constraint(equalTo: textField.widthAnchor).isActive = true
@@ -307,7 +306,6 @@ class RegistrationViewController: UIViewController {
             return
         }
 
-        // Проверка корректности введенной почты
         if !isValidEmail(email) {
             continueButton.isHidden = false
             if(password.isEmpty){
@@ -363,10 +361,6 @@ class RegistrationViewController: UIViewController {
             }
         }
     }
-    
-    
-    
-    
 }
 
 
