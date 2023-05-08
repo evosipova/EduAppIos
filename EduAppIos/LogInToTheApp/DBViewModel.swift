@@ -62,4 +62,12 @@ class DBViewModel {
         }
         error_mes.value = ""
     }
+    
+    func signOutCurrentUser() {
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print("error_log_out".localized, signOutError)
+        }
+    }
 }

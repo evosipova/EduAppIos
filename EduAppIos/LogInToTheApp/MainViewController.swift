@@ -7,9 +7,10 @@
 
 import Foundation
 import UIKit
-import Firebase
+
 
 class MainViewController: UIViewController {
+    var viewModel = DBViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,7 +120,7 @@ class MainViewController: UIViewController {
     
     @objc private func continueButtonTapped() {
         
-        signOutCurrentUser()
+        viewModel.signOutCurrentUser()
         let menuViewController = MenuViewController()
         
         let navigation = UINavigationController(rootViewController: menuViewController)
@@ -129,11 +130,5 @@ class MainViewController: UIViewController {
         generator.impactOccurred()
     }
     
-    private func signOutCurrentUser() {
-        do {
-            try Auth.auth().signOut()
-        } catch let signOutError as NSError {
-            print("error_log_out".localized, signOutError)
-        }
-    }
+    
 }
