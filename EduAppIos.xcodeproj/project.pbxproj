@@ -31,6 +31,8 @@
 		819E089429B769F200E4CFDF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E089329B769F200E4CFDF /* MenuViewController.swift */; };
 		819E089629B771A400E4CFDF /* UIView+Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E089529B771A400E4CFDF /* UIView+Pin.swift */; };
 		81DD9AD82A06D71D0015EE45 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */; };
+		81E2FF802A094AA900F7F055 /* MemoryCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E2FF7F2A094AA900F7F055 /* MemoryCollectionModel.swift */; };
+		81E2FF822A094B2900F7F055 /* MemoryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E2FF812A094B2900F7F055 /* MemoryCollectionViewModel.swift */; };
 		81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */; };
 		81E99C3529BCA41000D3B0BD /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */; };
 		81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */; };
@@ -66,6 +68,8 @@
 		819E089329B769F200E4CFDF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		819E089529B771A400E4CFDF /* UIView+Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Pin.swift"; sourceTree = "<group>"; };
 		81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		81E2FF7F2A094AA900F7F055 /* MemoryCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCollectionModel.swift; sourceTree = "<group>"; };
+		81E2FF812A094B2900F7F055 /* MemoryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCollectionViewModel.swift; sourceTree = "<group>"; };
 		81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
 		81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
 		81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 			children = (
 				5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */,
 				5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */,
+				81E2FF7F2A094AA900F7F055 /* MemoryCollectionModel.swift */,
+				81E2FF812A094B2900F7F055 /* MemoryCollectionViewModel.swift */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -273,6 +279,7 @@
 				81F2A4A82A07D93A00C83862 /* PuzzleCollectionViewModel.swift in Sources */,
 				819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */,
 				818ED50C2A02C0A4002ED41B /* TicTacToeModel.swift in Sources */,
+				81E2FF822A094B2900F7F055 /* MemoryCollectionViewModel.swift in Sources */,
 				5E95568F2A046322002A2878 /* AvatarGalleryViewController.swift in Sources */,
 				81DD9AD82A06D71D0015EE45 /* ProfileViewController.swift in Sources */,
 				81F2A4AA2A07D9B000C83862 /* PuzzleCollectionModel.swift in Sources */,
@@ -285,6 +292,7 @@
 				5E5E28B32A09322000488D24 /* Localize.swift in Sources */,
 				818ED50E2A02C0B5002ED41B /* TicTacToeViewModel.swift in Sources */,
 				5E9556952A053E6E002A2878 /* LoginViewController.swift in Sources */,
+				81E2FF802A094AA900F7F055 /* MemoryCollectionModel.swift in Sources */,
 				81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */,
 				81FB4E4B29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift in Sources */,
 				5EF37DDD2A01BB0C00C54F18 /* MemoryCollectionViewController.swift in Sources */,

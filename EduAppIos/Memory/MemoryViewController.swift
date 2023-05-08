@@ -241,7 +241,7 @@ class MemoryViewController: UIViewController {
     func continueButtonPressed(){
         if selectedCategoryIndex >= 0 && selectedCategoryIndex <= 3 {
             memoryCollectionController = MemoryCollectionViewController()
-            memoryCollectionController.selectedCategoryIndex = selectedCategoryIndex
+            memoryCollectionController.viewModel.model.selectedCategoryIndex = selectedCategoryIndex
             
             navigationController?.pushViewController(memoryCollectionController, animated: true)
         }
