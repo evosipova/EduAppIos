@@ -6,10 +6,8 @@
 //
 
 import Foundation
-import Firebase
-import FirebaseAuth
 import UIKit
-import FirebaseFirestore
+
 
 class RegistrationViewController: UIViewController {
     private let emailTextField = UITextField()
@@ -18,9 +16,9 @@ class RegistrationViewController: UIViewController {
     private let continueButton = UIButton()
     private let errorLabel = UILabel()
     let numberPadStackView = UIStackView()
-    private var firestore: Firestore!
+    //private var firestore: Firestore!
     private var codeTextFields: [UITextField] = []
-    
+    var viewModel = DBViewModel()
     
     
     private let numberButtons: [UIButton] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map { number in
@@ -62,7 +60,18 @@ class RegistrationViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         hideKeyboardWhenTappedAround()
-        firestore = Firestore.firestore()
+        bindViewModel()
+        viewModel.initDB()
+    }
+    
+    func bindViewModel(){
+        
+        viewModel.error_mes.bind({ (error_mes) in
+            DispatchQueue.main.async {
+                self.errorLabel.text = error_mes
+            }
+            
+        })
     }
     
     private func setupView() {
@@ -267,7 +276,6 @@ class RegistrationViewController: UIViewController {
         errorLabel.textColor = .red
         errorLabel.numberOfLines = 0
         errorLabel.textAlignment = .center
-        errorLabel.isHidden = true
         view.addSubview(errorLabel)
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -295,7 +303,7 @@ class RegistrationViewController: UIViewController {
             }else{
                 numberPadStackView.isHidden = true
             }
-            showError(message: "error_complete_all_fields".localized)
+            errorLabel.text = "error_complete_all_fields".localized
             
             return
         }
@@ -307,36 +315,17 @@ class RegistrationViewController: UIViewController {
             }else{
                 numberPadStackView.isHidden = true
             }
-            showError(message: "error_enter_valid_email".localized)
+            errorLabel.text = "error_enter_valid_email".localized
             return
         }
         
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
-            guard let strongSelf = self else { return }
-            
-            if let error = error {
-                print("error_creating_new_user".localized + "\(error.localizedDescription)")
-                strongSelf.showError(message: "error_creating_new_user".localized + "\(error.localizedDescription)")
-                return
-            }
-            
-            guard let user = authResult?.user else { return }
-            
-            let userRef = strongSelf.firestore.collection("users").document(user.uid)
-            let userData: [String: Any] = ["email": email, "username": username, "password" : password]
-            
-            userRef.setData(userData) { error in
-                if let error = error {
-                    print("error_saving_user_info".localized + "\(error.localizedDescription)")
-                    strongSelf.showError(message: "error_saving_user_info".localized + "\(error.localizedDescription)")
-                    return
-                }
-                
-                strongSelf.errorLabel.isHidden = true
-                let menuVC = MenuViewController()
-                strongSelf.navigationController?.pushViewController(menuVC, animated: true)
-            }
+        viewModel.registration(email: email, password: password, username: username)
+        if(errorLabel.text == ""){
+            let menuVC = MenuViewController()
+            self.navigationController?.pushViewController(menuVC, animated: true)
         }
+        
+        
     }
     
     func isValidEmail(_ email: String) -> Bool {
@@ -344,13 +333,6 @@ class RegistrationViewController: UIViewController {
         let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPredicate.evaluate(with: email)
     }
-    
-    func showError(message: String) {
-        errorLabel.text = message
-        errorLabel.isHidden = false
-    }
-    
-    
     
     
     

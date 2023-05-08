@@ -8,3 +8,8 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import Firebase
+
+class DBModel{
+    var firestore: Firestore!
+}
