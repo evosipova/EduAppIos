@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     private let emailTextField = UITextField()
@@ -309,19 +309,37 @@ class LoginViewController: UIViewController {
     
     @objc private func continueButtonTapped() {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
-        
-        
+
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+            guard let strongSelf = self else { return }
+            if let error = error {
+                // Обработка ошибки
+                print("Failed to sign in with email: \(error.localizedDescription)")
+                strongSelf.errorLabel.text = error.localizedDescription
+            } else {
+                // Аутентификация выполнена успешно
+                strongSelf.viewModel.log_in(email: email, password: password)
+                if strongSelf.errorLabel.text == "" {
+                    let menuVC = MenuViewController()
+                    strongSelf.navigationController?.pushViewController(menuVC, animated: true)
+                }
+            }
+        }
+
+        // Вывод ошибки при неверном пароле
+        if passwordTextField.text?.count != 6 {
+            errorLabel.text = "Неверный пароль, попробуйте еще раз"
+            return
+        }
+
         viewModel.log_in(email : email,password: password )
-        
-        
-        
-        
+
         //self.errorLabel.isHidden = true
         if(errorLabel.text==""){   let menuVC = MenuViewController()
             self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
-    
+
     
 //    private func showError(message: String) {
 //        errorLabel.text = message

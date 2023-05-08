@@ -16,7 +16,7 @@ class RegistrationViewController: UIViewController {
     private let continueButton = UIButton()
     private let errorLabel = UILabel()
     let numberPadStackView = UIStackView()
-    //private var firestore: Firestore!
+
     private var codeTextFields: [UITextField] = []
     var viewModel = DBViewModel()
     
@@ -292,24 +292,24 @@ class RegistrationViewController: UIViewController {
     
     
     @objc private func continueButtonTapped() {
-        
-        // починить
+
         guard let email = emailTextField.text, let username = usernameTextField.text, let password = passwordTextField.text else { return }
-        
+
         if email.isEmpty || username.isEmpty || password.isEmpty {
-            //continueButton.isHidden = true
+            continueButton.isHidden = false
             if(password.isEmpty){
                 numberPadStackView.isHidden = false
             }else{
                 numberPadStackView.isHidden = true
             }
             errorLabel.text = "error_complete_all_fields".localized
-            
+
             return
         }
-        
+
         // Проверка корректности введенной почты
         if !isValidEmail(email) {
+            continueButton.isHidden = false
             if(password.isEmpty){
                 numberPadStackView.isHidden = false
             }else{
@@ -318,15 +318,19 @@ class RegistrationViewController: UIViewController {
             errorLabel.text = "error_enter_valid_email".localized
             return
         }
-        
-        viewModel.registration(email: email, password: password, username: username)
-        if(errorLabel.text == ""){
-            let menuVC = MenuViewController()
-            self.navigationController?.pushViewController(menuVC, animated: true)
+
+        DispatchQueue.main.async {
+            self.viewModel.registration(email: email, password: password, username: username)
+            if self.errorLabel.text == "" {
+                let menuVC = MenuViewController()
+                self.navigationController?.pushViewController(menuVC, animated: true)
+            } else {
+                self.continueButton.isHidden = false
+            }
         }
-        
-        
     }
+
+
     
     func isValidEmail(_ email: String) -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"

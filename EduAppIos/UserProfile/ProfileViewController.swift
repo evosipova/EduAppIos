@@ -13,11 +13,32 @@ import Localize_Swift
 
 
 class ProfileViewController: UIViewController, AvatarGalleryDelegate {
+    func didSelectAvatar(image: UIImage) {
+        // Обновите изображение профиля с новым выбранным аватаром
+        avatarImageView.image = image
+    }
+
+
+
+    func didSelectAvatar(image: UIImage, imageName: String) {
+        avatarImageView.image = image
+        saveAvatar(avatarImage: image)
+        updateAvatarName(newAvatarName: imageName)
+    }
+
+
+    private func saveAvatarName(avatarName: String) {
+        UserDefaults.standard.set(avatarName, forKey: "selectedAvatarName")
+    }
+
+
 
     struct User {
         let username: String
         let email: String
+        let avatarName: String
     }
+
 
     var currentUser: User?
     var infoView: UIView?
@@ -32,10 +53,16 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchUserData()
         setupView()
-        loadSavedAvatar()
+        fetchUserData()
+        // Load the avatar for unauthorized users
+        if Auth.auth().currentUser == nil {
+            if let lastSelectedAvatar = UserDefaults.standard.string(forKey: "lastSelectedAvatar") {
+                avatarImageView.image = UIImage(named: lastSelectedAvatar)
+            }
+        }
     }
+
 
     private func setupView() {
         view.backgroundColor = .white
@@ -166,12 +193,12 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
     }
 
 
-    private func loadSavedAvatar() {
-        if let avatarData = UserDefaults.standard.object(forKey: "selectedAvatar") as? Data,
-           let avatarImage = UIImage(data: avatarData) {
-            avatarImageView.image = avatarImage
+    private func loadAvatar() {
+        if let avatarName = currentUser?.avatarName {
+            avatarImageView.image = UIImage(named: avatarName)
         }
     }
+
 
     private func saveAvatar(avatarImage: UIImage) {
         if let avatarData = avatarImage.pngData() {
@@ -179,10 +206,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         }
     }
 
-    func didSelectAvatar(image: UIImage) {
-        avatarImageView.image = image
-        saveAvatar(avatarImage: image)
-    }
+
 
     private func setupBackButton(){
         let config = UIImage.SymbolConfiguration(textStyle: .title1)
@@ -222,7 +246,6 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
     private func setupAvatarImageView() {
 
-
         avatarImageView.image = UIImage(named: "user1")
         avatarImageView.layer.cornerRadius = 60
         avatarImageView.clipsToBounds = true
@@ -250,7 +273,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
     func fetchUserData() {
         guard let user = Auth.auth().currentUser else {
-            currentUser = User(username: "", email: "")
+            currentUser = User(username: "", email: "", avatarName: "user1")
             updateLabels()
             return
         }
@@ -265,12 +288,15 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
             } else if let document = document, document.exists {
                 if let data = document.data() {
                     strongSelf.currentUser = User(username: data["username"] as? String ?? "",
-                                                  email: data["email"] as? String ?? "")
+                                                  email: data["email"] as? String ?? "",
+                                                  avatarName: data["avatarName"] as? String ?? "user1")
                     strongSelf.updateLabels()
+                    strongSelf.loadAvatar()
                 }
             }
         }
     }
+
 
 
 
@@ -316,7 +342,18 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         self.navigationController?.popViewController(animated: true)
     }
 
+    func updateAvatarName(newAvatarName: String) {
+        guard let user = Auth.auth().currentUser else { return }
+        let userRef = Firestore.firestore().collection("users").document(user.uid)
 
+        userRef.updateData(["avatarName": newAvatarName]) { error in
+            if let error = error {
+                print("Error updating avatarName: \(error.localizedDescription)")
+            } else {
+                print("AvatarName successfully updated")
+            }
+        }
+    }
 }
 
 
