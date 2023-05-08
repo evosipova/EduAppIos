@@ -7,13 +7,7 @@
 
 import Foundation
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
 
-import Foundation
-import UIKit
-import FirebaseAuth
-import FirebaseFirestore
 
 class LoginViewController: UIViewController {
     private let emailTextField = UITextField()
@@ -22,7 +16,7 @@ class LoginViewController: UIViewController {
     private let errorLabel = UILabel()
     private var codeTextFields: [UITextField] = []
     let numberPadStackView = UIStackView()
-    
+    var viewModel = DBViewModel()
     
     
     private let numberButtons: [UIButton] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map { number in
@@ -63,6 +57,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
         setupView()
+        bindViewModel()
     }
     
     private func setupView() {
@@ -76,6 +71,18 @@ class LoginViewController: UIViewController {
         setupContinueButton()
         
     }
+    
+    func bindViewModel(){
+        
+        
+        viewModel.error_mes.bind({ (error_mes) in
+            DispatchQueue.main.async {
+                self.errorLabel.text = error_mes
+            }
+            
+        })
+    }
+    
     private func setupPasswordInputButtons(){
         
         
@@ -187,7 +194,7 @@ class LoginViewController: UIViewController {
         errorLabel.textColor = .red
         errorLabel.numberOfLines = 0
         errorLabel.textAlignment = .center
-        errorLabel.isHidden = true
+//        errorLabel.isHidden = true
         view.addSubview(errorLabel)
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -304,29 +311,22 @@ class LoginViewController: UIViewController {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
         
         
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-            if let error = error {
-                print("error_log_in".localized+" \(error.localizedDescription)")
-                self?.showError(message: "error_log_in".localized+" \(error.localizedDescription)")
-                return
-            }
-            
-            guard let _ = authResult?.user else {
-                print("error_fetching_user_info".localized)
-                self?.showError(message: "error_fetching_user_info".localized)
-                return
-            }
-            
-            self?.errorLabel.isHidden = true
-            let menuVC = MenuViewController()
-            self?.navigationController?.pushViewController(menuVC, animated: true)
+        viewModel.log_in(email : email,password: password )
+        
+        
+        
+        
+        //self.errorLabel.isHidden = true
+        if(errorLabel.text==""){   let menuVC = MenuViewController()
+            self.navigationController?.pushViewController(menuVC, animated: true)
         }
     }
     
-    private func showError(message: String) {
-        errorLabel.text = message
-        errorLabel.isHidden = false
-    }
+    
+//    private func showError(message: String) {
+//        errorLabel.text = message
+//        errorLabel.isHidden = false
+//    }
 }
 
 extension LoginViewController {
