@@ -9,6 +9,14 @@ import Foundation
 import UIKit
 
 class MenuViewController: UIViewController {
+    static var language = "ru"
+    struct Model {
+        var games: String
+        var puzzle: String
+        var tictactoe: String
+        var memory: String
+    }
+    
     var viewRect = UILabel()
     var buttonPuzzles = UIButton()
     var buttonTicTac = UIButton()
@@ -19,6 +27,22 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
+    
+    
+    
+   func configure(with model: Model) {
+        buttonPuzzles.setTitle(model.puzzle, for: .normal)
+        buttonTicTac.setTitle(model.tictactoe, for: .normal)
+        buttonMemory.setTitle(model.memory, for: .normal)
+        
     }
     
     @objc
@@ -66,6 +90,8 @@ class MenuViewController: UIViewController {
         setupUser()
         setupProfileButton()
         
+        
+        
     }
     
     private func setupProfileButton() {
@@ -93,7 +119,7 @@ class MenuViewController: UIViewController {
         label.textColor = .white
         label.font = UIFont(name: "Raleway-Bold", size: 22)
         label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.text = "games".localized
+        label.text = "games".localized(MenuViewController.language)
         view.addSubview(label)
         label.pin(to: view, [.top: view.frame.height * 0.09, .left: view.frame.width / 20])
         
@@ -159,7 +185,7 @@ class MenuViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "puzzle".localized
+        label.text = "puzzle".localized(MenuViewController.language)
         buttonPuzzles.addSubview(label)
         label.pinCenter(to: buttonPuzzles)
         
@@ -211,7 +237,7 @@ class MenuViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "tic-tac-toe".localized
+        label.text = "tic-tac-toe".localized(MenuViewController.language)
         buttonTicTac.addSubview(label)
         label.pinCenter(to: buttonTicTac)
         
@@ -254,7 +280,7 @@ class MenuViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "memory".localized
+        label.text = "memory".localized(MenuViewController.language)
         buttonMemory.addSubview(label)
         label.pinCenter(to: buttonMemory)
         

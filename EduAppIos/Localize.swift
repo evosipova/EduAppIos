@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 class Localize {
@@ -36,3 +37,4 @@ class Localize {
         return ""
     }
 }
+

@@ -10,6 +10,7 @@ import UIKit
 
 
 class MainViewController: UIViewController {
+    static var language = "ru"
     struct Model {
         var registration: String
         var authorization: String
@@ -23,12 +24,15 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
     }
     
+
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateBackButton()
+
     }
     
     private func updateBackButton() {
@@ -101,9 +105,9 @@ class MainViewController: UIViewController {
         
         configure(
             with: Model(
-                registration: "registration".localized(),
-                authorization: "authorization".localized(),
-                guest: "guest".localized()
+                registration: "registration".localized(MainViewController.language),
+                authorization: "authorization".localized(MainViewController.language),
+                guest: "guest".localized(MainViewController.language)
             )
         )
     }

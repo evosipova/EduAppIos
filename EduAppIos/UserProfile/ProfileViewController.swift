@@ -129,7 +129,9 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
 
     private func setupLanguageButton() {
+        if(languageButton.title(for: .normal) == nil){
             languageButton.setTitle("Русский", for: .normal)
+        }
             languageButton.setTitleColor(.white, for: .normal)
             languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
             languageButton.addTarget(self, action: #selector(languageButtonTapped), for: .touchUpInside)
@@ -147,14 +149,34 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
     @objc private func languageButtonTapped() {
            // Switch the language based on the current button title
-           if languageButton.currentTitle == "Русский" {
-               languageButton.setTitle("English", for: .normal)
-               Localize.setCurrentLanguage("en")
-           } else {
-               languageButton.setTitle("Русский", for: .normal)
-               Localize.setCurrentLanguage("ru")
-           }
-           updateLabels()
+        if languageButton.currentTitle == "Русский" {
+            languageButton.setTitle("English", for: .normal)
+            Localize.setCurrentLanguage("en")
+            MainViewController.language = "en"
+            MenuViewController.language = "en"
+            // Locale.preferredLanguages[0] = "en"
+            var lisVc = self.navigationController!.viewControllers
+            for controller in lisVc {
+                //controller.lang = "en"
+                controller.viewDidLoad()
+            }
+            
+            
+        } else {
+            languageButton.setTitle("Русский", for: .normal)
+            Localize.setCurrentLanguage("ru")
+            MainViewController.language = "ru"
+            MenuViewController.language = "ru"
+            var lisVc = self.navigationController!.viewControllers
+            for controller in lisVc {
+                //controller.lang = "en"
+                controller.viewDidLoad()
+            }
+            
+            
+        }
+        
+        updateLabels()
        }
 
 
