@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     private let emailTextField = UITextField()
@@ -26,7 +26,6 @@ class LoginViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 36)
         button.tag = number
         button.addTarget(self, action: #selector(numberButtonTapped), for: .touchUpInside)
-        
         button.layer.cornerRadius = 40
         button.clipsToBounds = true
         button.backgroundColor = UIColor(white: 0.9, alpha: 1)
@@ -42,7 +41,6 @@ class LoginViewController: UIViewController {
         button.setImage(UIImage(systemName: "delete.left", withConfiguration: config), for: .normal)
         button.tintColor = UIColor(red: 0.553, green: 0.6, blue: 1, alpha: 1)
         button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-        
         button.layer.cornerRadius = 40
         button.clipsToBounds = true
         button.backgroundColor = UIColor(white: 0.9, alpha: 1)
@@ -62,7 +60,6 @@ class LoginViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .white
-        
         setupTextFields()
         setupBackButton()
         setupLabels()
@@ -71,27 +68,19 @@ class LoginViewController: UIViewController {
         setupContinueButton()
         
     }
-    
     func bindViewModel(){
-        
-        
         viewModel.error_mes.bind({ (error_mes) in
             DispatchQueue.main.async {
                 self.errorLabel.text = error_mes
             }
-            
         })
     }
     
     private func setupPasswordInputButtons(){
-        
-        
         numberPadStackView.axis = .vertical
         numberPadStackView.spacing = 16
-        
         let numberOfRows = 4
         let numberOfColumns = 3
-        
         for i in 0..<numberOfRows {
             let rowStackView = UIStackView()
             rowStackView.axis = .horizontal
@@ -116,7 +105,6 @@ class LoginViewController: UIViewController {
                     rowStackView.addArrangedSubview(numberButtons[index])
                 }
             }
-            
             numberPadStackView.addArrangedSubview(rowStackView)
         }
         view.addSubview(numberPadStackView)
@@ -131,7 +119,6 @@ class LoginViewController: UIViewController {
     
     
     private func setupTextFields(){
-        
         emailTextField.borderStyle = .roundedRect
         emailTextField.layer.borderWidth = 1.0
         emailTextField.layer.cornerRadius = 10
@@ -141,18 +128,13 @@ class LoginViewController: UIViewController {
         emailTextField.autocapitalizationType = .none
         view.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
-            
-            
             emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 130),
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             emailTextField.setHeight(50),
             emailTextField.setWidth(80)])
-        
-        
     }
     
     
@@ -160,11 +142,9 @@ class LoginViewController: UIViewController {
         let config = UIImage.SymbolConfiguration(textStyle: .title1)
         let image = UIImage(systemName: "arrow.turn.up.left",withConfiguration: config)?.withTintColor(.black
                                                                                                        , renderingMode: .alwaysOriginal)
-        
         let backButton = UIBarButtonItem()
         backButton.title = ""
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        
         self.navigationController?.navigationBar.backIndicatorImage = image
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
     }
@@ -194,7 +174,7 @@ class LoginViewController: UIViewController {
         errorLabel.textColor = .red
         errorLabel.numberOfLines = 0
         errorLabel.textAlignment = .center
-//        errorLabel.isHidden = true
+        //        errorLabel.isHidden = true
         view.addSubview(errorLabel)
         errorLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -215,9 +195,7 @@ class LoginViewController: UIViewController {
         codeStackView.spacing = 8
         view.addSubview(codeStackView)
         codeStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        
+
         NSLayoutConstraint.activate([
             codeStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             codeStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 300),
@@ -256,7 +234,6 @@ class LoginViewController: UIViewController {
         label.pinCenter(to: continueButton)
         
         NSLayoutConstraint.activate([
-            
             continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             continueButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 500),
             continueButton.setHeight(Int(view.frame.height*0.07)),
@@ -293,8 +270,6 @@ class LoginViewController: UIViewController {
         let number = sender.tag
         if let emptyTextField = codeTextFields.first(where: { $0.text?.isEmpty ?? false }) {
             emptyTextField.text = "\(number)"
-            
-            // Если все текстовые поля заполнены, проверьте пароль
             if codeTextFields.allSatisfy({ !($0.text?.isEmpty ?? true) }) {
                 let enteredPassword = codeTextFields.map { $0.text! }.joined()
                 passwordTextField.text = enteredPassword
@@ -307,27 +282,61 @@ class LoginViewController: UIViewController {
     }
     
     
-    
     @objc private func continueButtonTapped() {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        if email.isEmpty || password.isEmpty {
+            continueButton.isHidden = false
+            if password.isEmpty {
+                numberPadStackView.isHidden = false
+            } else {
+                numberPadStackView.isHidden = true
+            }
+            errorLabel.text = "error_complete_all_fields".localized
+            return
+        }
+
+        if !isValidEmail(email) {
+            continueButton.isHidden = false
+            if password.isEmpty {
+                numberPadStackView.isHidden = false
+            } else {
+                numberPadStackView.isHidden = true
+            }
+            errorLabel.text = "error_enter_valid_email".localized
+            return
+        }
         
-        
-        viewModel.log_in(email : email,password: password )
-        
-        
-        
-        
-        //self.errorLabel.isHidden = true
-        if(errorLabel.text==""){   let menuVC = MenuViewController()
-            self.navigationController?.pushViewController(menuVC, animated: true)
+        DispatchQueue.main.async {
+            Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                guard let strongSelf = self else { return }
+                if let error = error {
+                    print("Failed to sign in with email: \(error.localizedDescription)")
+                    strongSelf.errorLabel.text = "Неверный пароль, попробуйте еще раз"
+                    strongSelf.passwordTextField.text = ""
+                    strongSelf.continueButton.isHidden = true
+                } else {
+                    strongSelf.viewModel.log_in(email: email, password: password)
+                    if strongSelf.errorLabel.text == "" {
+                        let menuVC = MenuViewController()
+                        strongSelf.navigationController?.pushViewController(menuVC, animated: true)
+                    }
+                }
+            }
         }
     }
     
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPredicate.evaluate(with: email)
+    }
     
-//    private func showError(message: String) {
-//        errorLabel.text = message
-//        errorLabel.isHidden = false
-//    }
+    func showError(errorMessage: String) {
+        errorLabel.text = errorMessage
+        numberPadStackView.isHidden = true
+    }
+    
+    
 }
 
 extension LoginViewController {
@@ -337,12 +346,17 @@ extension LoginViewController {
         view.addGestureRecognizer(tap)
     }
     
+    func resetErrorState() {
+        errorLabel.text = ""
+        numberPadStackView.isHidden = false
+    }
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
         if (emailTextField.text != ""){
             
             if(passwordTextField.text?.count != 6){
-                numberPadStackView.isHidden = false
+                resetErrorState()
             }
         }
     }
