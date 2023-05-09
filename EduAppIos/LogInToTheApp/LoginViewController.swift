@@ -271,6 +271,7 @@ class LoginViewController: UIViewController {
         textField.clipsToBounds = true
         textField.textAlignment = .center
         textField.isUserInteractionEnabled = false
+        // запретить вставку + клавиатуру
         
         // поч не работает потом починить
         textField.font = UIFont.init(name: "Montserrat-Medium", size: 20)

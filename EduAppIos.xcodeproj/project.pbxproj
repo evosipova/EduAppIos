@@ -22,6 +22,7 @@
 		819808032A03F97500D9D3A1 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 819808022A03F97500D9D3A1 /* FirebaseAuth */; };
 		819808052A03F97500D9D3A1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 819808042A03F97500D9D3A1 /* FirebaseFirestore */; };
 		819808072A03FADE00D9D3A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 819808062A03FADE00D9D3A1 /* GoogleService-Info.plist */; };
+		819909E02A09760A00B3E9D6 /* EduGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819909DF2A09760A00B3E9D6 /* EduGradientButton.swift */; };
 		819BD5952A0833BC00289165 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 819BD5972A0833BC00289165 /* Localizable.strings */; };
 		819BD59A2A08351B00289165 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819BD5992A08351B00289165 /* String+extension.swift */; };
 		819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E087F29B768C900E4CFDF /* AppDelegate.swift */; };
@@ -31,16 +32,12 @@
 		819E089429B769F200E4CFDF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E089329B769F200E4CFDF /* MenuViewController.swift */; };
 		819E089629B771A400E4CFDF /* UIView+Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E089529B771A400E4CFDF /* UIView+Pin.swift */; };
 		81DD9AD82A06D71D0015EE45 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */; };
-		81E2FF802A094AA900F7F055 /* MemoryCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E2FF7F2A094AA900F7F055 /* MemoryCollectionModel.swift */; };
-		81E2FF822A094B2900F7F055 /* MemoryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E2FF812A094B2900F7F055 /* MemoryCollectionViewModel.swift */; };
 		81E2FF842A09500A00F7F055 /* DBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E2FF832A09500A00F7F055 /* DBModel.swift */; };
 		81E2FF862A09501900F7F055 /* DBViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E2FF852A09501900F7F055 /* DBViewModel.swift */; };
 		81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */; };
 		81E99C3529BCA41000D3B0BD /* PuzzleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */; };
 		81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */; };
 		81E99C3929BCCD5800D3B0BD /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */; };
-		81F2A4A82A07D93A00C83862 /* PuzzleCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F2A4A72A07D93A00C83862 /* PuzzleCollectionViewModel.swift */; };
-		81F2A4AA2A07D9B000C83862 /* PuzzleCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F2A4A92A07D9B000C83862 /* PuzzleCollectionModel.swift */; };
 		81FB4E4B29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +54,7 @@
 		818ED50B2A02C0A4002ED41B /* TicTacToeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeModel.swift; sourceTree = "<group>"; };
 		818ED50D2A02C0B5002ED41B /* TicTacToeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicTacToeViewModel.swift; sourceTree = "<group>"; };
 		819808062A03FADE00D9D3A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		819909DF2A09760A00B3E9D6 /* EduGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduGradientButton.swift; sourceTree = "<group>"; };
 		819BD5912A08334F00289165 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		819BD5922A08337C00289165 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		819BD5962A0833BC00289165 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -70,16 +68,12 @@
 		819E089329B769F200E4CFDF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		819E089529B771A400E4CFDF /* UIView+Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Pin.swift"; sourceTree = "<group>"; };
 		81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		81E2FF7F2A094AA900F7F055 /* MemoryCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCollectionModel.swift; sourceTree = "<group>"; };
-		81E2FF812A094B2900F7F055 /* MemoryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCollectionViewModel.swift; sourceTree = "<group>"; };
 		81E2FF832A09500A00F7F055 /* DBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBModel.swift; sourceTree = "<group>"; };
 		81E2FF852A09501900F7F055 /* DBViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBViewModel.swift; sourceTree = "<group>"; };
 		81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
 		81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleViewController.swift; sourceTree = "<group>"; };
 		81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Puzzle.swift; sourceTree = "<group>"; };
 		81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		81F2A4A72A07D93A00C83862 /* PuzzleCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCollectionViewModel.swift; sourceTree = "<group>"; };
-		81F2A4A92A07D9B000C83862 /* PuzzleCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCollectionModel.swift; sourceTree = "<group>"; };
 		81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,7 +105,7 @@
 			children = (
 				5E9556942A053E6E002A2878 /* LoginViewController.swift */,
 				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
-				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
+				819909DD2A0975BE00B3E9D6 /* MainScreen */,
 				819E089329B769F200E4CFDF /* MenuViewController.swift */,
 				81E2FF832A09500A00F7F055 /* DBModel.swift */,
 				81E2FF852A09501900F7F055 /* DBViewModel.swift */,
@@ -124,8 +118,6 @@
 			children = (
 				5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */,
 				5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */,
-				81E2FF7F2A094AA900F7F055 /* MemoryCollectionModel.swift */,
-				81E2FF812A094B2900F7F055 /* MemoryCollectionViewModel.swift */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -136,6 +128,23 @@
 				818ED5082A02C063002ED41B /* Dynamic.swift */,
 			);
 			path = Binding;
+			sourceTree = "<group>";
+		};
+		819909DD2A0975BE00B3E9D6 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				819909DE2A0975DC00B3E9D6 /* Views */,
+				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		819909DE2A0975DC00B3E9D6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				819909DF2A09760A00B3E9D6 /* EduGradientButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		819E087329B768C900E4CFDF = {
@@ -184,8 +193,6 @@
 				81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */,
 				81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */,
 				81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */,
-				81F2A4A72A07D93A00C83862 /* PuzzleCollectionViewModel.swift */,
-				81F2A4A92A07D9B000C83862 /* PuzzleCollectionModel.swift */,
 				818ED50A2A02C081002ED41B /* Binding */,
 			);
 			path = Puzzles;
@@ -282,14 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81F2A4A82A07D93A00C83862 /* PuzzleCollectionViewModel.swift in Sources */,
 				819E088029B768C900E4CFDF /* AppDelegate.swift in Sources */,
 				818ED50C2A02C0A4002ED41B /* TicTacToeModel.swift in Sources */,
-				81E2FF822A094B2900F7F055 /* MemoryCollectionViewModel.swift in Sources */,
 				5E95568F2A046322002A2878 /* AvatarGalleryViewController.swift in Sources */,
 				81E2FF842A09500A00F7F055 /* DBModel.swift in Sources */,
 				81DD9AD82A06D71D0015EE45 /* ProfileViewController.swift in Sources */,
-				81F2A4AA2A07D9B000C83862 /* PuzzleCollectionModel.swift in Sources */,
 				81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */,
 				819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */,
 				819BD59A2A08351B00289165 /* String+extension.swift in Sources */,
@@ -298,9 +302,9 @@
 				81E99C3529BCA41000D3B0BD /* PuzzleViewController.swift in Sources */,
 				81E2FF862A09501900F7F055 /* DBViewModel.swift in Sources */,
 				5E5E28B32A09322000488D24 /* Localize.swift in Sources */,
+				819909E02A09760A00B3E9D6 /* EduGradientButton.swift in Sources */,
 				818ED50E2A02C0B5002ED41B /* TicTacToeViewModel.swift in Sources */,
 				5E9556952A053E6E002A2878 /* LoginViewController.swift in Sources */,
-				81E2FF802A094AA900F7F055 /* MemoryCollectionModel.swift in Sources */,
 				81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */,
 				81FB4E4B29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift in Sources */,
 				5EF37DDD2A01BB0C00C54F18 /* MemoryCollectionViewController.swift in Sources */,

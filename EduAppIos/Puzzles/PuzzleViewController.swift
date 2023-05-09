@@ -16,7 +16,7 @@ class PuzzleViewController : UIViewController{
     
     var label: UILabel! = {
         var label = UILabel()
-        label.text = "puzzle".localized
+        label.text = "пазлы"
         label.font = UIFont(name: "Raleway-Bold", size: 20)
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
@@ -44,7 +44,7 @@ class PuzzleViewController : UIViewController{
         for i in 0...3{
             if(buttons[i].layer.borderColor == UIColor(red: 0.755, green: 0.962, blue: 0.417, alpha: 1).cgColor){
                 puzzleCollectionController = PuzzleCollectionViewController()
-                puzzleCollectionController.viewModel.model.index = i
+                puzzleCollectionController.index = i
                 break
             }
         }
@@ -226,7 +226,7 @@ class PuzzleViewController : UIViewController{
         label.textColor = .white
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "continue".localized
+        label.text = "продолжить"
         continueButton.addSubview(label)
         label.pinCenter(to: continueButton)
         

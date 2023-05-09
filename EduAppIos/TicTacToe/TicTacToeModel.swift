@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class TicTacToeModel{
+struct TicTacToeModel{
     enum Turn{
         case X
         case O

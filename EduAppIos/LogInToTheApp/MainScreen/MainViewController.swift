@@ -10,7 +10,16 @@ import UIKit
 
 
 class MainViewController: UIViewController {
+    struct Model {
+        var registration: String
+        var authorization: String
+        var guest: String
+    }
+    
     var viewModel = DBViewModel()
+    private var guestButton: EduGradientButton = EduGradientButton()
+    private var registrationButton: EduGradientButton = EduGradientButton()
+    private var authorizationButton: EduGradientButton = EduGradientButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +38,13 @@ class MainViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
+    private func configure(with model: Model) {
+        guestButton.title = model.guest
+        registrationButton.configure(with: model.registration)
+        authorizationButton.title = model.authorization
+    }
+    
     private func setupView() {
-        
         let image = UIImage(named: "launch")
         let imageView = UIImageView(frame: view.bounds)
         imageView.contentMode =  UIView.ContentMode.scaleAspectFill
@@ -53,10 +67,23 @@ class MainViewController: UIViewController {
         ])
         
         let buttons = [
-            createGradientButton(title: "registration".localized, action: #selector(registerButtonTapped)),
-            createGradientButton(title: "authorization".localized, action: #selector(loginButtonTapped)),
-            createGradientButton(title: "guest".localized, action: #selector(continueButtonTapped))
+            registrationButton,
+            authorizationButton,
+            guestButton
         ]
+        
+        registrationButton.action = { [weak self] in
+            self?.registerButtonTapped()
+        }
+        
+        authorizationButton.action = { [weak self] in
+            self?.loginButtonTapped()
+        }
+        
+        guestButton.action = { [weak self] in
+            self?.continueButtonTapped()
+        }
+        
         
         let buttonStackView = UIStackView(arrangedSubviews: buttons)
         buttonStackView.axis = .vertical
@@ -71,41 +98,15 @@ class MainViewController: UIViewController {
             buttonStackView.widthAnchor.constraint(equalToConstant: 210),
             buttonStackView.heightAnchor.constraint(equalToConstant: 210)
         ])
+        
+        configure(
+            with: Model(
+                registration: "registration".localized(),
+                authorization: "authorization".localized(),
+                guest: "guest".localized()
+            )
+        )
     }
-    
-    private func createGradientButton(title: String, action: Selector) -> UIImageView {
-        
-        
-        let image = UIImage(named: "grad_buttons")
-        let containerView = UIImageView(image: image)
-        containerView.contentMode =  UIView.ContentMode.scaleAspectFit
-        containerView.isUserInteractionEnabled = true
-        
-        
-        let button = UIButton()
-        button.setTitle(title, for: .normal)
-        button.titleLabel!.font = UIFont(name: "Raleway-Bold", size: 17)
-        button.titleLabel!.font = UIFont.boldSystemFont(ofSize: 17)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
-        button.addTarget(self, action: action, for: .touchUpInside)
-        button.layer.cornerRadius = 15
-        button.clipsToBounds = true
-        
-        containerView.addSubview(button)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 4),
-            button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -4),
-            button.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 2),
-            button.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -2)
-        ])
-        return containerView
-    }
-    
-    
     
     @objc private func registerButtonTapped() {
         let registrationViewController = RegistrationViewController()

@@ -12,8 +12,7 @@ import UIKit
 class MemoryCollectionViewController: UIViewController {
     var viewRect = UILabel()
     var stackView = UIStackView()
-    var viewModel = MemoryCollectionViewModel()
-    //var selectedCategoryIndex: Int = -1
+    var selectedCategoryIndex: Int = -1
     
     var label: UILabel! = {
         let label = UILabel()
@@ -33,6 +32,18 @@ class MemoryCollectionViewController: UIViewController {
     var rulesLabel: UILabel!
     
     
+    let categoriesImages: [[UIImage?]] = [
+        [UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish"),UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish")],
+        
+        [UIImage(named: "airplane"), UIImage(named: "bus"), UIImage(named: "excavator"), UIImage(named: "fighterJet"), UIImage(named: "greenCar"), UIImage(named: "redCar"), UIImage(named: "rocket"), UIImage(named: "tractor"), UIImage(named: "airplane"), UIImage(named: "bus"), UIImage(named: "excavator"), UIImage(named: "fighterJet"), UIImage(named: "greenCar"), UIImage(named: "redCar"), UIImage(named: "rocket"), UIImage(named: "tractor")],
+        
+        [UIImage(named: "cactus"), UIImage(named: "chamomile"), UIImage(named: "forget-me-not"), UIImage(named: "hyacinth"), UIImage(named: "marigold"), UIImage(named: "sunflower"), UIImage(named: "tulip"), UIImage(named: "lily"), UIImage(named: "cactus"), UIImage(named: "chamomile"), UIImage(named: "forget-me-not"), UIImage(named: "hyacinth"), UIImage(named: "marigold"), UIImage(named: "sunflower"),UIImage(named: "tulip"), UIImage(named: "lily")],
+        
+        [UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"),UIImage(named: "hedgehog"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit"), UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"),UIImage(named: "hedgehog"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit")]
+    ]
+    
+    var buttonsImages: [UIImage?] = []
+    
     var selectedButtons: [UIButton] = []
     
     var endGameContoller = EndGameViewController()
@@ -42,7 +53,8 @@ class MemoryCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.setImages()
+        guard selectedCategoryIndex >= 0, selectedCategoryIndex < categoriesImages.count else { return }
+        buttonsImages = categoriesImages[selectedCategoryIndex]
         
         setupView()
         setupStackView()
@@ -151,7 +163,9 @@ class MemoryCollectionViewController: UIViewController {
     
     
     private func setupGame() {
-        viewModel.setupGame()
+        buttonsImages.shuffle()
+        var buttonImagesPairs = buttonsImages + buttonsImages
+        buttonImagesPairs.shuffle()
         
         for (index, button) in buttons.enumerated() {
             button.tag = index
@@ -206,10 +220,11 @@ class MemoryCollectionViewController: UIViewController {
         
         if selectedButtons.count < 2 {
             
-            viewModel.buttonTapped(sender)
+            guard sender.tag < buttonsImages.count else { return }
+            
             
             UIView.transition(with: sender, duration: 0.3, options: .transitionFlipFromLeft, animations: {
-                let image = self.viewModel.getImage(sender)
+                let image = self.buttonsImages[sender.tag]
                 sender.setImage(image, for: .normal)
             }, completion: nil)
             
@@ -217,6 +232,8 @@ class MemoryCollectionViewController: UIViewController {
             
             if selectedButtons.count == 2 {
                 view.isUserInteractionEnabled = false
+                
+                
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                     guard let self = self else { return }
