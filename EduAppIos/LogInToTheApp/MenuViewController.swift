@@ -194,7 +194,13 @@ class MenuViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.text = "puzzle".localized(MainViewController.language)
         buttonPuzzles.addSubview(label)
-        label.pinCenter(to: buttonPuzzles)
+        let db = Firestore.firestore()
+        let user = Auth.auth().currentUser
+        if user == nil {
+            label.pinCenter(to: buttonPuzzles)
+        }else{
+            label.pin(to: buttonPuzzles, [.top : buttonPuzzles.frame.height/5,.left : buttonPuzzles.frame.width*0.25])
+        }
         
         let imagePuzzle = UIImage(named: "puzzle_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imagePuzzle, scaledToSize: CGSize(width: buttonPuzzles.frame.height/2, height: buttonPuzzles.frame.height/2))
@@ -260,8 +266,13 @@ class MenuViewController: UIViewController {
         labelTicTac.font = UIFont.boldSystemFont(ofSize: 18)
         labelTicTac.text = "tic-tac-toe".localized(MainViewController.language)
         buttonTicTac.addSubview(labelTicTac)
-        labelTicTac.pinCenter(to: buttonTicTac)
-
+        let db = Firestore.firestore()
+        let user = Auth.auth().currentUser
+        if user == nil {
+            labelTicTac.pinCenter(to: buttonTicTac)
+        }else{
+            labelTicTac.pin(to: buttonTicTac, [.top : buttonTicTac.frame.height/5,.left : buttonTicTac.frame.width*0.25])
+        }
 
         let imageTicTac = UIImage(named: "tictactoe_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imageTicTac, scaledToSize: CGSize(width: buttonTicTac.frame.height/2.5, height: buttonTicTac.frame.height/2.5))
@@ -303,8 +314,14 @@ class MenuViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.text = "memory".localized(MainViewController.language)
         buttonMemory.addSubview(label)
-        label.pinCenter(to: buttonMemory)
         
+        let db = Firestore.firestore()
+        let user = Auth.auth().currentUser
+        if user == nil {
+            label.pinCenter(to: buttonMemory)
+        }else{
+            label.pin(to: buttonMemory, [.top : buttonMemory.frame.height/5,.left : buttonMemory.frame.width*0.25])
+        }
         
         let imageMemory = UIImage(named: "memory_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imageMemory, scaledToSize: CGSize(width: buttonMemory.frame.height/1.8, height: buttonMemory.frame.height/1.8))
@@ -336,9 +353,9 @@ class MenuViewController: UIViewController {
                 if let document = document, document.exists {
                     let data = document.data()
 
-                    self.labelPuzzlesPlayed.text = "Количество сыгранных игр: \(data?["game1Plays"] ?? 0)"
-                    self.labelTicTacPlayed.text = "Количество сыгранных игр: \(data?["game2Plays"] ?? 0)"
-                    self.labelMemoryPlayed.text = "Количество сыгранных игр: \(data?["game3Plays"] ?? 0)"
+                    self.labelPuzzlesPlayed.text = "game_amount".localized(MainViewController.language) + " \(data?["game1Plays"] ?? 0)"
+                    self.labelTicTacPlayed.text = "game_amount".localized(MainViewController.language) + " \(data?["game2Plays"] ?? 0)"
+                    self.labelMemoryPlayed.text = "game_amount".localized(MainViewController.language) + " \(data?["game3Plays"] ?? 0)"
                 } else {
                     print("Document does not exist")
                 }
@@ -355,29 +372,30 @@ class MenuViewController: UIViewController {
 
     private func setupLabelPuzzlesPlayed() {
         labelPuzzlesPlayed.textColor = .black
-        labelPuzzlesPlayed.font = UIFont.systemFont(ofSize: 14)
-        view.addSubview(labelPuzzlesPlayed)
+        labelPuzzlesPlayed.font = UIFont(name: "Raleway-Bold", size: 15)
+        labelPuzzlesPlayed.font = UIFont.boldSystemFont(ofSize: 15)
+        buttonPuzzles.addSubview(labelPuzzlesPlayed)
         labelPuzzlesPlayed.translatesAutoresizingMaskIntoConstraints = false
-        labelPuzzlesPlayed.topAnchor.constraint(equalTo: buttonPuzzles.bottomAnchor, constant: 8).isActive = true
-        labelPuzzlesPlayed.centerXAnchor.constraint(equalTo: buttonPuzzles.centerXAnchor).isActive = true
+        labelPuzzlesPlayed.pin(to: buttonPuzzles, [.top : buttonPuzzles.frame.height/2,.left : buttonPuzzles.frame.width*0.25])
+        
     }
 
     private func setupLabelTicTacPlayed() {
         labelTicTacPlayed.textColor = .black
-        labelTicTacPlayed.font = UIFont.systemFont(ofSize: 14)
-        view.addSubview(labelTicTacPlayed)
+        labelTicTacPlayed.font = UIFont(name: "Raleway-Bold", size: 15)
+        labelTicTacPlayed.font = UIFont.boldSystemFont(ofSize: 15)
+        buttonTicTac.addSubview(labelTicTacPlayed)
         labelTicTacPlayed.translatesAutoresizingMaskIntoConstraints = false
-        labelTicTacPlayed.topAnchor.constraint(equalTo: buttonTicTac.bottomAnchor, constant: 8).isActive = true
-        labelTicTacPlayed.centerXAnchor.constraint(equalTo: buttonTicTac.centerXAnchor).isActive = true
+        labelTicTacPlayed.pin(to: buttonTicTac, [.top : buttonTicTac.frame.height/2,.left : buttonTicTac.frame.width*0.25])
     }
 
     private func setupLabelMemoryPlayed() {
         labelMemoryPlayed.textColor = .black
-        labelMemoryPlayed.font = UIFont.systemFont(ofSize: 14)
-        view.addSubview(labelMemoryPlayed)
+        labelMemoryPlayed.font = UIFont(name: "Raleway-Bold", size: 15)
+        labelMemoryPlayed.font = UIFont.boldSystemFont(ofSize: 15)
+        buttonMemory.addSubview(labelMemoryPlayed)
         labelMemoryPlayed.translatesAutoresizingMaskIntoConstraints = false
-        labelMemoryPlayed.topAnchor.constraint(equalTo: buttonMemory.bottomAnchor, constant: 8).isActive = true
-        labelMemoryPlayed.centerXAnchor.constraint(equalTo: buttonMemory.centerXAnchor).isActive = true
+        labelMemoryPlayed.pin(to: buttonMemory, [.top : buttonMemory.frame.height/2,.left : buttonMemory.frame.width*0.25])
     }
 
     

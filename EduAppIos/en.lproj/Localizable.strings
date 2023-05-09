@@ -39,3 +39,4 @@
 "turn_o" = "Turn: O";
 "puzzle_rules" = "The player must assemble an image from fragments by dragging them on the playing field until a complete picture is obtained.";
 "about_us" = "About us\n\nConcept and programming: Elizaveta Osipova\n Anastasia Lazareva\n\nDesign:\n Maria Smirnova\n Alisa Vyshegorodtseva\n Anastasia Lazareva\n Elizaveta Osipova\n\n2023";
+"game_amount" = "games played: ";
