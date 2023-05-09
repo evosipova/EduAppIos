@@ -14,7 +14,6 @@ import Localize_Swift
 
 class ProfileViewController: UIViewController, AvatarGalleryDelegate {
     func didSelectAvatar(image: UIImage) {
-        // Обновите изображение профиля с новым выбранным аватаром
         avatarImageView.image = image
     }
 
@@ -325,8 +324,6 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
     func updateLabels() {
           nameLabel.text = currentUser?.username ?? ""
           emailLabel.text = currentUser?.email ?? ""
-//        let logoutButton = UIButton(type: .system)
-//        logoutButton.setTitle("exit".localized, for: .normal)
       }
 
     private func setupNameLabel() {
