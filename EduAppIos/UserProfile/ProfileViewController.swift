@@ -157,7 +157,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
             MainViewController.language = "en"
           
             // Locale.preferredLanguages[0] = "en"
-            var lisVc = self.navigationController!.viewControllers
+            let lisVc = self.navigationController!.viewControllers
             for controller in lisVc {
                 //controller.lang = "en"
                 controller.viewDidLoad()
@@ -169,7 +169,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
             Localize.setCurrentLanguage("ru")
             MainViewController.language = "ru"
            
-            var lisVc = self.navigationController!.viewControllers
+            let lisVc = self.navigationController!.viewControllers
             for controller in lisVc {
                 //controller.lang = "en"
                 controller.viewDidLoad()

@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class EndGameViewController: UIViewController {
     
@@ -54,7 +55,18 @@ class EndGameViewController: UIViewController {
     
     @objc
     func buttonExitPressed(){
-        self.navigationController?.popToRootViewController(animated: true)
+        let user = Auth.auth().currentUser
+        if user == nil {
+            self.navigationController?.popToRootViewController(animated: true)
+        }else{
+            if (initialcontrollerId == 2){
+                let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                self.navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+            }else{
+                let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                self.navigationController!.popToViewController(viewControllers[viewControllers.count - 4], animated: true)
+            }
+        }
     }
     
     @objc

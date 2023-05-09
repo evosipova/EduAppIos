@@ -194,7 +194,7 @@ class MenuViewController: UIViewController {
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.text = "puzzle".localized(MainViewController.language)
         buttonPuzzles.addSubview(label)
-        let db = Firestore.firestore()
+       
         let user = Auth.auth().currentUser
         if user == nil {
             label.pinCenter(to: buttonPuzzles)
@@ -266,7 +266,6 @@ class MenuViewController: UIViewController {
         labelTicTac.font = UIFont.boldSystemFont(ofSize: 18)
         labelTicTac.text = "tic-tac-toe".localized(MainViewController.language)
         buttonTicTac.addSubview(labelTicTac)
-        let db = Firestore.firestore()
         let user = Auth.auth().currentUser
         if user == nil {
             labelTicTac.pinCenter(to: buttonTicTac)
@@ -315,7 +314,6 @@ class MenuViewController: UIViewController {
         label.text = "memory".localized(MainViewController.language)
         buttonMemory.addSubview(label)
         
-        let db = Firestore.firestore()
         let user = Auth.auth().currentUser
         if user == nil {
             label.pinCenter(to: buttonMemory)
