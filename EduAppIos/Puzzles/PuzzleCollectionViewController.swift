@@ -18,17 +18,16 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
     var infoButton: UIButton!
     var rulesView: UIView!
     var rulesLabel: UILabel!
-
-
-
+    
+    
+    
     func incrementGame1Plays() {
         guard let user = Auth.auth().currentUser else {
             print("Error updating game1Plays: user not logged in")
             return
         }
         let db = Firestore.firestore()
-
-        //let userRef = Firestore.firestore().collection("users").document(user.uid)
+        
         let game1PlaysRef = db.collection("users").document(user.uid)
         game1PlaysRef.updateData([
             "game1Plays": FieldValue.increment(Int64(1))
@@ -40,7 +39,7 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
             }
         }
     }
-
+    
     
     var label: UILabel! = {
         var label = UILabel()
@@ -250,8 +249,8 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
         let imgView = UIImageView(image: imageWithImage(image: img, scaledToSize: CGSize(width: viewRect.bounds.width, height: viewRect.bounds.width)))
         view.addSubview(imgView)
         imgView.pinCenter(to: view)
-
-
+        
+        
         incrementGame1Plays()
         
         endGameController.initialcontrollerId = 1

@@ -243,23 +243,23 @@ class MemoryViewController: UIViewController {
         if selectedCategoryIndex >= 0 && selectedCategoryIndex <= 3 {
             memoryCollectionController = MemoryCollectionViewController()
             memoryCollectionController.selectedCategoryIndex = selectedCategoryIndex
-
+            
             // Update the game3Plays counter in Firestore
             updateGame3PlaysInFirestore()
-
+            
             navigationController?.pushViewController(memoryCollectionController, animated: true)
         }
     }
-
+    
     
     func updateGame3PlaysInFirestore() {
         guard let user = Auth.auth().currentUser else {
             print("Error updating game3Plays: user not logged in")
             return
         }
-
+        
         let userRef = Firestore.firestore().collection("users").document(user.uid)
-
+        
         Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
             let userDocument: DocumentSnapshot
             do {
@@ -268,7 +268,7 @@ class MemoryViewController: UIViewController {
                 errorPointer?.pointee = fetchError
                 return nil
             }
-
+            
             guard let oldGame3Plays = userDocument.data()?["game3Plays"] as? Int else {
                 let error = NSError(
                     domain: "AppErrorDomain",
@@ -280,7 +280,7 @@ class MemoryViewController: UIViewController {
                 errorPointer?.pointee = error
                 return nil
             }
-
+            
             transaction.updateData(["game3Plays": oldGame3Plays + 1], forDocument: userRef)
             return nil
         }) { (_, error) in
@@ -291,6 +291,6 @@ class MemoryViewController: UIViewController {
             }
         }
     }
-
-
+    
+    
 }

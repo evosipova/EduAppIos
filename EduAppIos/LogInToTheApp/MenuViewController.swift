@@ -45,7 +45,7 @@ class MenuViewController: UIViewController {
     
     
     
-   func configure(with model: Model) {
+    func configure(with model: Model) {
         buttonPuzzles.setTitle(model.puzzle, for: .normal)
         buttonTicTac.setTitle(model.tictactoe, for: .normal)
         buttonMemory.setTitle(model.memory, for: .normal)
@@ -215,7 +215,10 @@ class MenuViewController: UIViewController {
         UIGraphicsEndImageContext()
         return newImage
     }
-    
+
+
+    private let labelTicTac = UILabel()
+
     private func setupButtonTicTac() {
         buttonTicTac.frame = CGRect(x: 0, y: 0, width: viewRect.frame.width*0.95, height: viewRect.frame.height*0.2)
         buttonTicTac.backgroundColor = .white
@@ -239,17 +242,28 @@ class MenuViewController: UIViewController {
         buttonTicTac.imageEdgeInsets.left = -buttonTicTac.frame.width*0.75
         
         
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: buttonTicTac.frame.width, height: buttonTicTac.frame.height*0.9)
-        label.backgroundColor = .white
-        label.textColor = .black
-        label.font = UIFont(name: "Raleway-Bold", size: 18)
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "tic-tac-toe".localized(MenuViewController.language)
-        buttonTicTac.addSubview(label)
-        label.pinCenter(to: buttonTicTac)
-        
-        
+        //        let label = UILabel()
+        //        label.frame = CGRect(x: 0, y: 0, width: buttonTicTac.frame.width, height: buttonTicTac.frame.height*0.9)
+        //        label.backgroundColor = .white
+        //        label.textColor = .black
+        //        label.font = UIFont(name: "Raleway-Bold", size: 18)
+        //        label.font = UIFont.boldSystemFont(ofSize: 18)
+        //        label.text = "tic-tac-toe".localized(MenuViewController.language)
+        //        buttonTicTac.addSubview(label)
+        //        label.pinCenter(to: buttonTicTac)
+
+
+        labelTicTac.removeFromSuperview()
+        labelTicTac.frame = CGRect(x: 0, y: 0, width: buttonTicTac.frame.width, height: buttonTicTac.frame.height*0.9)
+        labelTicTac.backgroundColor = .white
+        labelTicTac.textColor = .black
+        labelTicTac.font = UIFont(name: "Raleway-Bold", size: 18)
+        labelTicTac.font = UIFont.boldSystemFont(ofSize: 18)
+        labelTicTac.text = "tic-tac-toe".localized(MenuViewController.language)
+        buttonTicTac.addSubview(labelTicTac)
+        labelTicTac.pinCenter(to: buttonTicTac)
+
+
         let imageTicTac = UIImage(named: "tictactoe_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imageTicTac, scaledToSize: CGSize(width: buttonTicTac.frame.height/2.5, height: buttonTicTac.frame.height/2.5))
         
@@ -323,7 +337,6 @@ class MenuViewController: UIViewController {
                 if let document = document, document.exists {
                     let data = document.data()
 
-                    // Update the labels' text
                     self.labelPuzzlesPlayed.text = "Количество сыгранных игр: \(data?["game1Plays"] ?? 0)"
                     self.labelTicTacPlayed.text = "Количество сыгранных игр: \(data?["game2Plays"] ?? 0)"
                     self.labelMemoryPlayed.text = "Количество сыгранных игр: \(data?["game3Plays"] ?? 0)"

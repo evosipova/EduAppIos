@@ -66,12 +66,12 @@ class TicTacToeViewController: UIViewController {
         addToBoard(sender)
         
     }
-
-
+    
+    
     func win(winner: String) {
         finishGame(result: "winner".localized + winner)
     }
-
+    
     func finishGame(result: String) {
         endGameContoller.resLabel.text = result
         viewModel.clearBoard()
@@ -84,16 +84,16 @@ class TicTacToeViewController: UIViewController {
         }
         self.navigationController?.pushViewController(endGameContoller, animated: true)
     }
-
-
+    
+    
     func updateGame2PlaysInFirestore() {
         guard let user = Auth.auth().currentUser else {
             print("Error updating game2Plays: user not logged in")
             return
         }
-
+        
         let userRef = Firestore.firestore().collection("users").document(user.uid)
-
+        
         Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
             let userDocument: DocumentSnapshot
             do {
@@ -102,7 +102,7 @@ class TicTacToeViewController: UIViewController {
                 errorPointer?.pointee = fetchError
                 return nil
             }
-
+            
             guard let oldGame2Plays = userDocument.data()?["game2Plays"] as? Int else {
                 let error = NSError(
                     domain: "AppErrorDomain",
@@ -114,7 +114,7 @@ class TicTacToeViewController: UIViewController {
                 errorPointer?.pointee = error
                 return nil
             }
-
+            
             transaction.updateData(["game2Plays": oldGame2Plays + 1], forDocument: userRef)
             return nil
         }) { (_, error) in
@@ -125,8 +125,8 @@ class TicTacToeViewController: UIViewController {
             }
         }
     }
-
-
+    
+    
     func addToBoard(_ sender: UIButton!) {
         viewModel.buttonPressed(sender: sender, index: buttons.firstIndex(of: sender)!)
         if viewModel.model.boardIsFull == true && viewModel.model.winner.value == "" {
@@ -135,7 +135,7 @@ class TicTacToeViewController: UIViewController {
             win(winner: viewModel.model.winner.value)
         }
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -241,7 +241,7 @@ class TicTacToeViewController: UIViewController {
         rulesLabel.text = "tic_tac_toe_rules".localized
         rulesLabel.numberOfLines = 0
         rulesLabel.textAlignment = .center
-
+        
         rulesLabel.translatesAutoresizingMaskIntoConstraints = false
         
         
