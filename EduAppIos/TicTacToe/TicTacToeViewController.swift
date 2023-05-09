@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
 
 class TicTacToeViewController: UIViewController {
     
@@ -64,10 +66,17 @@ class TicTacToeViewController: UIViewController {
         addToBoard(sender)
         
     }
-    
-    func win(winner : String){
-        endGameContoller.resLabel.text = "winner".localized + winner
+
+
+    func win(winner: String) {
+        finishGame(result: "winner".localized + winner)
+    }
+
+    func finishGame(result: String) {
+        endGameContoller.resLabel.text = result
         viewModel.clearBoard()
+        viewModel.game2Plays += 1
+        updateGame2PlaysInFirestore()
         for button in buttons {
             button.setTitle("", for: .normal)
             button.setImage(nil, for: .normal)
@@ -75,22 +84,58 @@ class TicTacToeViewController: UIViewController {
         }
         self.navigationController?.pushViewController(endGameContoller, animated: true)
     }
-    
-    func addToBoard(_ sender: UIButton!){
-        viewModel.buttonPressed(sender: sender, index: buttons.firstIndex(of: sender)!)
-        if(viewModel.model.boardIsFull == true && viewModel.model.winner.value == ""){
-            endGameContoller.resLabel.text = "tie".localized
-            viewModel.clearBoard()
-            for button in buttons {
-                button.setTitle("", for: .normal)
-                button.setImage(nil, for: .normal)
-                button.isEnabled = true
+
+
+    func updateGame2PlaysInFirestore() {
+        guard let user = Auth.auth().currentUser else {
+            print("Error updating game2Plays: user not logged in")
+            return
+        }
+
+        let userRef = Firestore.firestore().collection("users").document(user.uid)
+
+        Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
+            let userDocument: DocumentSnapshot
+            do {
+                try userDocument = transaction.getDocument(userRef)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
             }
-            self.navigationController?.pushViewController(endGameContoller, animated: true)
-        }else if viewModel.model.winner.value != ""{
+
+            guard let oldGame2Plays = userDocument.data()?["game2Plays"] as? Int else {
+                let error = NSError(
+                    domain: "AppErrorDomain",
+                    code: -1,
+                    userInfo: [
+                        NSLocalizedDescriptionKey: "Unable to retrieve game2Plays from snapshot \(userDocument)"
+                    ]
+                )
+                errorPointer?.pointee = error
+                return nil
+            }
+
+            transaction.updateData(["game2Plays": oldGame2Plays + 1], forDocument: userRef)
+            return nil
+        }) { (_, error) in
+            if let error = error {
+                print("Error updating game2Plays: \(error.localizedDescription)")
+            } else {
+                print("game2Plays successfully updated")
+            }
+        }
+    }
+
+
+    func addToBoard(_ sender: UIButton!) {
+        viewModel.buttonPressed(sender: sender, index: buttons.firstIndex(of: sender)!)
+        if viewModel.model.boardIsFull == true && viewModel.model.winner.value == "" {
+            finishGame(result: "tie".localized)
+        } else if viewModel.model.winner.value != "" {
             win(winner: viewModel.model.winner.value)
         }
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

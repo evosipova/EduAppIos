@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import Firebase
+
 
 class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
     
@@ -16,6 +18,29 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
     var infoButton: UIButton!
     var rulesView: UIView!
     var rulesLabel: UILabel!
+
+
+
+    func incrementGame1Plays() {
+        guard let user = Auth.auth().currentUser else {
+            print("Error updating game1Plays: user not logged in")
+            return
+        }
+        let db = Firestore.firestore()
+
+        //let userRef = Firestore.firestore().collection("users").document(user.uid)
+        let game1PlaysRef = db.collection("users").document(user.uid)
+        game1PlaysRef.updateData([
+            "game1Plays": FieldValue.increment(Int64(1))
+        ]) { err in
+            if let err = err {
+                print("Error updating game1Plays: \(err)")
+            } else {
+                print("game1Plays successfully incremented")
+            }
+        }
+    }
+
     
     var label: UILabel! = {
         var label = UILabel()
@@ -225,13 +250,15 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
         let imgView = UIImageView(image: imageWithImage(image: img, scaledToSize: CGSize(width: viewRect.bounds.width, height: viewRect.bounds.width)))
         view.addSubview(imgView)
         imgView.pinCenter(to: view)
+
+
+        incrementGame1Plays()
         
         endGameController.initialcontrollerId = 1
         endGameController.resLabel.text = "Победа!"
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.navigationController?.pushViewController(self.endGameController, animated: true)
         }
-        
     }
     
     

@@ -7,6 +7,9 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestore
+import FirebaseAuth
+
 
 class PuzzleViewController : UIViewController{
     
@@ -41,6 +44,7 @@ class PuzzleViewController : UIViewController{
     
     @objc
     func continueButtonPressed(){
+
         for i in 0...3{
             if(buttons[i].layer.borderColor == UIColor(red: 0.755, green: 0.962, blue: 0.417, alpha: 1).cgColor){
                 puzzleCollectionController = PuzzleCollectionViewController()
@@ -50,6 +54,10 @@ class PuzzleViewController : UIViewController{
         }
         navigationController?.pushViewController(puzzleCollectionController, animated: true)
     }
+
+
+
+
     
     
     override func viewDidLoad() {

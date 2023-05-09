@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import Firebase
+
 
 class MenuViewController: UIViewController {
     static var language = "ru"
@@ -21,7 +23,12 @@ class MenuViewController: UIViewController {
     var buttonPuzzles = UIButton()
     var buttonTicTac = UIButton()
     var buttonMemory = UIButton()
-    
+
+    var labelPuzzlesPlayed = UILabel()
+    var labelTicTacPlayed = UILabel()
+    var labelMemoryPlayed = UILabel()
+
+
     var buttonProfile = UIButton()
     
     override func viewDidLoad() {
@@ -32,7 +39,7 @@ class MenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        loadDataFromFirestore()
         
     }
     
@@ -89,7 +96,8 @@ class MenuViewController: UIViewController {
         setupButtons()
         setupUser()
         setupProfileButton()
-        
+
+        setupLabels()
         
         
     }
@@ -303,5 +311,62 @@ class MenuViewController: UIViewController {
         setupButtonMemory()
         
     }
+
+    func loadDataFromFirestore() {
+        let db = Firestore.firestore()
+        let user = Auth.auth().currentUser
+
+        if let user = user {
+            let docRef = db.collection("users").document(user.uid)
+
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let data = document.data()
+
+                    // Update the labels' text
+                    self.labelPuzzlesPlayed.text = "Количество сыгранных игр: \(data?["game1Plays"] ?? 0)"
+                    self.labelTicTacPlayed.text = "Количество сыгранных игр: \(data?["game2Plays"] ?? 0)"
+                    self.labelMemoryPlayed.text = "Количество сыгранных игр: \(data?["game3Plays"] ?? 0)"
+                } else {
+                    print("Document does not exist")
+                }
+            }
+        }
+    }
+
+
+    private func setupLabels() {
+        setupLabelPuzzlesPlayed()
+        setupLabelTicTacPlayed()
+        setupLabelMemoryPlayed()
+    }
+
+    private func setupLabelPuzzlesPlayed() {
+        labelPuzzlesPlayed.textColor = .black
+        labelPuzzlesPlayed.font = UIFont.systemFont(ofSize: 14)
+        view.addSubview(labelPuzzlesPlayed)
+        labelPuzzlesPlayed.translatesAutoresizingMaskIntoConstraints = false
+        labelPuzzlesPlayed.topAnchor.constraint(equalTo: buttonPuzzles.bottomAnchor, constant: 8).isActive = true
+        labelPuzzlesPlayed.centerXAnchor.constraint(equalTo: buttonPuzzles.centerXAnchor).isActive = true
+    }
+
+    private func setupLabelTicTacPlayed() {
+        labelTicTacPlayed.textColor = .black
+        labelTicTacPlayed.font = UIFont.systemFont(ofSize: 14)
+        view.addSubview(labelTicTacPlayed)
+        labelTicTacPlayed.translatesAutoresizingMaskIntoConstraints = false
+        labelTicTacPlayed.topAnchor.constraint(equalTo: buttonTicTac.bottomAnchor, constant: 8).isActive = true
+        labelTicTacPlayed.centerXAnchor.constraint(equalTo: buttonTicTac.centerXAnchor).isActive = true
+    }
+
+    private func setupLabelMemoryPlayed() {
+        labelMemoryPlayed.textColor = .black
+        labelMemoryPlayed.font = UIFont.systemFont(ofSize: 14)
+        view.addSubview(labelMemoryPlayed)
+        labelMemoryPlayed.translatesAutoresizingMaskIntoConstraints = false
+        labelMemoryPlayed.topAnchor.constraint(equalTo: buttonMemory.bottomAnchor, constant: 8).isActive = true
+        labelMemoryPlayed.centerXAnchor.constraint(equalTo: buttonMemory.centerXAnchor).isActive = true
+    }
+
     
 }
