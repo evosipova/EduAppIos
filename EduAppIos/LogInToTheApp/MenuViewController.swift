@@ -11,7 +11,6 @@ import Firebase
 
 
 class MenuViewController: UIViewController {
-    static var language = "ru"
     struct Model {
         var games: String
         var puzzle: String
@@ -127,7 +126,7 @@ class MenuViewController: UIViewController {
         label.textColor = .white
         label.font = UIFont(name: "Raleway-Bold", size: 22)
         label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.text = "games".localized(MenuViewController.language)
+        label.text = "games".localized(MainViewController.language)
         view.addSubview(label)
         label.pin(to: view, [.top: view.frame.height * 0.09, .left: view.frame.width / 20])
         
@@ -193,7 +192,7 @@ class MenuViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "puzzle".localized(MenuViewController.language)
+        label.text = "puzzle".localized(MainViewController.language)
         buttonPuzzles.addSubview(label)
         label.pinCenter(to: buttonPuzzles)
         
@@ -259,7 +258,7 @@ class MenuViewController: UIViewController {
         labelTicTac.textColor = .black
         labelTicTac.font = UIFont(name: "Raleway-Bold", size: 18)
         labelTicTac.font = UIFont.boldSystemFont(ofSize: 18)
-        labelTicTac.text = "tic-tac-toe".localized(MenuViewController.language)
+        labelTicTac.text = "tic-tac-toe".localized(MainViewController.language)
         buttonTicTac.addSubview(labelTicTac)
         labelTicTac.pinCenter(to: buttonTicTac)
 
@@ -302,7 +301,7 @@ class MenuViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "memory".localized(MenuViewController.language)
+        label.text = "memory".localized(MainViewController.language)
         buttonMemory.addSubview(label)
         label.pinCenter(to: buttonMemory)
         

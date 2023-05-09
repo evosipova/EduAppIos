@@ -43,7 +43,7 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
     
     var label: UILabel! = {
         var label = UILabel()
-        label.text = "пазлы"
+        label.text = "puzzle".localized(MainViewController.language)
         label.font = UIFont(name: "Raleway-Bold", size: 20)
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
@@ -202,7 +202,7 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
         
         
         let rulesLabel = UILabel()
-        rulesLabel.text = "Игрок должен собрать из фрагментов изображение, перетаскивая их на игровом поле до тех пор, пока не получится полноценная картинка."
+        rulesLabel.text = "puzzle_rules".localized(MainViewController.language)
         rulesLabel.numberOfLines = 0
         rulesLabel.textAlignment = .center
         rulesLabel.font = UIFont.systemFont(ofSize: 20)
@@ -254,7 +254,7 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
         incrementGame1Plays()
         
         endGameController.initialcontrollerId = 1
-        endGameController.resLabel.text = "Победа!"
+        endGameController.resLabel.text = "win".localized(MainViewController.language)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.navigationController?.pushViewController(self.endGameController, animated: true)
         }

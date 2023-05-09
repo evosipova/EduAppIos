@@ -123,7 +123,7 @@ class LoginViewController: UIViewController {
         emailTextField.layer.borderWidth = 1.0
         emailTextField.layer.cornerRadius = 10
         emailTextField.layer.borderColor = UIColor.black.cgColor
-        emailTextField.placeholder = "email".localized
+        emailTextField.placeholder = "email".localized(MainViewController.language)
         emailTextField.font = UIFont(name: "Raleway-Regular", size: 20)
         emailTextField.autocapitalizationType = .none
         view.addSubview(emailTextField)
@@ -157,7 +157,7 @@ class LoginViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 22)
         label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.text = "log_in".localized
+        label.text = "log_in".localized(MainViewController.language)
         view.addSubview(label)
         label.pin(to: view, [.top: view.frame.height * 0.07])
         label.pinCenterX(to: view)
@@ -167,7 +167,7 @@ class LoginViewController: UIViewController {
         passLabel.textColor = .black
         passLabel.font = UIFont(name: "Raleway-Bold", size: 18)
         passLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        passLabel.text = "password".localized
+        passLabel.text = "password".localized(MainViewController.language)
         view.addSubview(passLabel)
         passLabel.pin(to: view, [.top: view.frame.height * 0.315, .left: view.frame.width * 0.11])
         
@@ -229,7 +229,7 @@ class LoginViewController: UIViewController {
         label.textColor = .white
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "continue".localized
+        label.text = "continue".localized(MainViewController.language)
         continueButton.addSubview(label)
         label.pinCenter(to: continueButton)
         
@@ -291,7 +291,7 @@ class LoginViewController: UIViewController {
             } else {
                 numberPadStackView.isHidden = true
             }
-            errorLabel.text = "error_complete_all_fields".localized
+            errorLabel.text = "error_complete_all_fields".localized(MainViewController.language)
             return
         }
 
@@ -302,7 +302,7 @@ class LoginViewController: UIViewController {
             } else {
                 numberPadStackView.isHidden = true
             }
-            errorLabel.text = "error_enter_valid_email".localized
+            errorLabel.text = "error_enter_valid_email".localized(MainViewController.language)
             return
         }
         
@@ -311,7 +311,7 @@ class LoginViewController: UIViewController {
                 guard let strongSelf = self else { return }
                 if let error = error {
                     print("Failed to sign in with email: \(error.localizedDescription)")
-                    strongSelf.errorLabel.text = "Неверный пароль, попробуйте еще раз"
+                    strongSelf.errorLabel.text = "error_wrong_password".localized(MainViewController.language)
                     strongSelf.passwordTextField.text = ""
                     strongSelf.continueButton.isHidden = true
                 } else {

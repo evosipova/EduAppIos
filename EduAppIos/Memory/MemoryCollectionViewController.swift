@@ -10,13 +10,14 @@ import UIKit
 
 
 class MemoryCollectionViewController: UIViewController {
+   
     var viewRect = UILabel()
     var stackView = UIStackView()
     var selectedCategoryIndex: Int = -1
     
     var label: UILabel! = {
         let label = UILabel()
-        label.text = "memory".localized
+        label.text = "memory".localized(MainViewController.language)
         label.font = UIFont(name: "Raleway-Bold", size: 20)
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
@@ -124,7 +125,7 @@ class MemoryCollectionViewController: UIViewController {
         
         
         let rulesLabel = UILabel()
-        rulesLabel.text = "memory_rules".localized
+        rulesLabel.text = "memory_rules".localized(MainViewController.language)
         rulesLabel.numberOfLines = 0
         rulesLabel.textAlignment = .center
         rulesLabel.font = UIFont.systemFont(ofSize: 20)

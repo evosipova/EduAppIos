@@ -114,7 +114,7 @@ class RegistrationViewController: UIViewController {
         label.textColor = .white
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "continue".localized
+        label.text = "continue".localized(MainViewController.language)
         continueButton.addSubview(label)
         label.pinCenter(to: continueButton)
         
@@ -219,7 +219,7 @@ class RegistrationViewController: UIViewController {
         usernameTextField.layer.cornerRadius = 10
         usernameTextField.layer.borderColor = UIColor.black.cgColor
         usernameTextField.font = UIFont(name: "Raleway-Regular", size: 20)
-        usernameTextField.placeholder = "name".localized
+        usernameTextField.placeholder = "name".localized(MainViewController.language)
         view.addSubview(usernameTextField)
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         
@@ -227,7 +227,7 @@ class RegistrationViewController: UIViewController {
         emailTextField.layer.borderWidth = 1.0
         emailTextField.layer.cornerRadius = 10
         emailTextField.layer.borderColor = UIColor.black.cgColor
-        emailTextField.placeholder = "email".localized
+        emailTextField.placeholder = "email".localized(MainViewController.language)
         emailTextField.font = UIFont(name: "Raleway-Regular", size: 20)
         emailTextField.autocapitalizationType = .none
         view.addSubview(emailTextField)
@@ -258,7 +258,7 @@ class RegistrationViewController: UIViewController {
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 22)
         label.font = UIFont.boldSystemFont(ofSize: 22)
-        label.text = "registration".localized
+        label.text = "registration".localized(MainViewController.language)
         view.addSubview(label)
         label.pin(to: view, [.top: view.frame.height * 0.07])
         label.pinCenterX(to: view)
@@ -268,7 +268,7 @@ class RegistrationViewController: UIViewController {
         passLabel.textColor = .black
         passLabel.font = UIFont(name: "Raleway-Bold", size: 18)
         passLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        passLabel.text = "password".localized
+        passLabel.text = "password".localized(MainViewController.language)
         view.addSubview(passLabel)
         passLabel.pin(to: view, [.top: view.frame.height * 0.315, .left: view.frame.width * 0.11])
         
@@ -301,7 +301,7 @@ class RegistrationViewController: UIViewController {
             }else{
                 numberPadStackView.isHidden = true
             }
-            errorLabel.text = "error_complete_all_fields".localized
+            errorLabel.text = "error_complete_all_fields".localized(MainViewController.language)
 
             return
         }
@@ -313,7 +313,7 @@ class RegistrationViewController: UIViewController {
             }else{
                 numberPadStackView.isHidden = true
             }
-            errorLabel.text = "error_enter_valid_email".localized
+            errorLabel.text = "error_enter_valid_email".localized(MainViewController.language)
             return
         }
 

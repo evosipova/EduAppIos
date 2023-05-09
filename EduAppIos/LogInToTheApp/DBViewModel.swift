@@ -18,13 +18,13 @@ class DBViewModel {
     func log_in(email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password) { [ self] authResult, error in
             if let error = error {
-                print("error_log_in".localized+" \(error.localizedDescription)")
-                error_mes.value = "error_log_in".localized+" \(error.localizedDescription)"
+                print("error_log_in".localized(MainViewController.language)+" \(error.localizedDescription)")
+                error_mes.value = "error_log_in".localized(MainViewController.language)+" \(error.localizedDescription)"
                 return
             }
             guard let _ = authResult?.user else {
-                print("error_fetching_user_info".localized)
-                error_mes.value = "error_fetching_user_info".localized
+                print("error_fetching_user_info".localized(MainViewController.language))
+                error_mes.value = "error_fetching_user_info".localized(MainViewController.language)
                 return
             }
         }
@@ -69,7 +69,7 @@ class DBViewModel {
         do {
             try Auth.auth().signOut()
         } catch let signOutError as NSError {
-            print("error_log_out".localized, signOutError)
+            print("error_log_out".localized(MainViewController.language), signOutError)
         }
     }
 }

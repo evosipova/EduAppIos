@@ -86,7 +86,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         setupAvatarImageView()
 
         let logoutButton = UIButton(type: .system)
-        logoutButton.setTitle("exit".localized, for: .normal)
+        logoutButton.setTitle("exit".localized(MainViewController.language), for: .normal)
 
 
         logoutButton.setTitleColor(.white, for: .normal)
@@ -128,9 +128,12 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
 
     private func setupLanguageButton() {
-        if(languageButton.title(for: .normal) == nil){
+        if(MainViewController.language == "ru"){
             languageButton.setTitle("Русский", for: .normal)
-        }
+        }else {
+                languageButton.setTitle("English", for: .normal)
+            }
+        
             languageButton.setTitleColor(.white, for: .normal)
             languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
             languageButton.addTarget(self, action: #selector(languageButtonTapped), for: .touchUpInside)
@@ -152,7 +155,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
             languageButton.setTitle("English", for: .normal)
             Localize.setCurrentLanguage("en")
             MainViewController.language = "en"
-            MenuViewController.language = "en"
+          
             // Locale.preferredLanguages[0] = "en"
             var lisVc = self.navigationController!.viewControllers
             for controller in lisVc {
@@ -165,7 +168,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
             languageButton.setTitle("Русский", for: .normal)
             Localize.setCurrentLanguage("ru")
             MainViewController.language = "ru"
-            MenuViewController.language = "ru"
+           
             var lisVc = self.navigationController!.viewControllers
             for controller in lisVc {
                 //controller.lang = "en"
@@ -194,11 +197,11 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
             let infoLabel = UILabel(frame: CGRect(x: 10, y: 10, width: infoView!.frame.width - 20, height: infoView!.frame.height - 20))
 
-            let string = "О нас\n\nКонцепт и программирование: Осипова Елизавета\n Лазарева Анастасия\n\nДизайн:\n Смирнова Мария\n Вышегородцева Алиса\n Осипова Елизавета\n\n2023"
+            let string = "about_us".localized(MainViewController.language)
 
             let attributedString = NSMutableAttributedString(string: string)
 
-            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 17), range: NSRange(location: 0, length: 5))
+            attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 17), range: NSRange(location: 0, length: (MainViewController.language == "ru" ? 5 : 8)))
             attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 17), range: NSRange(location: 7, length: 27))
             attributedString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 17), range: NSRange(location: 74, length: 7))
 
@@ -255,7 +258,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
     private func setupTitleLabel() {
         let titleLabel = UILabel()
-        titleLabel.text = "settings".localized
+        titleLabel.text = "settings".localized(MainViewController.language)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.textColor = .white
 

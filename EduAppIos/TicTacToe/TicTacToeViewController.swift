@@ -24,7 +24,7 @@ class TicTacToeViewController: UIViewController {
     
     var turnLabel: UILabel! = {
         var turnLabel = UILabel()
-        turnLabel.text = "turn_x".localized
+        turnLabel.text = "turn_x".localized(MainViewController.language)
         turnLabel.font = UIFont(name: "Raleway-Bold", size: 26)
         turnLabel.font = UIFont.boldSystemFont(ofSize: 26)
         turnLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,7 @@ class TicTacToeViewController: UIViewController {
     
     var label: UILabel! = {
         var label = UILabel()
-        label.text = "tic_tac_toe".localized
+        label.text = "tic_tac_toe".localized(MainViewController.language)
         label.font = UIFont(name: "Raleway-Bold", size: 20)
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
@@ -69,7 +69,7 @@ class TicTacToeViewController: UIViewController {
     
     
     func win(winner: String) {
-        finishGame(result: "winner".localized + winner)
+        finishGame(result: "winner".localized(MainViewController.language) + winner)
     }
     
     func finishGame(result: String) {
@@ -130,7 +130,7 @@ class TicTacToeViewController: UIViewController {
     func addToBoard(_ sender: UIButton!) {
         viewModel.buttonPressed(sender: sender, index: buttons.firstIndex(of: sender)!)
         if viewModel.model.boardIsFull == true && viewModel.model.winner.value == "" {
-            finishGame(result: "tie".localized)
+            finishGame(result: "tie".localized(MainViewController.language))
         } else if viewModel.model.winner.value != "" {
             win(winner: viewModel.model.winner.value)
         }
@@ -238,7 +238,7 @@ class TicTacToeViewController: UIViewController {
         let rulesLabel = UILabel()
         rulesLabel.font = UIFont(name: "Raleway-Bold", size: 24)
         
-        rulesLabel.text = "tic_tac_toe_rules".localized
+        rulesLabel.text = "tic_tac_toe_rules".localized(MainViewController.language)
         rulesLabel.numberOfLines = 0
         rulesLabel.textAlignment = .center
         
