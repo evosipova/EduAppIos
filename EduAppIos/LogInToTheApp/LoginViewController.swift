@@ -120,6 +120,7 @@ class LoginViewController: UIViewController {
     
     private func setupTextFields(){
         emailTextField.placeholder = "email".localized(MainViewController.language)
+        emailTextField.autocapitalizationType = .none
         view.addSubview(emailTextField)
         NSLayoutConstraint.activate([
             emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
