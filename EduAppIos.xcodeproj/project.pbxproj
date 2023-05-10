@@ -171,6 +171,7 @@
 				819E088D29B768CB00E4CFDF /* Info.plist */,
 				819E089529B771A400E4CFDF /* UIView+Pin.swift */,
 				81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */,
+				818ED50A2A02C081002ED41B /* Binding */,
 				819909DE2A0975DC00B3E9D6 /* Views */,
 				5E9556962A0542F3002A2878 /* LogInToTheApp */,
 				5E9556932A0519B0002A2878 /* UserProfile */,
@@ -191,7 +192,6 @@
 				81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */,
 				81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */,
 				81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */,
-				818ED50A2A02C081002ED41B /* Binding */,
 			);
 			path = Puzzles;
 			sourceTree = "<group>";

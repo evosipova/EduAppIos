@@ -72,6 +72,20 @@ class RegistrationViewController: UIViewController {
             }
             
         })
+        
+        viewModel.continueButtonIsHidden.bind({(flag) in
+            DispatchQueue.main.async {
+                self.continueButton.isHidden = flag
+            }
+            
+        })
+        
+        viewModel.numberPadIsHidden.bind({(flag) in
+            DispatchQueue.main.async {
+                self.numberPadStackView.isHidden = flag
+            }
+            
+        })
     }
     
     private func setupView() {
@@ -277,52 +291,18 @@ class RegistrationViewController: UIViewController {
     
     
     @objc private func continueButtonTapped() {
-
         guard let email = emailTextField.text, let username = usernameTextField.text, let password = passwordTextField.text else { return }
 
-        if email.isEmpty || username.isEmpty || password.isEmpty {
-            continueButton.isHidden = false
-            if(password.isEmpty){
-                numberPadStackView.isHidden = false
-            }else{
-                numberPadStackView.isHidden = true
-            }
-            errorLabel.text = "error_complete_all_fields".localized(MainViewController.language)
-
-            return
-        }
-
-        if !isValidEmail(email) {
-            continueButton.isHidden = false
-            if(password.isEmpty){
-                numberPadStackView.isHidden = false
-            }else{
-                numberPadStackView.isHidden = true
-            }
-            errorLabel.text = "error_enter_valid_email".localized(MainViewController.language)
-            return
-        }
-
-        DispatchQueue.main.async {
-            self.viewModel.registration(email: email, password: password, username: username)
+        self.viewModel.registration(email: email, username: username, password: password)
             if self.errorLabel.text == "" {
                 let menuVC = MenuViewController()
                 self.navigationController?.pushViewController(menuVC, animated: true)
             } else {
                 self.continueButton.isHidden = false
             }
-        }
     }
 
 
-    
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPredicate.evaluate(with: email)
-    }
-    
-    
     
     @objc private func deleteButtonTapped() {
         if let lastFilledTextField = codeTextFields.last(where: { !($0.text?.isEmpty ?? true) }) {
@@ -330,13 +310,11 @@ class RegistrationViewController: UIViewController {
         }
     }
     
-    
     @objc private func numberButtonTapped(sender: UIButton) {
         let number = sender.tag
         if let emptyTextField = codeTextFields.first(where: { $0.text?.isEmpty ?? false }) {
             emptyTextField.text = "\(number)"
-            
-            // Если все текстовые поля заполнены, проверьте пароль
+ 
             if codeTextFields.allSatisfy({ !($0.text?.isEmpty ?? true) }) {
                 let enteredPassword = codeTextFields.map { $0.text! }.joined()
                 passwordTextField.text = enteredPassword

@@ -14,6 +14,12 @@ class DBViewModel {
     var model = DBModel()
 
     var error_mes = Dynamic("")
+    
+   
+    
+    var continueButtonIsHidden = Dynamic(true)
+    var numberPadIsHidden = Dynamic(true)
+    
 
     func log_in(email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password) { [ self] authResult, error in
@@ -35,7 +41,39 @@ class DBViewModel {
         model.firestore = Firestore.firestore()
     }
 
-    func registration(email: String, password: String, username: String) {
+    private func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPredicate.evaluate(with: email)
+    }
+    func registration(email: String, username: String, password: String) {
+        
+        if email.isEmpty || username.isEmpty || password.isEmpty {
+                print("hui")
+                continueButtonIsHidden.value = false
+                   if(password.isEmpty){
+                       numberPadIsHidden.value = false
+                   }else{
+                       numberPadIsHidden.value  = true
+                   }
+                error_mes.value = "error_complete_all_fields".localized(MainViewController.language)
+
+                   return
+               }
+        
+        if !isValidEmail(email) {
+            print("hui2")
+            continueButtonIsHidden.value = false
+            if(password.isEmpty){
+                numberPadIsHidden.value = false
+            }else{
+                numberPadIsHidden.value = true
+            }
+            error_mes.value = "error_enter_valid_email".localized(MainViewController.language)
+            return
+        }
+        
+        
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
