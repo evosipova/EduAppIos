@@ -66,21 +66,21 @@ class RegistrationViewController: UIViewController {
     
     func bindViewModel(){
         
-        viewModel.error_mes.bind({ (error_mes) in
+        viewModel.model.error_mes.bind({ (error_mes) in
             DispatchQueue.main.async {
                 self.errorLabel.text = error_mes
             }
             
         })
         
-        viewModel.continueButtonIsHidden.bind({(flag) in
+        viewModel.model.continueButtonIsHidden.bind({(flag) in
             DispatchQueue.main.async {
                 self.continueButton.isHidden = flag
             }
             
         })
         
-        viewModel.numberPadIsHidden.bind({(flag) in
+        viewModel.model.numberPadIsHidden.bind({(flag) in
             DispatchQueue.main.async {
                 self.numberPadStackView.isHidden = flag
             }

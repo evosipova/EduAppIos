@@ -7,10 +7,12 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 import Firebase
 
 
 class MenuViewController: UIViewController {
+    var viewModel = DBViewModel()
     struct Model {
         var games: String
         var puzzle: String
@@ -173,12 +175,8 @@ class MenuViewController: UIViewController {
         buttonPuzzles.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: viewRect.frame.width*0.05).isActive = true
         buttonPuzzles.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.1).isActive = true
  
-        var isCentered = false
-        let user = Auth.auth().currentUser
-        if user == nil {
-            isCentered = true
-        }
-        
+        var isCentered = viewModel.isNotAutrorised()
+
         let imagePuzzle = UIImage(named: "puzzle_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imagePuzzle, scaledToSize: CGSize(width: buttonPuzzles.frame.height/2, height: buttonPuzzles.frame.height/2))
         
@@ -209,11 +207,7 @@ class MenuViewController: UIViewController {
         buttonTicTac.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: viewRect.frame.width*0.05).isActive = true
         buttonTicTac.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.4).isActive = true
        
-        var isCentered = false
-        let user = Auth.auth().currentUser
-        if user == nil {
-            isCentered = true
-        }
+        var isCentered = viewModel.isNotAutrorised()
        
 
         let imageTicTac = UIImage(named: "tictactoe_icon.svg")!
@@ -235,11 +229,7 @@ class MenuViewController: UIViewController {
         buttonMemory.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: viewRect.frame.width*0.05).isActive = true
         buttonMemory.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.7).isActive = true
         
-        var isCentered = false
-        let user = Auth.auth().currentUser
-        if user == nil {
-            isCentered = true
-        }
+        var isCentered = viewModel.isNotAutrorised()
        
         let imageMemory = UIImage(named: "memory_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imageMemory, scaledToSize: CGSize(width: buttonMemory.frame.height/1.8, height: buttonMemory.frame.height/1.8))

@@ -7,10 +7,10 @@
 
 import Foundation
 import UIKit
-import FirebaseAuth
+
 
 class EndGameViewController: UIViewController {
-    
+    var viewModel = DBViewModel()
     //мемори = 0, пазлы = 1, крестики-нолики = 2
     var initialcontrollerId: Int = 2
     
@@ -55,8 +55,8 @@ class EndGameViewController: UIViewController {
     
     @objc
     func buttonExitPressed(){
-        let user = Auth.auth().currentUser
-        if user == nil {
+        let isNotAuthorised = viewModel.isNotAutrorised()
+        if isNotAuthorised {
             self.navigationController?.popToRootViewController(animated: true)
         }else{
             if (initialcontrollerId == 2){

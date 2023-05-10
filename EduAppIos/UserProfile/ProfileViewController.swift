@@ -13,6 +13,7 @@ import Localize_Swift
 
 
 class ProfileViewController: UIViewController, AvatarGalleryDelegate {
+    var viewModel = DBViewModel()
     func didSelectAvatar(image: UIImage) {
         avatarImageView.image = image
     }
@@ -55,7 +56,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         setupView()
         fetchUserData()
         // Load the avatar for unauthorized users
-        if Auth.auth().currentUser == nil {
+        if viewModel.isNotAutrorised() {
             if let lastSelectedAvatar = UserDefaults.standard.string(forKey: "lastSelectedAvatar") {
                 avatarImageView.image = UIImage(named: lastSelectedAvatar)
             }

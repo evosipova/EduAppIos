@@ -11,8 +11,6 @@ import UIKit
 
 class TicTacToeViewModel {
    var model = TicTacToeModel()
-
-    var game2Plays: Int = 0
     
     func buttonPressed(sender: UIButton!, index: Int){
         if(sender.title(for: .normal) == ""){

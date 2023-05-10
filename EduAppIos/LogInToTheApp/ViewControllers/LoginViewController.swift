@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import FirebaseAuth
+
 
 class LoginViewController: UIViewController {
     private let emailTextField:EduTextField = EduTextField()
@@ -69,10 +69,24 @@ class LoginViewController: UIViewController {
         
     }
     func bindViewModel(){
-        viewModel.error_mes.bind({ (error_mes) in
+        viewModel.model.error_mes.bind({ (error_mes) in
             DispatchQueue.main.async {
                 self.errorLabel.text = error_mes
             }
+        })
+        
+        viewModel.model.continueButtonIsHidden.bind({(flag) in
+            DispatchQueue.main.async {
+                self.continueButton.isHidden = flag
+            }
+            
+        })
+        
+        viewModel.model.numberPadIsHidden.bind({(flag) in
+            DispatchQueue.main.async {
+                self.numberPadStackView.isHidden = flag
+            }
+            
         })
     }
     
@@ -278,53 +292,16 @@ class LoginViewController: UIViewController {
     
     @objc private func continueButtonTapped() {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
-        if email.isEmpty || password.isEmpty {
-            continueButton.isHidden = false
-            if password.isEmpty {
-                numberPadStackView.isHidden = false
-            } else {
-                numberPadStackView.isHidden = true
-            }
-            errorLabel.text = "error_complete_all_fields".localized(MainViewController.language)
-            return
-        }
-
-        if !isValidEmail(email) {
-            continueButton.isHidden = false
-            if password.isEmpty {
-                numberPadStackView.isHidden = false
-            } else {
-                numberPadStackView.isHidden = true
-            }
-            errorLabel.text = "error_enter_valid_email".localized(MainViewController.language)
-            return
-        }
-        
         DispatchQueue.main.async {
-            Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-                guard let strongSelf = self else { return }
-                if let error = error {
-                    print("Failed to sign in with email: \(error.localizedDescription)")
-                    strongSelf.errorLabel.text = "error_wrong_password".localized(MainViewController.language)
-                    strongSelf.passwordTextField.text = ""
-                    strongSelf.continueButton.isHidden = true
-                } else {
-                    strongSelf.viewModel.log_in(email: email, password: password)
-                    if strongSelf.errorLabel.text == "" {
+            self.viewModel.log_in(email: email, password: password)
+            if self.errorLabel.text == "" {
                         let menuVC = MenuViewController()
-                        strongSelf.navigationController?.pushViewController(menuVC, animated: true)
+                        self.navigationController?.pushViewController(menuVC, animated: true)
                     }
                 }
-            }
-        }
     }
     
-    func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPredicate.evaluate(with: email)
-    }
-    
+   
     func showError(errorMessage: String) {
         errorLabel.text = errorMessage
         numberPadStackView.isHidden = true

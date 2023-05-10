@@ -107,10 +107,7 @@
 		5E9556962A0542F3002A2878 /* LogInToTheApp */ = {
 			isa = PBXGroup;
 			children = (
-				5E9556942A053E6E002A2878 /* LoginViewController.swift */,
-				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
-				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
-				819E089329B769F200E4CFDF /* MenuViewController.swift */,
+				811473F22A0C11780093EC0F /* ViewControllers */,
 				81E2FF832A09500A00F7F055 /* DBModel.swift */,
 				81E2FF852A09501900F7F055 /* DBViewModel.swift */,
 			);
@@ -124,6 +121,17 @@
 				5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */,
 			);
 			path = Memory;
+			sourceTree = "<group>";
+		};
+		811473F22A0C11780093EC0F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				819E089329B769F200E4CFDF /* MenuViewController.swift */,
+				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
+				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
+				5E9556942A053E6E002A2878 /* LoginViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		818ED50A2A02C081002ED41B /* Binding */ = {

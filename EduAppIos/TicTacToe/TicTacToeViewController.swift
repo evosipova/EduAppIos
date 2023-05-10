@@ -75,7 +75,7 @@ class TicTacToeViewController: UIViewController {
     func finishGame(result: String) {
         endGameContoller.resLabel.text = result
         viewModel.clearBoard()
-        viewModel.game2Plays += 1
+        viewModel.model.game2Plays += 1
         updateGame2PlaysInFirestore()
         for button in buttons {
             button.setTitle("", for: .normal)

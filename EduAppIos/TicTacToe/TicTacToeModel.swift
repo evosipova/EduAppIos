@@ -14,6 +14,7 @@ struct TicTacToeModel{
     
     var turnLabel = Dynamic("")
     var boardIsFull = false
+    var game2Plays: Int = 0
     var winner = Dynamic("")
     
     var buttons  = [Dynamic(""),Dynamic(""),Dynamic(""),Dynamic(""),Dynamic(""),Dynamic(""),Dynamic(""),Dynamic(""),Dynamic("")]
