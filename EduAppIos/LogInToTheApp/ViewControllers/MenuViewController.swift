@@ -7,8 +7,8 @@
 
 import Foundation
 import UIKit
-import FirebaseAuth
-import Firebase
+//import FirebaseAuth
+//import Firebase
 
 
 class MenuViewController: UIViewController {
@@ -24,12 +24,12 @@ class MenuViewController: UIViewController {
     var buttonPuzzles:EduMenuButton = EduMenuButton()
     var buttonTicTac:EduMenuButton = EduMenuButton()
     var buttonMemory:EduMenuButton = EduMenuButton()
-
+    
     var labelPuzzlesPlayed = UILabel()
     var labelTicTacPlayed = UILabel()
     var labelMemoryPlayed = UILabel()
-
-
+    
+    
     var buttonProfile = UIButton()
     
     override func viewDidLoad() {
@@ -97,7 +97,7 @@ class MenuViewController: UIViewController {
         setupButtons()
         setupUser()
         setupProfileButton()
-
+        
         setupLabels()
         
         
@@ -174,14 +174,14 @@ class MenuViewController: UIViewController {
         buttonPuzzles.heightAnchor.constraint(equalToConstant: viewRect.frame.height*0.2).isActive = true
         buttonPuzzles.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: viewRect.frame.width*0.05).isActive = true
         buttonPuzzles.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.1).isActive = true
- 
+        
         var isCentered = viewModel.isNotAutrorised()
-
+        
         let imagePuzzle = UIImage(named: "puzzle_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imagePuzzle, scaledToSize: CGSize(width: buttonPuzzles.frame.height/2, height: buttonPuzzles.frame.height/2))
         
         buttonPuzzles.configure(gameImage: newImage, isPinnedCenter: isCentered, name: "puzzle".localized(MainViewController.language))
-
+        
         buttonPuzzles.addTarget(self, action: #selector(buttonPuzzlesPressed), for: .touchUpInside)
         
     }
@@ -193,10 +193,10 @@ class MenuViewController: UIViewController {
         UIGraphicsEndImageContext()
         return newImage
     }
-
-
-
-
+    
+    
+    
+    
     private func setupButtonTicTac() {
         buttonTicTac.frame = CGRect(x: 0, y: 0, width: viewRect.frame.width*0.95, height: viewRect.frame.height*0.2)
         let parent = self.view!
@@ -206,10 +206,10 @@ class MenuViewController: UIViewController {
         buttonTicTac.heightAnchor.constraint(equalToConstant: viewRect.frame.height*0.2).isActive = true
         buttonTicTac.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: viewRect.frame.width*0.05).isActive = true
         buttonTicTac.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.4).isActive = true
-       
+        
         var isCentered = viewModel.isNotAutrorised()
-       
-
+        
+        
         let imageTicTac = UIImage(named: "tictactoe_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imageTicTac, scaledToSize: CGSize(width: buttonTicTac.frame.height/2.5, height: buttonTicTac.frame.height/2.5))
         
@@ -230,7 +230,7 @@ class MenuViewController: UIViewController {
         buttonMemory.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.7).isActive = true
         
         var isCentered = viewModel.isNotAutrorised()
-       
+        
         let imageMemory = UIImage(named: "memory_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imageMemory, scaledToSize: CGSize(width: buttonMemory.frame.height/1.8, height: buttonMemory.frame.height/1.8))
         buttonMemory.configure(gameImage: newImage, isPinnedCenter: isCentered, name: "memory".localized(MainViewController.language))
@@ -245,35 +245,26 @@ class MenuViewController: UIViewController {
         setupButtonMemory()
         
     }
-
+    
+    
     func loadDataFromFirestore() {
-        let db = Firestore.firestore()
-        let user = Auth.auth().currentUser
-
-        if let user = user {
-            let docRef = db.collection("users").document(user.uid)
-
-            docRef.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let data = document.data()
-
-                    self.labelPuzzlesPlayed.text = "game_amount".localized(MainViewController.language) + " \(data?["game1Plays"] ?? 0)"
-                    self.labelTicTacPlayed.text = "game_amount".localized(MainViewController.language) + " \(data?["game2Plays"] ?? 0)"
-                    self.labelMemoryPlayed.text = "game_amount".localized(MainViewController.language) + " \(data?["game3Plays"] ?? 0)"
-                } else {
-                    print("Document does not exist")
-                }
+        viewModel.loadDataFromFirestore { game1Plays, game2Plays, game3Plays in
+            DispatchQueue.main.async {
+                self.labelPuzzlesPlayed.text = "game_amount".localized(MainViewController.language) + " \(game1Plays)"
+                self.labelTicTacPlayed.text = "game_amount".localized(MainViewController.language) + " \(game2Plays)"
+                self.labelMemoryPlayed.text = "game_amount".localized(MainViewController.language) + " \(game3Plays)"
             }
         }
     }
-
-
+    
+    
+    
     private func setupLabels() {
         setupLabelPuzzlesPlayed()
         setupLabelTicTacPlayed()
         setupLabelMemoryPlayed()
     }
-
+    
     private func setupLabelPuzzlesPlayed() {
         labelPuzzlesPlayed.textColor = .black
         labelPuzzlesPlayed.font = UIFont(name: "Raleway-Bold", size: 15)
@@ -283,7 +274,7 @@ class MenuViewController: UIViewController {
         labelPuzzlesPlayed.pin(to: buttonPuzzles, [.top : buttonPuzzles.frame.height/2,.left : buttonPuzzles.frame.width*0.25])
         
     }
-
+    
     private func setupLabelTicTacPlayed() {
         labelTicTacPlayed.textColor = .black
         labelTicTacPlayed.font = UIFont(name: "Raleway-Bold", size: 15)
@@ -292,7 +283,7 @@ class MenuViewController: UIViewController {
         labelTicTacPlayed.translatesAutoresizingMaskIntoConstraints = false
         labelTicTacPlayed.pin(to: buttonTicTac, [.top : buttonTicTac.frame.height/2,.left : buttonTicTac.frame.width*0.25])
     }
-
+    
     private func setupLabelMemoryPlayed() {
         labelMemoryPlayed.textColor = .black
         labelMemoryPlayed.font = UIFont(name: "Raleway-Bold", size: 15)
@@ -301,6 +292,6 @@ class MenuViewController: UIViewController {
         labelMemoryPlayed.translatesAutoresizingMaskIntoConstraints = false
         labelMemoryPlayed.pin(to: buttonMemory, [.top : buttonMemory.frame.height/2,.left : buttonMemory.frame.width*0.25])
     }
-
+    
     
 }
