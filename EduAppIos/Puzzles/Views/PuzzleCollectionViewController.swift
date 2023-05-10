@@ -11,15 +11,25 @@ import Firebase
 
 
 class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
-    
+    var viewModel = PuzzleCollectionViewModel()
     var endGameController = EndGameViewController()
-    
     
     var infoButton: UIButton!
     var rulesView: UIView!
     var rulesLabel: UILabel!
     
+    var viewRect = UIView()
+    var collectionView: UICollectionView!
     
+    var label: UILabel! = {
+        var label = UILabel()
+        label.text = "puzzle".localized(MainViewController.language)
+        label.font = UIFont(name: "Raleway-Bold", size: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     func incrementGame1Plays() {
         guard let user = Auth.auth().currentUser else {
@@ -40,57 +50,7 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
         }
     }
     
-    
-    var label: UILabel! = {
-        var label = UILabel()
-        label.text = "puzzle".localized(MainViewController.language)
-        label.font = UIFont(name: "Raleway-Bold", size: 20)
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    
-    var viewRect = UIView()
-    var collectionView: UICollectionView!
-    
-    var puzzle = [Puzzle(title: "desert.svg", solvedImages: ["desert1.svg","desert2.svg","desert3.svg","desert4.svg","desert5.svg","desert6.svg","desert7.svg","desert8.svg","desert9.svg"]),Puzzle(title: "bunny.svg", solvedImages: ["bunny1.svg","bunny2.svg","bunny3.svg","bunny4.svg","bunny5.svg","bunny6.svg","bunny7.svg","bunny8.svg","bunny9.svg"]),Puzzle(title: "fish.svg", solvedImages: ["fish1.svg","fish2.svg","fish3.svg","fish4.svg","fish5.svg","fish6.svg","fish7.svg","fish8.svg","fish9.svg"]),Puzzle(title: "rose.svg", solvedImages: ["rose1.svg","rose2.svg","rose3.svg","rose4.svg","rose5.svg","rose6.svg","rose7.svg","rose8.svg","rose9.svg"])]
-    var index: Int = 0
-    var gameTimer: Timer?
-    
-    
-    
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if index < puzzle.count {
-            return puzzle[index].unsolvedImages.count
-        } else {
-            return 0
-        }
-    }
-    
-    func imageWithImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
-        image.draw(in: CGRectMake(0, 0, newSize.width, newSize.height))
-        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
-        UIGraphicsEndImageContext()
-        return newImage
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageCollectionViewCell
-        
-        let image = UIImage(named: puzzle[index].unsolvedImages[indexPath.item])!
-        let newImage = imageWithImage(image: image, scaledToSize: CGSize(width: cell.frame.width, height: cell.frame.height))
-        cell.puzzleImage.image = newImage
-        
-        return cell
-    }
+
     
     
     override func viewDidLoad() {
@@ -98,25 +58,29 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
         setupView()
         setupRectangle()
         setupCollectionView()
+        setupInfoButton()
+        setupBackButton()
         collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.dragInteractionEnabled = true
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
         
-        let config = UIImage.SymbolConfiguration(textStyle: .title1)
-        let image = UIImage(systemName: "arrow.turn.up.left",withConfiguration: config)?.withTintColor(.white
-                                                                                                       , renderingMode: .alwaysOriginal)
         
-        let backButton = UIBarButtonItem()
-        backButton.title = ""
-        
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        
-        self.navigationController?.navigationBar.backIndicatorImage = image
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
-        
-        setupInfoButton()
     }
+    
+    func setupBackButton(){
+           let config = UIImage.SymbolConfiguration(textStyle: .title1)
+           let image = UIImage(systemName: "arrow.turn.up.left",withConfiguration: config)?.withTintColor(.white
+                                                                                                          , renderingMode: .alwaysOriginal)
+           
+           let backButton = UIBarButtonItem()
+           backButton.title = ""
+           
+           self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+           
+           self.navigationController?.navigationBar.backIndicatorImage = image
+           self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
+       }
     
     private func setupView() {
         self.view.backgroundColor = UIColor(red: 0.118, green: 0.118, blue: 0.118, alpha: 1)
@@ -244,97 +208,108 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
     }
     
     private func gameEnd(){
+           let imgView = viewModel.getImgView(size : CGSize(width: viewRect.bounds.width, height: viewRect.bounds.width))
+           view.addSubview(imgView)
+           imgView.pinCenter(to: view)
+           
+           endGameController.initialcontrollerId = 1
+           endGameController.resLabel.text = "Победа!"
+           DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+               self.navigationController?.pushViewController(self.endGameController, animated: true)
+           }
+           
+       }
+    
+    
+}
+
+extension PuzzleCollectionViewController{
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.collectionView(collectionView, numberOfItemsInSection: section)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let img = UIImage(named: puzzle[index].title)!
-        let imgView = UIImageView(image: imageWithImage(image: img, scaledToSize: CGSize(width: viewRect.bounds.width, height: viewRect.bounds.width)))
-        view.addSubview(imgView)
-        imgView.pinCenter(to: view)
-        
-        
-        incrementGame1Plays()
-        
-        endGameController.initialcontrollerId = 1
-        endGameController.resLabel.text = "win".localized(MainViewController.language)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.navigationController?.pushViewController(self.endGameController, animated: true)
-        }
+        return viewModel.collectionView(collectionView, cellForItemAt: indexPath)
     }
     
     
 }
+
+
+
+
+
 extension PuzzleCollectionViewController: UICollectionViewDragDelegate {
     
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let item = self.puzzle[index].unsolvedImages[indexPath.item]
-        let itemProvider = NSItemProvider(object: item as NSString)
-        let dragItem = UIDragItem(itemProvider: itemProvider)
-        dragItem.localObject = dragItem
-        return [dragItem]
-    }
+
+           let item = viewModel.getItem(indexPath: indexPath)
+           let itemProvider = NSItemProvider(object: item as NSString)
+           let dragItem = UIDragItem(itemProvider: itemProvider)
+           dragItem.localObject = dragItem
+           return [dragItem]
+       }
 }
+
+
+
 
 extension PuzzleCollectionViewController: UICollectionViewDropDelegate {
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidEnd session: UIDropSession) {
-        if puzzle[index].unsolvedImages == puzzle[index].solvedImages {
-            
-            collectionView.dragInteractionEnabled = false
-            if index == puzzle.count - 1 {
-                navigationItem.rightBarButtonItem?.isEnabled = false
-            } else {
-                navigationItem.rightBarButtonItem?.isEnabled = true
-            }
-            collectionView.isHidden = true
-            gameEnd()
-            
-            
-        }
-    }
+           if viewModel.chechGameEnd() {
+               
+               collectionView.dragInteractionEnabled = false
+               
+               collectionView.isHidden = true
+               gameEnd()
+               
+               
+           }
+       }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        if collectionView.hasActiveDrag {
-            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-        }
-        return UICollectionViewDropProposal(operation: .forbidden)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        
-        var destinationIndexPath: IndexPath
-        if let indexPath = coordinator.destinationIndexPath {
-            destinationIndexPath = indexPath
-        } else {
-            let row = collectionView.numberOfItems(inSection: 0)
-            destinationIndexPath = IndexPath(item: row - 1, section: 0)
-        }
-        
-        if coordinator.proposal.operation == .move {
-            self.reorderItems(coordinator: coordinator, destinationIndexPath: destinationIndexPath, collectionView: collectionView)
-            self.collectionView.reloadData()
-        }
-    }
-    
-    fileprivate func reorderItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath:IndexPath, collectionView: UICollectionView) {
-        
-        if let item = coordinator.items.first,
-           let sourceIndexPath = item.sourceIndexPath {
-            
-            collectionView.performBatchUpdates({
-                puzzle[index].unsolvedImages.swapAt(sourceIndexPath.item, destinationIndexPath.item)
-                collectionView.reloadItems(at: [sourceIndexPath,destinationIndexPath])
-            }, completion: nil)
-            
-            coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
-        }
-    }
-}
+           if collectionView.hasActiveDrag {
+               return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+           }
+           return UICollectionViewDropProposal(operation: .forbidden)
+       }
+       
+       func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+           
+           var destinationIndexPath: IndexPath
+           if let indexPath = coordinator.destinationIndexPath {
+               destinationIndexPath = indexPath
+           } else {
+               let row = collectionView.numberOfItems(inSection: 0)
+               destinationIndexPath = IndexPath(item: row - 1, section: 0)
+           }
+           
+           if coordinator.proposal.operation == .move {
+               self.reorderItems(coordinator: coordinator, destinationIndexPath: destinationIndexPath, collectionView: collectionView)
+               self.collectionView.reloadData()
+           }
+       }
+       
+      func reorderItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath:IndexPath, collectionView: UICollectionView) {
+           
+          viewModel.reorderItems(coordinator: coordinator, destinationIndexPath: destinationIndexPath, collectionView: collectionView)
+       }
+   }
 
-extension PuzzleCollectionViewController : UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: view.frame.height*0.15, left: 0, bottom: 0, right: 0)
-        
-    }
+   extension PuzzleCollectionViewController : UICollectionViewDelegateFlowLayout {
+       
+       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+           return UIEdgeInsets(top: view.frame.height*0.15, left: 0, bottom: 0, right: 0)
+           
+       }
+
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewWidth = collectionView.bounds.width

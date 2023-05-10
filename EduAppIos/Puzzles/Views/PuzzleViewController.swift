@@ -48,7 +48,7 @@ class PuzzleViewController : UIViewController{
         for i in 0...3{
             if(buttons[i].layer.borderColor == UIColor(red: 0.755, green: 0.962, blue: 0.417, alpha: 1).cgColor){
                 puzzleCollectionController = PuzzleCollectionViewController()
-                puzzleCollectionController.index = i
+                puzzleCollectionController.viewModel.model.index = i
                 break
             }
         }
