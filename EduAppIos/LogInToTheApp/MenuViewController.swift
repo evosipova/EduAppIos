@@ -19,9 +19,9 @@ class MenuViewController: UIViewController {
     }
     
     var viewRect = UILabel()
-    var buttonPuzzles = UIButton()
-    var buttonTicTac = UIButton()
-    var buttonMemory = UIButton()
+    var buttonPuzzles:EduMenuButton = EduMenuButton()
+    var buttonTicTac:EduMenuButton = EduMenuButton()
+    var buttonMemory:EduMenuButton = EduMenuButton()
 
     var labelPuzzlesPlayed = UILabel()
     var labelTicTacPlayed = UILabel()
@@ -166,49 +166,24 @@ class MenuViewController: UIViewController {
     
     private func setupButtonPuzzles() {
         buttonPuzzles.frame = CGRect(x: 0, y: 0, width: viewRect.frame.width*0.95, height: viewRect.frame.height*0.2)
-        buttonPuzzles.backgroundColor = .white
-        buttonPuzzles.layer.cornerRadius = 20
-        buttonPuzzles.layer.borderColor = UIColor(red: 0.554, green: 0.599, blue: 1, alpha: 1).cgColor
-        buttonPuzzles.layer.borderWidth = 2
         let parent = self.view!
         parent.addSubview(buttonPuzzles)
-        buttonPuzzles.translatesAutoresizingMaskIntoConstraints = false
         buttonPuzzles.widthAnchor.constraint(equalToConstant: viewRect.frame.width*0.9).isActive = true
         buttonPuzzles.heightAnchor.constraint(equalToConstant: viewRect.frame.height*0.2).isActive = true
         buttonPuzzles.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: viewRect.frame.width*0.05).isActive = true
         buttonPuzzles.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.1).isActive = true
-        
-        
-        let config = UIImage.SymbolConfiguration(textStyle: .largeTitle)
-        let image = UIImage(systemName: "arrowtriangle.right.fill",withConfiguration: config)?.withTintColor(.black
-                                                                                                             , renderingMode: .alwaysOriginal)
-        buttonPuzzles.setImage(image, for: .normal)
-        buttonPuzzles.imageEdgeInsets.left = -buttonPuzzles.frame.width*0.75
-        
-        
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: buttonPuzzles.frame.width, height: buttonPuzzles.frame.height*0.9)
-        label.backgroundColor = .white
-        label.textColor = .black
-        label.font = UIFont(name: "Raleway-Bold", size: 18)
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "puzzle".localized(MainViewController.language)
-        buttonPuzzles.addSubview(label)
-       
+ 
+        var isCentered = false
         let user = Auth.auth().currentUser
         if user == nil {
-            label.pinCenter(to: buttonPuzzles)
-        }else{
-            label.pin(to: buttonPuzzles, [.top : buttonPuzzles.frame.height/5,.left : buttonPuzzles.frame.width*0.25])
+            isCentered = true
         }
         
         let imagePuzzle = UIImage(named: "puzzle_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imagePuzzle, scaledToSize: CGSize(width: buttonPuzzles.frame.height/2, height: buttonPuzzles.frame.height/2))
         
-        let imagePuzzleView = UIImageView(image: newImage)
-        
-        buttonPuzzles.addSubview(imagePuzzleView)
-        imagePuzzleView.pin(to: buttonPuzzles, [.top: buttonPuzzles.frame.height/3.2, .right: viewRect.frame.width/40])
+        buttonPuzzles.configure(gameImage: newImage, isPinnedCenter: isCentered, name: "puzzle".localized(MainViewController.language))
+
         buttonPuzzles.addTarget(self, action: #selector(buttonPuzzlesPressed), for: .touchUpInside)
         
     }
@@ -222,14 +197,10 @@ class MenuViewController: UIViewController {
     }
 
 
-    private let labelTicTac = UILabel()
+
 
     private func setupButtonTicTac() {
         buttonTicTac.frame = CGRect(x: 0, y: 0, width: viewRect.frame.width*0.95, height: viewRect.frame.height*0.2)
-        buttonTicTac.backgroundColor = .white
-        buttonTicTac.layer.cornerRadius = 20
-        buttonTicTac.layer.borderColor = UIColor(red: 0.554, green: 0.599, blue: 1, alpha: 1).cgColor
-        buttonTicTac.layer.borderWidth = 2
         let parent = self.view!
         parent.addSubview(buttonTicTac)
         buttonTicTac.translatesAutoresizingMaskIntoConstraints = false
@@ -237,60 +208,25 @@ class MenuViewController: UIViewController {
         buttonTicTac.heightAnchor.constraint(equalToConstant: viewRect.frame.height*0.2).isActive = true
         buttonTicTac.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: viewRect.frame.width*0.05).isActive = true
         buttonTicTac.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.4).isActive = true
-        
-        let config = UIImage.SymbolConfiguration(textStyle: .largeTitle)
-        let image = UIImage(systemName: "arrowtriangle.right.fill",withConfiguration: config)?.withTintColor(.black
-                                                                                                             , renderingMode: .alwaysOriginal)
-        
-        buttonTicTac.setImage(image, for: .normal)
-        
-        buttonTicTac.imageEdgeInsets.left = -buttonTicTac.frame.width*0.75
-        
-        
-        //        let label = UILabel()
-        //        label.frame = CGRect(x: 0, y: 0, width: buttonTicTac.frame.width, height: buttonTicTac.frame.height*0.9)
-        //        label.backgroundColor = .white
-        //        label.textColor = .black
-        //        label.font = UIFont(name: "Raleway-Bold", size: 18)
-        //        label.font = UIFont.boldSystemFont(ofSize: 18)
-        //        label.text = "tic-tac-toe".localized(MenuViewController.language)
-        //        buttonTicTac.addSubview(label)
-        //        label.pinCenter(to: buttonTicTac)
-
-
-        labelTicTac.removeFromSuperview()
-        labelTicTac.frame = CGRect(x: 0, y: 0, width: buttonTicTac.frame.width, height: buttonTicTac.frame.height*0.9)
-        labelTicTac.backgroundColor = .white
-        labelTicTac.textColor = .black
-        labelTicTac.font = UIFont(name: "Raleway-Bold", size: 18)
-        labelTicTac.font = UIFont.boldSystemFont(ofSize: 18)
-        labelTicTac.text = "tic-tac-toe".localized(MainViewController.language)
-        buttonTicTac.addSubview(labelTicTac)
+       
+        var isCentered = false
         let user = Auth.auth().currentUser
         if user == nil {
-            labelTicTac.pinCenter(to: buttonTicTac)
-        }else{
-            labelTicTac.pin(to: buttonTicTac, [.top : buttonTicTac.frame.height/5,.left : buttonTicTac.frame.width*0.25])
+            isCentered = true
         }
+       
 
         let imageTicTac = UIImage(named: "tictactoe_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imageTicTac, scaledToSize: CGSize(width: buttonTicTac.frame.height/2.5, height: buttonTicTac.frame.height/2.5))
         
-        let imageTicTacView = UIImageView(image: newImage)
-        
-        buttonTicTac.addSubview(imageTicTacView)
-        imageTicTacView.pin(to: buttonTicTac, [.top: buttonTicTac.frame.height/2.8, .right: viewRect.frame.width/20])
-        
+        buttonTicTac.configure(gameImage: newImage, isPinnedCenter: isCentered, name: "tic-tac-toe".localized(MainViewController.language))
         buttonTicTac.addTarget(self, action: #selector(buttonTicTacPressed), for: .touchUpInside)
         
     }
     
     private func setupButtonMemory() {
         buttonMemory.frame = CGRect(x: 0, y: 0, width: viewRect.frame.width*0.95, height: viewRect.frame.height*0.2)
-        buttonMemory.backgroundColor = .white
-        buttonMemory.layer.cornerRadius = 20
-        buttonMemory.layer.borderColor = UIColor(red: 0.554, green: 0.599, blue: 1, alpha: 1).cgColor
-        buttonMemory.layer.borderWidth = 2
+        
         let parent = self.view!
         parent.addSubview(buttonMemory)
         buttonMemory.translatesAutoresizingMaskIntoConstraints = false
@@ -299,35 +235,15 @@ class MenuViewController: UIViewController {
         buttonMemory.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: viewRect.frame.width*0.05).isActive = true
         buttonMemory.topAnchor.constraint(equalTo: viewRect.topAnchor, constant: viewRect.frame.height*0.7).isActive = true
         
-        let config = UIImage.SymbolConfiguration(textStyle: .largeTitle)
-        let image = UIImage(systemName: "arrowtriangle.right.fill",withConfiguration: config)?.withTintColor(.black                                          , renderingMode: .alwaysOriginal)
-        buttonMemory.setImage(image, for: .normal)
-        buttonMemory.imageEdgeInsets.left = -buttonMemory.frame.width*0.75
-        
-        
-        let label = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: buttonMemory.frame.width, height: buttonMemory.frame.height*0.9)
-        label.backgroundColor = .white
-        label.textColor = .black
-        label.font = UIFont(name: "Raleway-Bold", size: 18)
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.text = "memory".localized(MainViewController.language)
-        buttonMemory.addSubview(label)
-        
+        var isCentered = false
         let user = Auth.auth().currentUser
         if user == nil {
-            label.pinCenter(to: buttonMemory)
-        }else{
-            label.pin(to: buttonMemory, [.top : buttonMemory.frame.height/5,.left : buttonMemory.frame.width*0.25])
+            isCentered = true
         }
-        
+       
         let imageMemory = UIImage(named: "memory_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imageMemory, scaledToSize: CGSize(width: buttonMemory.frame.height/1.8, height: buttonMemory.frame.height/1.8))
-        
-        let imageMemoryView = UIImageView(image: newImage)
-        
-        buttonMemory.addSubview(imageMemoryView)
-        imageMemoryView.pin(to: buttonMemory, [.top: buttonMemory.frame.height/3.4, .right: viewRect.frame.width/30])
+        buttonMemory.configure(gameImage: newImage, isPinnedCenter: isCentered, name: "memory".localized(MainViewController.language))
         
         buttonMemory.addTarget(self, action: #selector(buttonMemoryPressed), for: .touchUpInside)
         
