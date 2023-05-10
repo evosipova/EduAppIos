@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 
 protocol AvatarGalleryDelegate: AnyObject {
@@ -14,8 +15,6 @@ protocol AvatarGalleryDelegate: AnyObject {
 }
 
 class AvatarGalleryViewController: UIViewController {
-
-    var viewModel = DBViewModel()
 
     weak var delegate: AvatarGalleryDelegate?
 
@@ -48,7 +47,7 @@ class AvatarGalleryViewController: UIViewController {
         collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 
-    
+
 }
 
 extension AvatarGalleryViewController: UICollectionViewDataSource {
@@ -69,23 +68,25 @@ extension AvatarGalleryViewController: UICollectionViewDelegate {
         let selectedImage = UIImage(named: imageNames[indexPath.row])
         delegate?.didSelectAvatar(image: selectedImage!)
 
-        if !viewModel.isNotAutrorised() {
-            viewModel.updateAvatarName(newAvatarName: imageNames[indexPath.row]) { (result: Result<Void, Error>) in
-                switch result {
-                case .success:
-                    print("Avatar name updated successfully")
-                case .failure(let error):
+        if let currentUser = Auth.auth().currentUser {
+            // Update avatar name in Firestore for authorized users
+            let userRef = Firestore.firestore().collection("users").document(currentUser.uid)
+            userRef.updateData(["avatarName": imageNames[indexPath.row]]) { (error) in
+                if let error = error {
                     print("Error updating avatar name: \(error.localizedDescription)")
+                } else {
+                    print("Avatar name updated successfully")
                 }
             }
         } else {
+            // Save the avatar name for unauthorized users using UserDefaults
             UserDefaults.standard.set(imageNames[indexPath.row], forKey: "lastSelectedAvatar")
         }
 
         self.dismiss(animated: true, completion: nil)
     }
-}
 
+}
 
 class AvatarCell: UICollectionViewCell {
     var imageView: UIImageView!

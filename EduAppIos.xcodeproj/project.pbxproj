@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E2729BE2A0C2AA2004E5D03 /* MemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2729BD2A0C2AA2004E5D03 /* MemoryViewModel.swift */; };
+		5E2729C02A0C600B004E5D03 /* MemoryCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2729BF2A0C600B004E5D03 /* MemoryCollectionModel.swift */; };
 		5E5E28B12A091F9500488D24 /* Localize_Swift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E5E28B02A091F9500488D24 /* Localize_Swift */; };
 		5E5E28B32A09322000488D24 /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E28B22A09322000488D24 /* Localize.swift */; };
 		5E95568F2A046322002A2878 /* AvatarGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		5E2729BD2A0C2AA2004E5D03 /* MemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewModel.swift; sourceTree = "<group>"; };
+		5E2729BF2A0C600B004E5D03 /* MemoryCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCollectionModel.swift; sourceTree = "<group>"; };
 		5E5E28B22A09322000488D24 /* Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localize.swift; sourceTree = "<group>"; };
 		5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGalleryViewController.swift; sourceTree = "<group>"; };
 		5E9556942A053E6E002A2878 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */,
 				5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */,
 				5E2729BD2A0C2AA2004E5D03 /* MemoryViewModel.swift */,
+				5E2729BF2A0C600B004E5D03 /* MemoryCollectionModel.swift */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */,
 				819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */,
 				819BD59A2A08351B00289165 /* String+extension.swift in Sources */,
+				5E2729C02A0C600B004E5D03 /* MemoryCollectionModel.swift in Sources */,
 				5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */,
 				811474002A0C2E320093EC0F /* PuzzleCollectionModel.swift in Sources */,
 				5EF37DD92A01096300C54F18 /* RegistrationViewController.swift in Sources */,

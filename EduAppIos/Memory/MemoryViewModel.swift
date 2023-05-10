@@ -1,19 +1,31 @@
 //
-//  MemoryViewModel.swift
+//  MemoryCollectionViewModel.swift
 //  EduAppIos
 //
-//  Created by Elizaveta Osipova on 5/10/23.
+//  Created by Настя Лазарева on 08.05.2023.
 //
 
 import Foundation
+import UIKit
+class MemoryCollectionViewModel{
+    var model = MemoryCollectionModel()
 
+    func setImages(){
+        guard model.selectedCategoryIndex >= 0, model.selectedCategoryIndex < model.categoriesImages.count else { return }
+        model.buttonsImages = model.categoriesImages[model.selectedCategoryIndex]
+    }
+    func setupGame(){
+        model.buttonsImages.shuffle()
+        var buttonImagesPairs = model.buttonsImages + model.buttonsImages
+        buttonImagesPairs.shuffle()
 
+    }
+    func buttonTapped(_ sender: UIButton){
+        guard sender.tag < model.buttonsImages.count else { return }
 
-class MemoryViewModel {
-    func updateGame3Plays(completion: @escaping () -> Void) {
-        let defaults = UserDefaults.standard
-        let currentGame3Plays = defaults.integer(forKey: "game3Plays")
-        defaults.set(currentGame3Plays + 1, forKey: "game3Plays")
-        completion()
+    }
+
+    func getImage(_ sender: UIButton) ->UIImage{
+        return model.buttonsImages[sender.tag]!
     }
 }
