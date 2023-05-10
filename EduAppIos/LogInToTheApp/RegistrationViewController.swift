@@ -10,8 +10,8 @@ import UIKit
 
 
 class RegistrationViewController: UIViewController {
-    private let emailTextField = UITextField()
-    private let usernameTextField = UITextField()
+    private let emailTextField: EduTextField = EduTextField()
+    private let usernameTextField:EduTextField = EduTextField()
     private let passwordTextField = UITextField()
     private let continueButton = UIButton()
     private let errorLabel = UILabel()
@@ -214,40 +214,26 @@ class RegistrationViewController: UIViewController {
     }
     
     private func setupTextFields(){
-        usernameTextField.borderStyle = .roundedRect
-        usernameTextField.layer.borderWidth = 1.0
-        usernameTextField.layer.cornerRadius = 10
-        usernameTextField.layer.borderColor = UIColor.black.cgColor
-        usernameTextField.font = UIFont(name: "Raleway-Regular", size: 20)
         usernameTextField.placeholder = "name".localized(MainViewController.language)
         view.addSubview(usernameTextField)
-        usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         
-        emailTextField.borderStyle = .roundedRect
-        emailTextField.layer.borderWidth = 1.0
-        emailTextField.layer.cornerRadius = 10
-        emailTextField.layer.borderColor = UIColor.black.cgColor
         emailTextField.placeholder = "email".localized(MainViewController.language)
-        emailTextField.font = UIFont(name: "Raleway-Regular", size: 20)
-        emailTextField.autocapitalizationType = .none
         view.addSubview(emailTextField)
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        emailTextField.autocapitalizationType = .none
         
         NSLayoutConstraint.activate([
             usernameTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             usernameTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             usernameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             usernameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            usernameTextField.setHeight(50),
-            usernameTextField.setWidth(80),
+            
             
             
             emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 20),
             emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            emailTextField.setHeight(50),
-            emailTextField.setWidth(80)])
+            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40)
+          ])
         
         
     }

@@ -31,6 +31,7 @@
 		819E088C29B768CB00E4CFDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 819E088A29B768CB00E4CFDF /* LaunchScreen.storyboard */; };
 		819E089429B769F200E4CFDF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E089329B769F200E4CFDF /* MenuViewController.swift */; };
 		819E089629B771A400E4CFDF /* UIView+Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819E089529B771A400E4CFDF /* UIView+Pin.swift */; };
+		81AE6BC12A0B1DF2005FB015 /* EduTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AE6BC02A0B1DF2005FB015 /* EduTextField.swift */; };
 		81DD9AD82A06D71D0015EE45 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */; };
 		81E2FF842A09500A00F7F055 /* DBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E2FF832A09500A00F7F055 /* DBModel.swift */; };
 		81E2FF862A09501900F7F055 /* DBViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E2FF852A09501900F7F055 /* DBViewModel.swift */; };
@@ -67,6 +68,7 @@
 		819E088D29B768CB00E4CFDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		819E089329B769F200E4CFDF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		819E089529B771A400E4CFDF /* UIView+Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Pin.swift"; sourceTree = "<group>"; };
+		81AE6BC02A0B1DF2005FB015 /* EduTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduTextField.swift; sourceTree = "<group>"; };
 		81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		81E2FF832A09500A00F7F055 /* DBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBModel.swift; sourceTree = "<group>"; };
 		81E2FF852A09501900F7F055 /* DBViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBViewModel.swift; sourceTree = "<group>"; };
@@ -105,7 +107,7 @@
 			children = (
 				5E9556942A053E6E002A2878 /* LoginViewController.swift */,
 				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
-				819909DD2A0975BE00B3E9D6 /* MainScreen */,
+				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
 				819E089329B769F200E4CFDF /* MenuViewController.swift */,
 				81E2FF832A09500A00F7F055 /* DBModel.swift */,
 				81E2FF852A09501900F7F055 /* DBViewModel.swift */,
@@ -130,19 +132,11 @@
 			path = Binding;
 			sourceTree = "<group>";
 		};
-		819909DD2A0975BE00B3E9D6 /* MainScreen */ = {
-			isa = PBXGroup;
-			children = (
-				819909DE2A0975DC00B3E9D6 /* Views */,
-				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
-			);
-			path = MainScreen;
-			sourceTree = "<group>";
-		};
 		819909DE2A0975DC00B3E9D6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				819909DF2A09760A00B3E9D6 /* EduGradientButton.swift */,
+				81AE6BC02A0B1DF2005FB015 /* EduTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,6 +168,7 @@
 				819E088D29B768CB00E4CFDF /* Info.plist */,
 				819E089529B771A400E4CFDF /* UIView+Pin.swift */,
 				81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */,
+				819909DE2A0975DC00B3E9D6 /* Views */,
 				5E9556962A0542F3002A2878 /* LogInToTheApp */,
 				5E9556932A0519B0002A2878 /* UserProfile */,
 				5EB2A6F229BE888D00895B68 /* Memory */,
@@ -293,6 +288,7 @@
 				818ED50C2A02C0A4002ED41B /* TicTacToeModel.swift in Sources */,
 				5E95568F2A046322002A2878 /* AvatarGalleryViewController.swift in Sources */,
 				81E2FF842A09500A00F7F055 /* DBModel.swift in Sources */,
+				81AE6BC12A0B1DF2005FB015 /* EduTextField.swift in Sources */,
 				81DD9AD82A06D71D0015EE45 /* ProfileViewController.swift in Sources */,
 				81E99C3729BCCB2F00D3B0BD /* Puzzle.swift in Sources */,
 				819E088229B768C900E4CFDF /* SceneDelegate.swift in Sources */,

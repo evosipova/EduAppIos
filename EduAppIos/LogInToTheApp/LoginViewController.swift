@@ -10,8 +10,8 @@ import UIKit
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
-    private let emailTextField = UITextField()
-    private let passwordTextField = UITextField()
+    private let emailTextField:EduTextField = EduTextField()
+    private let passwordTextField:EduTextField = EduTextField()
     private let continueButton = UIButton()
     private let errorLabel = UILabel()
     private var codeTextFields: [UITextField] = []
@@ -119,15 +119,8 @@ class LoginViewController: UIViewController {
     
     
     private func setupTextFields(){
-        emailTextField.borderStyle = .roundedRect
-        emailTextField.layer.borderWidth = 1.0
-        emailTextField.layer.cornerRadius = 10
-        emailTextField.layer.borderColor = UIColor.black.cgColor
         emailTextField.placeholder = "email".localized(MainViewController.language)
-        emailTextField.font = UIFont(name: "Raleway-Regular", size: 20)
-        emailTextField.autocapitalizationType = .none
         view.addSubview(emailTextField)
-        emailTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 130),
