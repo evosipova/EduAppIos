@@ -7,40 +7,11 @@
 
 import Foundation
 import UIKit
-import Firebase
-import Localize_Swift
-
-
 
 class ProfileViewController: UIViewController, AvatarGalleryDelegate {
     var viewModel = DBViewModel()
-    func didSelectAvatar(image: UIImage) {
-        avatarImageView.image = image
-    }
+    var currentUser: DBViewModel.User?
 
-
-
-    func didSelectAvatar(image: UIImage, imageName: String) {
-        avatarImageView.image = image
-        saveAvatar(avatarImage: image)
-        updateAvatarName(newAvatarName: imageName)
-    }
-
-
-    private func saveAvatarName(avatarName: String) {
-        UserDefaults.standard.set(avatarName, forKey: "selectedAvatarName")
-    }
-
-
-
-    struct User {
-        let username: String
-        let email: String
-        let avatarName: String
-    }
-
-
-    var currentUser: User?
     var infoView: UIView?
     var isInfoViewVisible = false
 
@@ -51,11 +22,32 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
     let languageButton = UIButton(type: .system)
 
+    func didSelectAvatar(image: UIImage) {
+        avatarImageView.image = image
+    }
+
+
+    func didSelectAvatar(image: UIImage, imageName: String) {
+        avatarImageView.image = image
+        saveAvatar(avatarImage: image)
+        viewModel.updateAvatarName(newAvatarName: imageName) { (result: Result<Void, Error>) in
+            switch result {
+            case .success:
+                print("Avatar name updated successfully")
+            case .failure(let error):
+                print("Error updating avatar name: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func saveAvatarName(avatarName: String) {
+        UserDefaults.standard.set(avatarName, forKey: "selectedAvatarName")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         fetchUserData()
-        // Load the avatar for unauthorized users
         if viewModel.isNotAutrorised() {
             if let lastSelectedAvatar = UserDefaults.standard.string(forKey: "lastSelectedAvatar") {
                 avatarImageView.image = UIImage(named: lastSelectedAvatar)
@@ -132,15 +124,15 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         if(MainViewController.language == "ru"){
             languageButton.setTitle("Русский", for: .normal)
         }else {
-                languageButton.setTitle("English", for: .normal)
-            }
+            languageButton.setTitle("English", for: .normal)
+        }
 
-            languageButton.setTitleColor(.white, for: .normal)
-            languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-            languageButton.addTarget(self, action: #selector(languageButtonTapped), for: .touchUpInside)
+        languageButton.setTitleColor(.white, for: .normal)
+        languageButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        languageButton.addTarget(self, action: #selector(languageButtonTapped), for: .touchUpInside)
 
-            view.addSubview(languageButton)
-            languageButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(languageButton)
+        languageButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             languageButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             languageButton.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 20),
@@ -148,19 +140,15 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
             languageButton.heightAnchor.constraint(equalToConstant: 40)
         ])
 
-        }
+    }
 
     @objc private func languageButtonTapped() {
-           // Switch the language based on the current button title
         if languageButton.currentTitle == "Русский" {
             languageButton.setTitle("English", for: .normal)
             Localize.setCurrentLanguage("en")
             MainViewController.language = "en"
-
-            // Locale.preferredLanguages[0] = "en"
             let lisVc = self.navigationController!.viewControllers
             for controller in lisVc {
-                //controller.lang = "en"
                 controller.viewDidLoad()
             }
 
@@ -172,15 +160,11 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
 
             let lisVc = self.navigationController!.viewControllers
             for controller in lisVc {
-                //controller.lang = "en"
                 controller.viewDidLoad()
             }
-
-
         }
-
         updateLabels()
-       }
+    }
 
 
     @objc private func infoButtonTapped() {
@@ -296,39 +280,27 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         setupEmailLabel()
     }
 
+
+
     func fetchUserData() {
-        guard let user = Auth.auth().currentUser else {
-            currentUser = User(username: "", email: "", avatarName: "user1")
-            updateLabels()
-            return
-        }
-
-        let userRef = Firestore.firestore().collection("users").document(user.uid)
-
-        userRef.getDocument { [weak self] (document, error) in
+        viewModel.fetchUserData { [weak self] (result: Result<DBViewModel.User, Error>) in
             guard let strongSelf = self else { return }
 
-            if let error = error {
-                print("error_fetching_user_info" +  " \(error.localizedDescription)")
-            } else if let document = document, document.exists {
-                if let data = document.data() {
-                    strongSelf.currentUser = User(username: data["username"] as? String ?? "",
-                                                  email: data["email"] as? String ?? "",
-                                                  avatarName: data["avatarName"] as? String ?? "user1")
-                    strongSelf.updateLabels()
-                    strongSelf.loadAvatar()
-                }
+            switch result {
+            case .success(let fetchedUser):
+                strongSelf.currentUser = fetchedUser
+                strongSelf.updateLabels()
+                strongSelf.loadAvatar()
+            case .failure(let error):
+                print("error_fetching_user_info" + " \(error.localizedDescription)")
             }
         }
     }
 
-
-
-
     func updateLabels() {
-          nameLabel.text = currentUser?.username ?? ""
-          emailLabel.text = currentUser?.email ?? ""
-      }
+        nameLabel.text = currentUser?.username ?? ""
+        emailLabel.text = currentUser?.email ?? ""
+    }
 
     private func setupNameLabel() {
         nameLabel.text = currentUser?.username ?? ""
@@ -365,17 +337,7 @@ class ProfileViewController: UIViewController, AvatarGalleryDelegate {
         self.navigationController?.popViewController(animated: true)
     }
 
-    func updateAvatarName(newAvatarName: String) {
-        guard let user = Auth.auth().currentUser else { return }
-        let userRef = Firestore.firestore().collection("users").document(user.uid)
 
-        userRef.updateData(["avatarName": newAvatarName]) { error in
-            if let error = error {
-                print("Error updating avatarName: \(error.localizedDescription)")
-            } else {
-                print("AvatarName successfully updated")
-            }
-        }
-    }
 }
+
 

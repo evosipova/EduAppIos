@@ -317,17 +317,17 @@ extension LoginViewController {
         view.addGestureRecognizer(tap)
     }
 
-    func resetErrorState() {
-        errorLabel.text = ""
-        numberPadStackView.isHidden = false
-    }
+//    func resetErrorState() {
+//        errorLabel.text = ""
+//        numberPadStackView.isHidden = false
+//    }
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
         if (emailTextField.text != ""){
 
             if(passwordTextField.text?.count != 6){
-                resetErrorState()
+                numberPadStackView.isHidden = false
             }
         }
     }

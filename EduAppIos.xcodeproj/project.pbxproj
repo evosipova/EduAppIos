@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E2729BE2A0C2AA2004E5D03 /* MemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2729BD2A0C2AA2004E5D03 /* MemoryViewModel.swift */; };
 		5E2729C02A0C600B004E5D03 /* MemoryCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2729BF2A0C600B004E5D03 /* MemoryCollectionModel.swift */; };
 		5E5E28B12A091F9500488D24 /* Localize_Swift in Frameworks */ = {isa = PBXBuildFile; productRef = 5E5E28B02A091F9500488D24 /* Localize_Swift */; };
 		5E5E28B32A09322000488D24 /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E28B22A09322000488D24 /* Localize.swift */; };
@@ -48,7 +47,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5E2729BD2A0C2AA2004E5D03 /* MemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewModel.swift; sourceTree = "<group>"; };
 		5E2729BF2A0C600B004E5D03 /* MemoryCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCollectionModel.swift; sourceTree = "<group>"; };
 		5E5E28B22A09322000488D24 /* Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localize.swift; sourceTree = "<group>"; };
 		5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGalleryViewController.swift; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 			children = (
 				5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */,
 				5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */,
-				5E2729BD2A0C2AA2004E5D03 /* MemoryViewModel.swift */,
 				5E2729BF2A0C600B004E5D03 /* MemoryCollectionModel.swift */,
 			);
 			path = Memory;
@@ -362,7 +359,6 @@
 				81E99C3129BB579E00D3B0BD /* EndGameViewController.swift in Sources */,
 				81FB4E4B29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift in Sources */,
 				5EF37DDD2A01BB0C00C54F18 /* MemoryCollectionViewController.swift in Sources */,
-				5E2729BE2A0C2AA2004E5D03 /* MemoryViewModel.swift in Sources */,
 				8103B3B629B91D8D002AF007 /* TicTacToeViewController.swift in Sources */,
 				811473FE2A0C2E1D0093EC0F /* PuzzleCollectionViewModel.swift in Sources */,
 				81E99C3929BCCD5800D3B0BD /* ImageCollectionViewCell.swift in Sources */,

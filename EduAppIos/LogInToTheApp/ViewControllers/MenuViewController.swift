@@ -7,8 +7,6 @@
 
 import Foundation
 import UIKit
-import FirebaseAuth
-import Firebase
 
 
 class MenuViewController: UIViewController {
@@ -246,26 +244,17 @@ class MenuViewController: UIViewController {
 
     }
 
+
     func loadDataFromFirestore() {
-        let db = Firestore.firestore()
-        let user = Auth.auth().currentUser
-
-        if let user = user {
-            let docRef = db.collection("users").document(user.uid)
-
-            docRef.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    let data = document.data()
-
-                    self.labelPuzzlesPlayed.text = "game_amount".localized(MainViewController.language) + " \(data?["game1Plays"] ?? 0)"
-                    self.labelTicTacPlayed.text = "game_amount".localized(MainViewController.language) + " \(data?["game2Plays"] ?? 0)"
-                    self.labelMemoryPlayed.text = "game_amount".localized(MainViewController.language) + " \(data?["game3Plays"] ?? 0)"
-                } else {
-                    print("Document does not exist")
-                }
+        viewModel.loadDataFromFirestore { game1Plays, game2Plays, game3Plays in
+            DispatchQueue.main.async {
+                self.labelPuzzlesPlayed.text = "game_amount".localized(MainViewController.language) + " \(game1Plays)"
+                self.labelTicTacPlayed.text = "game_amount".localized(MainViewController.language) + " \(game2Plays)"
+                self.labelMemoryPlayed.text = "game_amount".localized(MainViewController.language) + " \(game3Plays)"
             }
         }
     }
+
 
 
     private func setupLabels() {
