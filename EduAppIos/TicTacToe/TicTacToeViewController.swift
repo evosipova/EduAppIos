@@ -7,8 +7,7 @@
 
 import Foundation
 import UIKit
-import FirebaseFirestore
-import FirebaseAuth
+
 
 class TicTacToeViewController: UIViewController {
     
@@ -19,12 +18,12 @@ class TicTacToeViewController: UIViewController {
     
     
     var infoButton: UIButton!
+    private let infoButtonConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium, scale: .large)
     var rulesView: UIView!
     var rulesLabel: UILabel!
     
     var turnLabel: UILabel! = {
         var turnLabel = UILabel()
-        turnLabel.text = "turn_x".localized(MainViewController.language)
         turnLabel.font = UIFont(name: "Raleway-Bold", size: 26)
         turnLabel.font = UIFont.boldSystemFont(ofSize: 26)
         turnLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +32,6 @@ class TicTacToeViewController: UIViewController {
     
     var label: UILabel! = {
         var label = UILabel()
-        label.text = "tic_tac_toe".localized(MainViewController.language)
         label.font = UIFont(name: "Raleway-Bold", size: 20)
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
@@ -73,59 +71,22 @@ class TicTacToeViewController: UIViewController {
     }
     
     func finishGame(result: String) {
-        endGameContoller.resLabel.text = result
-        viewModel.clearBoard()
-        viewModel.model.game2Plays += 1
-        updateGame2PlaysInFirestore()
-        for button in buttons {
-            button.setTitle("", for: .normal)
-            button.setImage(nil, for: .normal)
-            button.isEnabled = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.endGameContoller.resLabel.text = result
+            self.viewModel.clearBoard()
+            self.viewModel.model.game2Plays += 1
+            self.viewModel.updateGame2PlaysInFirestore()
+            for button in self.buttons {
+                button.setTitle("", for: .normal)
+                button.setImage(nil, for: .normal)
+                button.isEnabled = true
+            }
         }
-        self.navigationController?.pushViewController(endGameContoller, animated: true)
+        self.navigationController?.pushViewController(self.endGameContoller, animated: true)
     }
     
     
-    func updateGame2PlaysInFirestore() {
-        guard let user = Auth.auth().currentUser else {
-            print("Error updating game2Plays: user not logged in")
-            return
-        }
-        
-        let userRef = Firestore.firestore().collection("users").document(user.uid)
-        
-        Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
-            let userDocument: DocumentSnapshot
-            do {
-                try userDocument = transaction.getDocument(userRef)
-            } catch let fetchError as NSError {
-                errorPointer?.pointee = fetchError
-                return nil
-            }
-            
-            guard let oldGame2Plays = userDocument.data()?["game2Plays"] as? Int else {
-                let error = NSError(
-                    domain: "AppErrorDomain",
-                    code: -1,
-                    userInfo: [
-                        NSLocalizedDescriptionKey: "Unable to retrieve game2Plays from snapshot \(userDocument)"
-                    ]
-                )
-                errorPointer?.pointee = error
-                return nil
-            }
-            
-            transaction.updateData(["game2Plays": oldGame2Plays + 1], forDocument: userRef)
-            return nil
-        }) { (_, error) in
-            if let error = error {
-                print("Error updating game2Plays: \(error.localizedDescription)")
-            } else {
-                print("game2Plays successfully updated")
-            }
-        }
-    }
-    
+   
     
     func addToBoard(_ sender: UIButton!) {
         viewModel.buttonPressed(sender: sender, index: buttons.firstIndex(of: sender)!)
@@ -184,8 +145,8 @@ class TicTacToeViewController: UIViewController {
         
         layer0.frame = view.frame
         view.layer.addSublayer(layer0)
-        
-        
+        turnLabel.text = "turn_x".localized(MainViewController.language)
+        label.text = "tic-tac-toe".localized(MainViewController.language)
         setupRectangle()
     }
     private func setupRectangle() {
@@ -265,7 +226,7 @@ class TicTacToeViewController: UIViewController {
         rulesView.isHidden = !rulesView.isHidden
     }
     
-    private let infoButtonConfig = UIImage.SymbolConfiguration(pointSize: 30, weight: .medium, scale: .large)
+   
     
     private func setupInfoButton() {
         infoButton = UIButton(type: .system)

@@ -30,18 +30,6 @@ class MainViewController: UIViewController {
 
 
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-
-    private func updateBackButton() {
-        let backButtonImage = UIImage(systemName: "arrow.turn.up.left")
-        navigationController?.navigationBar.backIndicatorImage = backButtonImage
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButtonImage
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    }
-
     private func configure(with model: Model) {
         guestButton.title = model.guest
         registrationButton.configure(with: model.registration)

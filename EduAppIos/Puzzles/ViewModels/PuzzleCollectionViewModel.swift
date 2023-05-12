@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
+import Firebase
 
 class PuzzleCollectionViewModel{
     var model = PuzzleCollectionModel()
@@ -16,6 +18,25 @@ class PuzzleCollectionViewModel{
             return model.puzzle[model.index].unsolvedImages.count
         } else {
             return 0
+        }
+    }
+    
+    func incrementGame1Plays() {
+        guard let user = Auth.auth().currentUser else {
+            print("Error updating game1Plays: user not logged in")
+            return
+        }
+        let db = Firestore.firestore()
+        
+        let game1PlaysRef = db.collection("users").document(user.uid)
+        game1PlaysRef.updateData([
+            "game1Plays": FieldValue.increment(Int64(1))
+        ]) { err in
+            if let err = err {
+                print("Error updating game1Plays: \(err)")
+            } else {
+                print("game1Plays successfully incremented")
+            }
         }
     }
     

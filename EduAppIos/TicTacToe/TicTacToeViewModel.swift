@@ -7,7 +7,8 @@
 
 import Foundation
 import UIKit
-
+import FirebaseAuth
+import FirebaseFirestore
 
 class TicTacToeViewModel {
    var model = TicTacToeModel()
@@ -56,6 +57,47 @@ class TicTacToeViewModel {
         model.boardIsFull = isBoardFull()
         
     }
+    
+    func updateGame2PlaysInFirestore() {
+        guard let user = Auth.auth().currentUser else {
+            print("Error updating game2Plays: user not logged in")
+            return
+        }
+        
+        let userRef = Firestore.firestore().collection("users").document(user.uid)
+        
+        Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
+            let userDocument: DocumentSnapshot
+            do {
+                try userDocument = transaction.getDocument(userRef)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+            
+            guard let oldGame2Plays = userDocument.data()?["game2Plays"] as? Int else {
+                let error = NSError(
+                    domain: "AppErrorDomain",
+                    code: -1,
+                    userInfo: [
+                        NSLocalizedDescriptionKey: "Unable to retrieve game2Plays from snapshot \(userDocument)"
+                    ]
+                )
+                errorPointer?.pointee = error
+                return nil
+            }
+            
+            transaction.updateData(["game2Plays": oldGame2Plays + 1], forDocument: userRef)
+            return nil
+        }) { (_, error) in
+            if let error = error {
+                print("Error updating game2Plays: \(error.localizedDescription)")
+            } else {
+                print("game2Plays successfully updated")
+            }
+        }
+    }
+    
     
     func checkWinner(){
         var cur = "O"

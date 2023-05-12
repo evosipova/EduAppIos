@@ -13,5 +13,5 @@ class PuzzleCollectionModel{
     
     var index: Int = 0
     
-    var gameTimer: Timer?
+    
 }
