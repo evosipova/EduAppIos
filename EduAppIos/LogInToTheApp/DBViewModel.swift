@@ -19,7 +19,7 @@ class DBViewModel {
 
     var model = DBModel()
 
-    func log_in(email: String, password: String){
+    func log_in(email: String, password: String) {
 
         if email.isEmpty || password.isEmpty {
             model.continueButtonIsHidden.value = false
@@ -44,33 +44,37 @@ class DBViewModel {
             return
         }
 
+//        Auth.auth().signIn(withEmail: email, password: password) { [ self] authResult, error in
+//
+//            if let error = error {
+//                print("Failed to sign in with email: \(error.localizedDescription)")
+//                model.error_mes.value = "error_wrong_password".localized(MainViewController.language)
+//                //                strongSelf.passwordTextField.text = ""
+//                model.continueButtonIsHidden.value = false
+//
+//                return
+//            }
+//        }
+
+
+        var flag = true
         Auth.auth().signIn(withEmail: email, password: password) { [ self] authResult, error in
-
-            if let error = error {
-                print("Failed to sign in with email: \(error.localizedDescription)")
-                model.error_mes.value = "error_wrong_password".localized(MainViewController.language)
-                //                strongSelf.passwordTextField.text = ""
-                model.continueButtonIsHidden.value = true
-                return
-            }
-        }
-
-
-        Auth.auth().signIn(withEmail: email, password: password) { [ self] authResult, error in
-            if let error = error {
-                print("error_log_in".localized(MainViewController.language)+" \(error.localizedDescription)")
-                model.error_mes.value = "error_log_in".localized(MainViewController.language)+" \(error.localizedDescription)"
-                model.continueButtonIsHidden.value = true
-                model.numberPadIsHidden.value = false
-                return
-            }
-            guard let _ = authResult?.user else {
+//            if error != nil {
+//                print("error_wrong_password".localized(MainViewController.language))
+//                model.error_mes.value = "error_wrong_password".localized(MainViewController.language)
+//                flag = false
+//            }
+//            else
+            if authResult?.user == nil  {
                 print("error_fetching_user_info".localized(MainViewController.language))
                 model.error_mes.value = "error_fetching_user_info".localized(MainViewController.language)
-                return
+                flag = false
             }
         }
-        model.error_mes.value = ""
+        if(flag) {
+            model.error_mes.value = ""
+        }
+        
     }
 
     func initDB(){
