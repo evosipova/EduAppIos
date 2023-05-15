@@ -90,7 +90,6 @@ class DBViewModel {
     func registration(email: String, username: String, password: String) {
 
         if email.isEmpty || username.isEmpty || password.isEmpty {
-            print("hui")
             model.continueButtonIsHidden.value = false
             if(password.isEmpty){
                 model.numberPadIsHidden.value = false
@@ -103,7 +102,6 @@ class DBViewModel {
         }
 
         if !isValidEmail(email) {
-            print("hui2")
             model.continueButtonIsHidden.value = false
             if(password.isEmpty){
                 model.numberPadIsHidden.value = false

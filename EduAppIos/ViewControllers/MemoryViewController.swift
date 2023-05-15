@@ -240,17 +240,15 @@ class MemoryViewController: UIViewController {
 
 
     @objc
-       func continueButtonPressed() {
-           if selectedCategoryIndex >= 0 && selectedCategoryIndex <= 3 {
-               memoryCollectionController = MemoryCollectionViewController()
-               memoryCollectionController.selectedCategoryIndex = selectedCategoryIndex
+    func continueButtonPressed() {
+        if selectedCategoryIndex >= 0 && selectedCategoryIndex <= 3 {
+            memoryCollectionController = MemoryCollectionViewController()
+            memoryCollectionController.selectedCategoryIndex = selectedCategoryIndex
 
-               memoryViewModel.updateGame3Plays {
-                   print("game3Plays successfully updated")
-               }
+            memoryViewModel.updateGame3PlaysInFirestore()
 
-               navigationController?.pushViewController(memoryCollectionController, animated: true)
-           }
-       }
+            navigationController?.pushViewController(memoryCollectionController, animated: true)
+        }
+    }
 
 }
