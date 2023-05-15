@@ -230,7 +230,6 @@ extension PuzzleCollectionViewController{
 extension PuzzleCollectionViewController: UICollectionViewDragDelegate {
     
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-
            let item = viewModel.getItem(indexPath: indexPath)
            let itemProvider = NSItemProvider(object: item as NSString)
            let dragItem = UIDragItem(itemProvider: itemProvider)
@@ -246,13 +245,9 @@ extension PuzzleCollectionViewController: UICollectionViewDropDelegate {
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidEnd session: UIDropSession) {
            if viewModel.chechGameEnd() {
-               
                collectionView.dragInteractionEnabled = false
-               
                collectionView.isHidden = true
                gameEnd()
-               
-               
            }
        }
     
@@ -264,7 +259,6 @@ extension PuzzleCollectionViewController: UICollectionViewDropDelegate {
        }
        
        func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-           
            var destinationIndexPath: IndexPath
            if let indexPath = coordinator.destinationIndexPath {
                destinationIndexPath = indexPath
@@ -272,7 +266,6 @@ extension PuzzleCollectionViewController: UICollectionViewDropDelegate {
                let row = collectionView.numberOfItems(inSection: 0)
                destinationIndexPath = IndexPath(item: row - 1, section: 0)
            }
-           
            if coordinator.proposal.operation == .move {
                self.reorderItems(coordinator: coordinator, destinationIndexPath: destinationIndexPath, collectionView: collectionView)
                self.collectionView.reloadData()
@@ -280,18 +273,14 @@ extension PuzzleCollectionViewController: UICollectionViewDropDelegate {
        }
        
       func reorderItems(coordinator: UICollectionViewDropCoordinator, destinationIndexPath:IndexPath, collectionView: UICollectionView) {
-           
           viewModel.reorderItems(coordinator: coordinator, destinationIndexPath: destinationIndexPath, collectionView: collectionView)
        }
    }
 
    extension PuzzleCollectionViewController : UICollectionViewDelegateFlowLayout {
-       
        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
            return UIEdgeInsets(top: view.frame.height*0.15, left: 0, bottom: 0, right: 0)
-           
        }
-
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let collectionViewWidth = collectionView.bounds.width
@@ -299,3 +288,4 @@ extension PuzzleCollectionViewController: UICollectionViewDropDelegate {
     }
     
 }
+
