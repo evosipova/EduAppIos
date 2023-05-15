@@ -101,73 +101,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5E9556932A0519B0002A2878 /* UserProfile */ = {
-			isa = PBXGroup;
-			children = (
-				5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */,
-				81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */,
-			);
-			path = UserProfile;
-			sourceTree = "<group>";
-		};
-		5E9556962A0542F3002A2878 /* LogInToTheApp */ = {
-			isa = PBXGroup;
-			children = (
-				811473F22A0C11780093EC0F /* ViewControllers */,
-				81E2FF832A09500A00F7F055 /* DBModel.swift */,
-				81E2FF852A09501900F7F055 /* DBViewModel.swift */,
-			);
-			path = LogInToTheApp;
-			sourceTree = "<group>";
-		};
-		5EB2A6F229BE888D00895B68 /* Memory */ = {
-			isa = PBXGroup;
-			children = (
-				5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */,
-				5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */,
-				5E2729BF2A0C600B004E5D03 /* MemoryCollectionModel.swift */,
-			);
-			path = Memory;
-			sourceTree = "<group>";
-		};
-		811473F22A0C11780093EC0F /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				819E089329B769F200E4CFDF /* MenuViewController.swift */,
-				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
-				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
-				5E9556942A053E6E002A2878 /* LoginViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		811473FA2A0C2DB90093EC0F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */,
-				81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */,
-				81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		811473FB2A0C2DC90093EC0F /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */,
-				811473FF2A0C2E320093EC0F /* PuzzleCollectionModel.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		811473FC2A0C2DE00093EC0F /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				811473FD2A0C2E1D0093EC0F /* PuzzleCollectionViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		811474012A0C39B30093EC0F /* Localisation */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +117,56 @@
 				818ED5082A02C063002ED41B /* Dynamic.swift */,
 			);
 			path = Binding;
+			sourceTree = "<group>";
+		};
+		818FD87E2A12684200A72535 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5E2729BF2A0C600B004E5D03 /* MemoryCollectionModel.swift */,
+				818ED50D2A02C0B5002ED41B /* TicTacToeViewModel.swift */,
+				81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */,
+				811473FF2A0C2E320093EC0F /* PuzzleCollectionModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		818FD8802A1268C800A72535 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				818ED50B2A02C0A4002ED41B /* TicTacToeModel.swift */,
+				811473FD2A0C2E1D0093EC0F /* PuzzleCollectionViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		818FD8812A12690400A72535 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				81E99C3829BCCD5800D3B0BD /* ImageCollectionViewCell.swift */,
+				81E99C3429BCA41000D3B0BD /* PuzzleViewController.swift */,
+				81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */,
+				8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */,
+				5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */,
+				5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */,
+				5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */,
+				81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */,
+				819E089329B769F200E4CFDF /* MenuViewController.swift */,
+				5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */,
+				5EF37DD62A00830F00C54F18 /* MainViewController.swift */,
+				5E9556942A053E6E002A2878 /* LoginViewController.swift */,
+				81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		818FD8822A12697100A72535 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				819808062A03FADE00D9D3A1 /* GoogleService-Info.plist */,
+				81E2FF832A09500A00F7F055 /* DBModel.swift */,
+				81E2FF852A09501900F7F055 /* DBViewModel.swift */,
+			);
+			path = DB;
 			sourceTree = "<group>";
 		};
 		819909DE2A0975DC00B3E9D6 /* CustomViews */ = {
@@ -216,43 +199,20 @@
 		819E087E29B768C900E4CFDF /* EduAppIos */ = {
 			isa = PBXGroup;
 			children = (
-				819808062A03FADE00D9D3A1 /* GoogleService-Info.plist */,
-				819E087F29B768C900E4CFDF /* AppDelegate.swift */,
-				819E088129B768C900E4CFDF /* SceneDelegate.swift */,
-				819E088829B768CB00E4CFDF /* Assets.xcassets */,
-				819E088A29B768CB00E4CFDF /* LaunchScreen.storyboard */,
-				819E088D29B768CB00E4CFDF /* Info.plist */,
-				81E99C3029BB579E00D3B0BD /* EndGameViewController.swift */,
+				818FD8822A12697100A72535 /* DB */,
+				818FD8812A12690400A72535 /* ViewControllers */,
+				818FD8802A1268C800A72535 /* ViewModels */,
+				818FD87E2A12684200A72535 /* Models */,
+				819909DE2A0975DC00B3E9D6 /* CustomViews */,
 				811474012A0C39B30093EC0F /* Localisation */,
 				818ED50A2A02C081002ED41B /* Binding */,
-				819909DE2A0975DC00B3E9D6 /* CustomViews */,
-				5E9556962A0542F3002A2878 /* LogInToTheApp */,
-				5E9556932A0519B0002A2878 /* UserProfile */,
-				5EB2A6F229BE888D00895B68 /* Memory */,
-				81FB4E4C29BFDFF100D16BAE /* TicTacToe */,
-				81E99C3A29BCCF3900D3B0BD /* Puzzles */,
+				819E088A29B768CB00E4CFDF /* LaunchScreen.storyboard */,
+				819E088129B768C900E4CFDF /* SceneDelegate.swift */,
+				819E088829B768CB00E4CFDF /* Assets.xcassets */,
+				819E087F29B768C900E4CFDF /* AppDelegate.swift */,
+				819E088D29B768CB00E4CFDF /* Info.plist */,
 			);
 			path = EduAppIos;
-			sourceTree = "<group>";
-		};
-		81E99C3A29BCCF3900D3B0BD /* Puzzles */ = {
-			isa = PBXGroup;
-			children = (
-				811473FC2A0C2DE00093EC0F /* ViewModels */,
-				811473FB2A0C2DC90093EC0F /* Models */,
-				811473FA2A0C2DB90093EC0F /* Views */,
-			);
-			path = Puzzles;
-			sourceTree = "<group>";
-		};
-		81FB4E4C29BFDFF100D16BAE /* TicTacToe */ = {
-			isa = PBXGroup;
-			children = (
-				8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */,
-				818ED50B2A02C0A4002ED41B /* TicTacToeModel.swift */,
-				818ED50D2A02C0B5002ED41B /* TicTacToeViewModel.swift */,
-			);
-			path = TicTacToe;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
