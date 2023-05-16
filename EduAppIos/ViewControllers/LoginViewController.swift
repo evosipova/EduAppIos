@@ -318,6 +318,7 @@ extension LoginViewController {
     
     
     @objc func dismissKeyboard() {
+        
         view.endEditing(true)
         if emailTextField.text != "" {
             if(passwordTextField.text?.count != 6  ){

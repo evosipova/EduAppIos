@@ -71,6 +71,8 @@ class DBViewModel {
                 model.continueButtonIsHidden.value = false
                 model.numberPadIsHidden.value = true
                 flag = false
+                
+                
             }
         }
         if(flag) {
