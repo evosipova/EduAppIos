@@ -44,12 +44,7 @@ class MenuViewController: UIViewController {
 
 
 
-    func configure(with model: Model) {
-        buttonPuzzles.setTitle(model.puzzle, for: .normal)
-        buttonTicTac.setTitle(model.tictactoe, for: .normal)
-        buttonMemory.setTitle(model.memory, for: .normal)
-
-    }
+    
 
     @objc
     private func buttonProfilePressed(){
@@ -211,6 +206,7 @@ class MenuViewController: UIViewController {
         let imageTicTac = UIImage(named: "tictactoe_icon.svg")!
         let newImage: UIImage = imageWithImage(image: imageTicTac, scaledToSize: CGSize(width: buttonTicTac.frame.height/2.5, height: buttonTicTac.frame.height/2.5))
 
+        buttonTicTac.setTitle("", for: .normal)
         buttonTicTac.configure(gameImage: newImage, isPinnedCenter: isCentered, name: "tic-tac-toe".localized(MainViewController.language))
         buttonTicTac.addTarget(self, action: #selector(buttonTicTacPressed), for: .touchUpInside)
 

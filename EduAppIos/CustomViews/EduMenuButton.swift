@@ -8,6 +8,7 @@
 import UIKit
 
 class EduMenuButton: UIButton{
+    private var label:UILabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,12 +29,13 @@ class EduMenuButton: UIButton{
         self.setImage(image, for: .normal)
         self.imageEdgeInsets.left = -self.frame.width*0.75
         
-        let label = UILabel()
+        
         label.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height*0.9)
         label.backgroundColor = .white
         label.textColor = .black
         label.font = UIFont(name: "Raleway-Bold", size: 18)
         label.font = UIFont.boldSystemFont(ofSize: 18)
+
         label.text = name
         self.addSubview(label)
         if(isPinnedCenter){

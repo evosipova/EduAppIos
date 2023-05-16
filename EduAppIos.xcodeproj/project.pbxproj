@@ -122,8 +122,8 @@
 		818FD87E2A12684200A72535 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				818ED50B2A02C0A4002ED41B /* TicTacToeModel.swift */,
 				5E2729BF2A0C600B004E5D03 /* MemoryCollectionModel.swift */,
-				818ED50D2A02C0B5002ED41B /* TicTacToeViewModel.swift */,
 				81E99C3629BCCB2F00D3B0BD /* Puzzle.swift */,
 				811473FF2A0C2E320093EC0F /* PuzzleCollectionModel.swift */,
 			);
@@ -133,7 +133,7 @@
 		818FD8802A1268C800A72535 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				818ED50B2A02C0A4002ED41B /* TicTacToeModel.swift */,
+				818ED50D2A02C0B5002ED41B /* TicTacToeViewModel.swift */,
 				811473FD2A0C2E1D0093EC0F /* PuzzleCollectionViewModel.swift */,
 			);
 			path = ViewModels;
