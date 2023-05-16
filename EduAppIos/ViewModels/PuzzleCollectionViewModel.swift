@@ -21,24 +21,46 @@ class PuzzleCollectionViewModel{
         }
     }
     
-    func incrementGame1Plays() {
+    func updateGame1PlaysInFirestore() {
         guard let user = Auth.auth().currentUser else {
             print("Error updating game1Plays: user not logged in")
             return
         }
-        let db = Firestore.firestore()
-        
-        let game1PlaysRef = db.collection("users").document(user.uid)
-        game1PlaysRef.updateData([
-            "game1Plays": FieldValue.increment(Int64(1))
-        ]) { err in
-            if let err = err {
-                print("Error updating game1Plays: \(err)")
+
+        let userRef = Firestore.firestore().collection("users").document(user.uid)
+
+        Firestore.firestore().runTransaction({ (transaction, errorPointer) -> Any? in
+            let userDocument: DocumentSnapshot
+            do {
+                try userDocument = transaction.getDocument(userRef)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+
+            guard let oldGame1Plays = userDocument.data()?["game1Plays"] as? Int else {
+                let error = NSError(
+                    domain: "AppErrorDomain",
+                    code: -1,
+                    userInfo: [
+                        NSLocalizedDescriptionKey: "Unable to retrieve game1Plays from snapshot \(userDocument)"
+                    ]
+                )
+                errorPointer?.pointee = error
+                return nil
+            }
+
+            transaction.updateData(["game1Plays": oldGame1Plays + 1], forDocument: userRef)
+            return nil
+        }) { (_, error) in
+            if let error = error {
+                print("Error updating game1Plays: \(error.localizedDescription)")
             } else {
-                print("game1Plays successfully incremented")
+                print("game1Plays successfully updated")
             }
         }
     }
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         

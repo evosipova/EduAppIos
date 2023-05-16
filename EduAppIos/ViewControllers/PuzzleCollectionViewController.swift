@@ -189,18 +189,20 @@ class PuzzleCollectionViewController: UIViewController, UICollectionViewDataSour
         infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
     }
     
-    private func gameEnd(){
-           let imgView = viewModel.getImgView(size : CGSize(width: viewRect.bounds.width, height: viewRect.bounds.width))
-           view.addSubview(imgView)
-           imgView.pinCenter(to: view)
-           
-           endGameController.initialcontrollerId = 1
-           endGameController.resLabel.text = "Победа!"
-           DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-               self.navigationController?.pushViewController(self.endGameController, animated: true)
-           }
-           
-       }
+    private func gameEnd() {
+        let imgView = viewModel.getImgView(size : CGSize(width: viewRect.bounds.width, height: viewRect.bounds.width))
+        view.addSubview(imgView)
+        imgView.pinCenter(to: view)
+
+        endGameController.initialcontrollerId = 1
+        endGameController.resLabel.text = "Победа!"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.navigationController?.pushViewController(self.endGameController, animated: true)
+        }
+
+        viewModel.updateGame1PlaysInFirestore()
+    }
+
     
     
 }
