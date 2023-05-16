@@ -311,12 +311,9 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     func hideKeyboardWhenTappedAround() {
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
-        
-        
     }
     
     
