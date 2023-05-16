@@ -59,7 +59,7 @@ class MenuViewController: UIViewController {
 
     @objc
     private func buttonMemoryPressed(){
-        self.navigationController?.pushViewController(MemoryViewController(), animated: true)
+        self.navigationController?.pushViewController(MemoryViewModel(), animated: true)
     }
 
     @objc

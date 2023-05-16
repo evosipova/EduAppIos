@@ -12,7 +12,7 @@
 		5E5E28B32A09322000488D24 /* Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E28B22A09322000488D24 /* Localize.swift */; };
 		5E95568F2A046322002A2878 /* AvatarGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */; };
 		5E9556952A053E6E002A2878 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9556942A053E6E002A2878 /* LoginViewController.swift */; };
-		5EB2A6F129BE875F00895B68 /* MemoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */; };
+		5EB2A6F129BE875F00895B68 /* MemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB2A6F029BE875F00895B68 /* MemoryViewModel.swift */; };
 		5EF37DD72A00830F00C54F18 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DD62A00830F00C54F18 /* MainViewController.swift */; };
 		5EF37DD92A01096300C54F18 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */; };
 		5EF37DDD2A01BB0C00C54F18 /* MemoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */; };
@@ -51,7 +51,7 @@
 		5E5E28B22A09322000488D24 /* Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localize.swift; sourceTree = "<group>"; };
 		5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarGalleryViewController.swift; sourceTree = "<group>"; };
 		5E9556942A053E6E002A2878 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewController.swift; sourceTree = "<group>"; };
+		5EB2A6F029BE875F00895B68 /* MemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewModel.swift; sourceTree = "<group>"; };
 		5EF37DD62A00830F00C54F18 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5EF37DD82A01096300C54F18 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCollectionViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +135,7 @@
 			children = (
 				818ED50D2A02C0B5002ED41B /* TicTacToeViewModel.swift */,
 				811473FD2A0C2E1D0093EC0F /* PuzzleCollectionViewModel.swift */,
+				5EB2A6F029BE875F00895B68 /* MemoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -147,7 +148,6 @@
 				81FB4E4A29BFD5DC00D16BAE /* PuzzleCollectionViewController.swift */,
 				8103B3B529B91D8D002AF007 /* TicTacToeViewController.swift */,
 				5EF37DDC2A01BB0C00C54F18 /* MemoryCollectionViewController.swift */,
-				5EB2A6F029BE875F00895B68 /* MemoryViewController.swift */,
 				5E95568E2A046322002A2878 /* AvatarGalleryViewController.swift */,
 				81DD9AD72A06D71D0015EE45 /* ProfileViewController.swift */,
 				819E089329B769F200E4CFDF /* MenuViewController.swift */,
@@ -325,7 +325,7 @@
 				819E089629B771A400E4CFDF /* UIView+Pin.swift in Sources */,
 				818ED5092A02C063002ED41B /* Dynamic.swift in Sources */,
 				819E089429B769F200E4CFDF /* MenuViewController.swift in Sources */,
-				5EB2A6F129BE875F00895B68 /* MemoryViewController.swift in Sources */,
+				5EB2A6F129BE875F00895B68 /* MemoryViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

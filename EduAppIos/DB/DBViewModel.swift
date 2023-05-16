@@ -20,66 +20,46 @@ class DBViewModel {
     var model = DBModel()
 
     func log_in(email: String, password: String) {
+          if email.isEmpty || password.isEmpty {
+              model.continueButtonIsHidden.value = false
+              if password.isEmpty {
+                  model.numberPadIsHidden.value = false
+              } else {
+                  model.numberPadIsHidden.value = true
+              }
+              model.error_mes.value = "error_complete_all_fields".localized(MainViewController.language)
+              return
+          }
 
-        if email.isEmpty || password.isEmpty {
-            model.continueButtonIsHidden.value = false
-            if password.isEmpty {
-                model.numberPadIsHidden.value = false
-            } else {
-                model.numberPadIsHidden.value = true
-            }
-            model.error_mes.value = "error_complete_all_fields".localized(MainViewController.language)
-            return
-        }
+          if !isValidEmail(email) {
+              model.continueButtonIsHidden.value = false
+              if password.isEmpty {
+                  model.numberPadIsHidden.value = false
+              } else {
+                  model.numberPadIsHidden.value = true
+              }
+              model.error_mes.value = "error_enter_valid_email".localized(MainViewController.language)
+              return
+          }
 
+          Auth.auth().signIn(withEmail: email, password: password) { [self] authResult, error in
+              if let error = error {
+                  let errorMessage: String
+                  switch AuthErrorCode(rawValue: error._code) {
+                  case .wrongPassword:
+                      errorMessage = "error_wrong_password".localized(MainViewController.language)
+                  case .userNotFound:
+                      errorMessage = "error_user_not_found".localized(MainViewController.language)
+                  default:
+                      errorMessage = "error_fetching_user_info".localized(MainViewController.language)
+                  }
+                  model.error_mes.value = errorMessage
+              } else {
+                  model.error_mes.value = ""
+              }
+          }
+      }
 
-        if !isValidEmail(email) {
-            model.continueButtonIsHidden.value = false
-            if password.isEmpty {
-                model.numberPadIsHidden.value = false
-            } else {
-                model.numberPadIsHidden.value = true
-            }
-            model.error_mes.value = "error_enter_valid_email".localized(MainViewController.language)
-            return
-        }
-
-//        Auth.auth().signIn(withEmail: email, password: password) { [ self] authResult, error in
-//
-//            if let error = error {
-//                print("Failed to sign in with email: \(error.localizedDescription)")
-//                model.error_mes.value = "error_wrong_password".localized(MainViewController.language)
-//                //                strongSelf.passwordTextField.text = ""
-//                model.continueButtonIsHidden.value = false
-//
-//                return
-//            }
-//        }
-
-
-        var flag = true
-        Auth.auth().signIn(withEmail: email, password: password) { [ self] authResult, error in
-//            if error != nil {
-//                print("error_wrong_password".localized(MainViewController.language))
-//                model.error_mes.value = "error_wrong_password".localized(MainViewController.language)
-//                flag = false
-//            }
-//            else
-            if authResult?.user == nil  {
-                print("error_fetching_user_info".localized(MainViewController.language))
-                model.error_mes.value = "error_fetching_user_info".localized(MainViewController.language)
-                model.continueButtonIsHidden.value = false
-                model.numberPadIsHidden.value = true
-                flag = false
-                
-                
-            }
-        }
-        if(flag) {
-            model.error_mes.value = ""
-        }
-        
-    }
 
     func initDB(){
         model.firestore = Firestore.firestore()

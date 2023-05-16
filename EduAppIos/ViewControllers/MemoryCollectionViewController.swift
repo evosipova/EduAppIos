@@ -14,6 +14,18 @@ class MemoryCollectionViewController: UIViewController {
     var viewRect = UILabel()
     var stackView = UIStackView()
     var selectedCategoryIndex: Int = -1
+    var infoButton: UIButton!
+    var rulesView: UIView!
+    var rulesLabel: UILabel!
+    var buttons : [UIButton] = []
+
+
+    var buttonsImages: [UIImage?] = []
+
+    var selectedButtons: [UIButton] = []
+
+    var endGameContoller = EndGameViewController()
+    var backButton = UIButton()
 
     var label: UILabel! = {
         let label = UILabel()
@@ -25,14 +37,6 @@ class MemoryCollectionViewController: UIViewController {
         return label
     }()
 
-    var buttons : [UIButton] = []
-
-
-    var infoButton: UIButton!
-    var rulesView: UIView!
-    var rulesLabel: UILabel!
-
-
     let categoriesImages: [[UIImage?]] = [
         [UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish"),UIImage(named: "apple"), UIImage(named: "banana"), UIImage(named: "carrot"), UIImage(named: "eggplant"), UIImage(named: "orange"), UIImage(named: "peach"), UIImage(named: "pepper"), UIImage(named: "radish")],
 
@@ -43,12 +47,6 @@ class MemoryCollectionViewController: UIViewController {
         [UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"),UIImage(named: "hedgehog"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit"), UIImage(named: "cat"), UIImage(named: "dog"), UIImage(named: "giraffe"), UIImage(named: "greenFish"),UIImage(named: "hedgehog"), UIImage(named: "lion"), UIImage(named: "mouse"), UIImage(named: "rabbit")]
     ]
 
-    var buttonsImages: [UIImage?] = []
-
-    var selectedButtons: [UIButton] = []
-
-    var endGameContoller = EndGameViewController()
-    var backButton = UIButton()
 
 
     override func viewDidLoad() {
@@ -176,7 +174,6 @@ class MemoryCollectionViewController: UIViewController {
     }
 
     private func checkForWin() {
-
         var flippedCount = 0
         for button in buttons {
             if !button.isEnabled {
@@ -195,9 +192,7 @@ class MemoryCollectionViewController: UIViewController {
 
 
     private func restartGame() {
-
         selectedButtons.removeAll()
-
 
         for button in buttons {
             button.isEnabled = true
@@ -209,7 +204,6 @@ class MemoryCollectionViewController: UIViewController {
         buttons.shuffle()
         for (index, button) in buttons.enumerated() {
             button.tag = index
-
         }
     }
 
