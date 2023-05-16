@@ -68,6 +68,8 @@ class DBViewModel {
             if authResult?.user == nil  {
                 print("error_fetching_user_info".localized(MainViewController.language))
                 model.error_mes.value = "error_fetching_user_info".localized(MainViewController.language)
+                model.continueButtonIsHidden.value = false
+                model.numberPadIsHidden.value = true
                 flag = false
             }
         }

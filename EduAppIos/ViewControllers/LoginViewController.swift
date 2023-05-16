@@ -284,13 +284,16 @@ class LoginViewController: UIViewController {
                 numberPadStackView.isHidden = true
                 continueButton.isHidden = false
                 continueButton.isEnabled = true
-
+                errorLabel.isHidden = false
             }
         }
     }
 
 
     @objc private func continueButtonTapped() {
+        errorLabel.isHidden = false
+        numberPadStackView.isHidden = true
+        continueButton.isHidden = false
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
         DispatchQueue.main.async {
             self.viewModel.log_in(email: email, password: password)
@@ -298,23 +301,11 @@ class LoginViewController: UIViewController {
                 let menuVC = MenuViewController()
                 self.navigationController?.pushViewController(menuVC, animated: true)
             }
-//            else if(self.errorLabel.text == "error_wrong_password".localized(MainViewController.language)){
-//                print("000")
-//                for field in self.codeTextFields {
-//                    field.text = ""
-//                }
-//                self.passwordTextField.text = ""
-//                self.dismissKeyboard()
-//            }
             
         }
     }
         
 
-
-
-    
-    
 
 }
 
@@ -333,16 +324,24 @@ extension LoginViewController {
         view.endEditing(true)
         if emailTextField.text != "" {
             if(passwordTextField.text?.count != 6  ){
-                numberPadStackView.isHidden = false
-                continueButton.isHidden = true
-//                if(errorLabel.text == "error_wrong_password".localized(MainViewController.language)){
-//                    errorLabel.isHidden = true
-//                }
-                
+                    numberPadStackView.isHidden = false
+                    continueButton.isHidden = true
+                    errorLabel.isHidden = true
             }
             else{
-                numberPadStackView.isHidden = true
-                continueButton.isHidden = false
+                if(errorLabel.text == "error_fetching_user_info".localized(MainViewController.language)){
+                    passwordTextField.text = ""
+                    for code in codeTextFields{
+                        code.text = ""
+                    }
+                    errorLabel.isHidden = true
+                    continueButton.isHidden = true
+                    numberPadStackView.isHidden = true
+                }else{
+                    numberPadStackView.isHidden = true
+                    continueButton.isHidden = false
+                    errorLabel.isHidden = false
+                }
             }
         }
         
