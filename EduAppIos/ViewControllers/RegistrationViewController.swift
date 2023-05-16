@@ -335,14 +335,18 @@ extension RegistrationViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
-        if (emailTextField.text != "") && (usernameTextField.text != ""){
+        if (emailTextField.text != "") && (usernameTextField.text != "") {
 
             if(passwordTextField.text?.count != 6){
                 numberPadStackView.isHidden = false
+            } else {
+                continueButton.isHidden = false
+                continueButton.isEnabled = true
             }
         }
     }
+
 }
