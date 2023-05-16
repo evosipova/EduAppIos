@@ -327,6 +327,7 @@ extension LoginViewController {
                     errorLabel.isHidden = true
             }
             else{
+                
                 if(errorLabel.text == "error_fetching_user_info".localized(MainViewController.language)){
                     passwordTextField.text = ""
                     for code in codeTextFields{

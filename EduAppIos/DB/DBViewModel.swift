@@ -199,6 +199,7 @@ class DBViewModel {
     }
 
 
+    
     func loadDataFromFirestore(completion: @escaping (_ game1Plays: Int, _ game2Plays: Int, _ game3Plays: Int) -> Void) {
         guard let currentUser = Auth.auth().currentUser else {
             print("No current user")
