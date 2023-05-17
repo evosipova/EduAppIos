@@ -328,13 +328,22 @@ extension LoginViewController {
             }
             else{
                 
-                if(errorLabel.text == "error_fetching_user_info".localized(MainViewController.language)){
+                if(errorLabel.text == "error_wrong_password".localized(MainViewController.language)){
                     passwordTextField.text = ""
                     for code in codeTextFields{
                         code.text = ""
                     }
                     errorLabel.isHidden = true
                     continueButton.isHidden = true
+                    numberPadStackView.isHidden = true
+                }else if(errorLabel.text == "error_user_not_found".localized(MainViewController.language)){
+                    passwordTextField.text = ""
+                    for code in codeTextFields{
+                        code.text = ""
+                    }
+                    emailTextField.text = ""
+                    errorLabel.isHidden = false
+                    continueButton.isHidden = false
                     numberPadStackView.isHidden = true
                 }else{
                     numberPadStackView.isHidden = true

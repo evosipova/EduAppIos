@@ -27,6 +27,7 @@
 "log_in" = "log in";
 "error_log_in" = "Login error: ";
 "error_fetching_user_info" = "Failed to get user data";
+"error_user_not_found" = "User not found";
 "exit" = "Exit";
 "play_again" = "Play again";
 "settings" = "settings";
